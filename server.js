@@ -1,5 +1,7 @@
-var express = require('express');
-var app = express();
+var express = require('express')
+var app = express()
+var path = require('path')
+var fs =require('fs')
 
 var options = {
   dotfiles: 'ignore',
@@ -13,7 +15,19 @@ var options = {
   }
 }
 
-// respond with "hello world" when a GET request is made to the homepage
-app.use(express.static('public', options));
+let pagesDir = path.resolve(__dirname, 'pages')
+const dirs = fs.readdirSync(pagesDir).filter(f => fs.statSync(path.join(pagesDir, f)).isDirectory())
+dirs.forEach(d => {
+  let dir = path.resolve(pagesDir, d)
+  app.use(express.static(dir, options))
+})
 
-var server = app.listen(3000);
+app.use(express.static('dist'))
+app.use('/assets', express.static('assets'))
+
+// Serve index.html by default
+app.use('/', (req, res) => {
+  res.redirect('index.html')
+})
+
+var server = app.listen(3000)
