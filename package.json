@@ -11,6 +11,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "morgan": "^1.9.0",
     "vue": "^2.4.4"
   },
   "browserslist": [

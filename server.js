@@ -3,6 +3,12 @@ var app = express()
 var path = require('path')
 var fs =require('fs')
 
+var logger = require('morgan')
+
+// Use colorful logger
+app.use(logger('dev'))
+
+// Serve static resources
 var options = {
   dotfiles: 'ignore',
   etag: false,
@@ -30,4 +36,9 @@ app.use('/', (req, res) => {
   res.redirect('index.html')
 })
 
-var server = app.listen(3000)
+// Start listening
+port = process.env.PORT || 3000
+app.listen(port, (err) => {
+  if(err) throw err
+  console.log('> Listening on http://localhost:%s', port)
+})
