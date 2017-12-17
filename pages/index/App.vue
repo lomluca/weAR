@@ -1,9 +1,11 @@
 <template>
-  <WearHeader />
+  <WearHeader/>
+  <WearNav/>
 </template>
 
 <script>
 import WearHeader from '../../components/Header'
+import WearNav from '../../components/Nav'
 
 export default {
   name: 'app',
@@ -13,7 +15,8 @@ export default {
     }
   },
   components: {
-    WearHeader
+    WearHeader, 
+    WearNav
   }
 }
 </script>
