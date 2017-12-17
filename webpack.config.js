@@ -1,8 +1,9 @@
 var path = require('path')
 var webpack = require('webpack')
+var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 
+// Build different entries for each page
 var glob = require('glob')
-
 const entries = {}
 glob.sync('./pages/**/main.js').forEach(path => {
   const chunk = path.split('./pages/')[1].split('/main.js')[0]
@@ -16,6 +17,9 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'js/[name].js'
   },
+  plugins: [
+    new CommonsChunkPlugin("commons")
+  ],
   module: {
     rules: [
       {
@@ -69,12 +73,10 @@ module.exports = {
   },
   performance: {
     hints: false
-  },
-  devtool: '#eval-source-map'
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
