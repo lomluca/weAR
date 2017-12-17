@@ -1,6 +1,8 @@
 <template>
-  <WearHeader/>
-  <WearNav/>
+  <div>
+    <wear-header /> 
+    <wear-nav />
+  </div>
 </template>
 
 <script>
@@ -15,8 +17,8 @@ export default {
     }
   },
   components: {
-    WearHeader, 
-    WearNav
+    'wear-header': WearHeader,
+    'wear-nav': WearNav
   }
 }
 </script>

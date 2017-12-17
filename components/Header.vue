@@ -1,6 +1,6 @@
 <template>
   <header>
-  	<p>weAR - {{ msg }}</p>
+    <p>weAR - {{ msg }}</p>
   </header>
 </template>
 

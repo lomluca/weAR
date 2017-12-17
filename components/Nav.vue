@@ -1,9 +1,9 @@
 <template>
-	<nav>
-		<a href="#">Buy</a>
-		<a href="#">Profile</a>
-		<a href="#">Cart ({{ size_cart }})</a>
-	</nav>
+  <nav>
+    <a href="#">Buy</a>
+    <a href="#">Profile</a>
+    <a href="#">Cart ({{ size_cart }})</a>
+  </nav>
 </template>
 
 <script>
@@ -20,7 +20,7 @@ export default {
 <style scope>
   nav a {
     background-color: rgb(69, 69, 69);
-    width: 60px;
+    width: 160px;
     vertical-align: middle;
     text-decoration: none;
     color: white;
