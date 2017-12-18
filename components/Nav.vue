@@ -1,13 +1,27 @@
 <template>
 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-  <el-menu-item index="1">Processing Center</el-menu-item>
-  <el-submenu index="2">
-    <template slot="title">Workspace</template>
-    <el-menu-item index="2-1">item one</el-menu-item>
-    <el-menu-item index="2-2">item two</el-menu-item>
-    <el-menu-item index="2-3">item three</el-menu-item>
+  <div
+    v-for="category in categories" 
+    v-bind:category="category" 
+    v-bind:index="category.id"
+    v-bind:key="category.id">
+
+    <!-- Render a standard menu item if no subcategories are found  -->
+    <el-menu-item v-if="!category.subcategories" v-bind:index="category.id">
+      {{ category.name }}
+    </el-menu-item>
+
+    <!-- Render a menu with sub items if subcategories are found -->
+    <el-submenu v-else v-bind:index="category.id">
+      <template slot="title">{{ category.name }}</template>
+      <el-menu-item v-for="subcategory in category.subcategories"
+        v-bind:subcategory="subcategory"
+        v-bind:index="subcategory.id"
+        v-bind:key="subcategory.id" >
+        {{ subcategory.name }}
     </el-submenu>
-  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
+
+  </div>
 </el-menu>
 </template>
 
@@ -16,7 +30,7 @@ export default {
   name: 'wear-nav',
   data: function() {
     return {
-      size_cart: 0
+      categories: getCategories()['data'] // Defined in static/js/model.js
     }
   }
 }

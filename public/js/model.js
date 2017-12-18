@@ -10,3 +10,17 @@ function getCarouselData() {
     ]
   }
 }
+
+function getCategories() {
+  return {
+    data: [
+      { id: 1, name: 'Man', subcategories: [ { id: 11, name: 'Shirts' }, { id: 12, name: 'Pants' } ] }, 
+      { id: 2, name: 'Woman', subcategories: [ { id: 21, name: 'Skirts' }, { id: 22, name: 'Trousers' } ] }, 
+      { id: 3, name: 'Winter Collection' },
+      { id: 4, name: 'Promos' }
+    ]
+  }
+}
+
+function query(params) {
+}
