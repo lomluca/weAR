@@ -28,13 +28,12 @@ dirs.forEach(d => {
   app.use(express.static(dir, options))
 })
 
-app.use(express.static('dist'))
-app.use(express.static('public'))
-app.use('/assets', express.static('assets'))
+app.use(express.static(path.resolve(__dirname, 'dist')))
+app.use(express.static(path.resolve(__dirname, 'public')))
 
-// Serve index.html by default
-app.use('/', (req, res) => {
-  res.redirect('index.html')
+// Show a nice 404 error message page
+app.use((req, res) => {
+  res.redirect('404.html')
 })
 
 // Start listening

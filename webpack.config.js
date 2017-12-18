@@ -46,13 +46,18 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|svg|ttf|woff|woff2)$/,
         loader: 'file-loader',
+        options: {
+          path: path.resolve(__dirname, './dist'),
+          publicPath: '/',
+          name: '[name].[ext]'
+        }
       },
       {
         test: /\.(html|htm)$/,
         loader: 'file-loader',
         options: {
-          publicPath: '/',
-          outputPath: path.resolve(__dirname),
+          path: path.resolve(__dirname, './dist'),
+          publicPath: '/dist/',
           name: '[name].[ext]'
         }
       }
