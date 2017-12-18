@@ -1,31 +1,22 @@
 <template>
-  <header>
-    <p>weAR - {{ msg }}</p>
-  </header>
+<el-header>
+  <p>weAR - {{ msg }}</p>
+  <wear-nav />
+</el-header>
 </template>
 
 <script>
+import WearNav from './Nav'
+
 export default {
   name: 'wear-header',
   data: function() {
     return {
       msg: "Hello world!"
     }
+  },
+  components: {
+    'wear-nav': WearNav
   }
 }
 </script>
-
-<style scope>
-  body {
-    margin: 0px auto;
-  }
-
-  header {
-    position: fixed;
-    background-color: rgb(69, 69, 69);
-    width: 100%;
-    height: 45px;
-    font-size: 15px;
-    color: white;
-  }
-</style>

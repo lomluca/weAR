@@ -29,6 +29,7 @@ dirs.forEach(d => {
 })
 
 app.use(express.static('dist'))
+app.use(express.static('public'))
 app.use('/assets', express.static('assets'))
 
 // Serve index.html by default

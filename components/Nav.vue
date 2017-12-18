@@ -1,9 +1,14 @@
 <template>
-  <nav>
-    <a href="#">Buy</a>
-    <a href="#">Profile</a>
-    <a href="#">Cart ({{ size_cart }})</a>
-  </nav>
+<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+  <el-menu-item index="1">Processing Center</el-menu-item>
+  <el-submenu index="2">
+    <template slot="title">Workspace</template>
+    <el-menu-item index="2-1">item one</el-menu-item>
+    <el-menu-item index="2-2">item two</el-menu-item>
+    <el-menu-item index="2-3">item three</el-menu-item>
+    </el-submenu>
+  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
+</el-menu>
 </template>
 
 <script>
@@ -16,17 +21,3 @@ export default {
   }
 }
 </script>
-
-<style scope>
-  nav a {
-    background-color: rgb(69, 69, 69);
-    width: 160px;
-    vertical-align: middle;
-    text-decoration: none;
-    color: white;
-  }
-
-  a:hover {
-    background-color: rgb(75, 75, 75);
-  }
-</style>
