@@ -1,8 +1,8 @@
 <template>
-<el-header>
+<div class="header">
   <p>weAR - {{ msg }}</p>
   <wear-nav />
-</el-header>
+</div>
 </template>
 
 <script>
