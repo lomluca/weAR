@@ -1,8 +1,29 @@
 <template>
-<div class="header">
-  <p>weAR - {{ msg }}</p>
-  <wear-nav />
-</div>
+<header>
+  <div class="headerRow1">
+    <div class="col">
+      <div class="inlineCol">
+        <a href="#"><el-button type="text">sign up for newsletter</el-button></a>
+      </div>
+    </div>
+    <div class="col">
+      <div class="top">
+        <div class="inlineCol">
+          <el-button type="text">sign in</el-button>
+        </div>
+        <div class="inlineCol">
+          <a href="#"><el-button type="text">register</el-button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="headerRow2">
+    <a href="#"><img src="../public/assets/logo_wear.png" alt="logo" width="50px" height="50px"></a>
+  </div>
+  <div class="headerRow3">
+    <wear-nav/>
+  </div>
+</header>
 </template>
 
 <script>
@@ -10,9 +31,9 @@ import WearNav from './Nav'
 
 export default {
   name: 'wear-header',
-  data: function() {
+  data() {
     return {
-      msg: "Hello world!"
+      title: "wear"
     }
   },
   components: {
@@ -20,3 +41,56 @@ export default {
   }
 }
 </script>
+
+
+
+
+<style>
+header {
+  width: 100%;
+  background: #fff;
+}
+
+header .el-button {
+  text-transform: uppercase;
+  color: #303133
+}
+
+/* Header row 1 */
+header .headerRow1, header .headerRow2, header .headerRow3 {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  background: #fff
+}
+header .headerRow1 .col {
+  float: left;
+  width: 50%
+}
+header .headerRow1 .col .inlineCol {
+  text-transform: uppercase;
+  margin-right: 60px;
+  margin-left: 10px;
+  padding-right: 0;
+  display: block;
+  float: left
+}
+header .headerRow1 .col .top {
+  float: right
+}
+header .headerRow1 .col .top .inlineCol {
+  margin-right: 10px;
+  margin-left: 60px
+}
+
+/* Header row 2 */
+header .headerRow2  {
+  text-align: center
+}
+
+/* Header row 3 */
+header .headerRow3 {
+
+}
+
+</style>

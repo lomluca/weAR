@@ -1,16 +1,16 @@
-<template>  
+<template>
 <el-container>
   <!-- Header -->
-  <el-header height="100px">
+  <el-header height="auto">
     <wear-header />
   </el-header>
 
   <!-- Page's main content -->
-  <el-main> 
+  <el-main>
     <!-- Carousel -->
     <div class="block">
       <el-carousel indicator-position="outside">
-        <el-carousel-item 
+        <el-carousel-item
           v-for="item in carouselData"
           v-bind:item="item"
           v-bind:key="item.id" >
@@ -19,7 +19,7 @@
           </a>
         </el-carousel-item>
       </el-carousel>
-    </div>   
+    </div>
   </el-main>
 
   <!-- Footer -->

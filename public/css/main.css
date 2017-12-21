@@ -6,7 +6,7 @@ html, body {
 .el-main {
   width: 100%;
   height: 100%;
-  background-color: #E9EEF3;
+  background-color: #F2F6FC;
   color: #333;
   text-align: center;
   line-height: 160px;
@@ -18,15 +18,12 @@ html, body {
 }
 
 .el-header {
-  height: 100px;
-  background-color: #B3C0D1;
+  background-color: #FFF;
   color: #333;
-}  
+}
 
 .el-footer {
-  background-color: #B3C0D1;
+  background-color: #FFF;
   color: #333;
   text-align: center;
 }
-
-
