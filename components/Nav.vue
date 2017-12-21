@@ -50,5 +50,8 @@ export default {
 </script>
 
 <style>
-
+.el-menu {
+  text-transform: uppercase;
+  font-family: Arial, sans-serif
+}
 </style>

@@ -88,9 +88,4 @@ header .headerRow2  {
   text-align: center
 }
 
-/* Header row 3 */
-header .headerRow3 {
-
-}
-
 </style>
