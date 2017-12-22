@@ -55,7 +55,4 @@ export default {
   text-transform: uppercase;
   font-family: Arial, sans-serif
 }
-#searchbox {
-  float: right
-}
 </style>
