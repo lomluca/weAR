@@ -45,7 +45,8 @@ export default {
 footer {
   width: 100%;
   height: 100%;
-  font-family: Arial, sans-serif
+  font-family: Helvetica, sans-serif;
+  font-size: 12px;
 }
 /* Footer columns */
 footer .footerColumn1, footer .footerColumn2, footer .footerColumn3, footer .footerColumn4 {
