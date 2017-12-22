@@ -6,7 +6,7 @@
   </el-header>
 
   <!-- Page's main content -->
-  <el-main>
+  <el-main style="overflow: initial">
     <!-- Carousel -->
     <div class="block">
       <el-carousel indicator-position="outside">

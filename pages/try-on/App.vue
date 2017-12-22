@@ -1,5 +1,4 @@
 <template>
-  <WearHeader />
 </template>
 
 <script>

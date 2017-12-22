@@ -6,6 +6,9 @@
   </el-header>
 
 
+  <el-main style="overflow: initial">
+  </el-main>
+
   <!-- Footer -->
   <el-footer height="auto">
     <wear-footer />

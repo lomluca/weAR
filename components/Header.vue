@@ -2,9 +2,6 @@
 <header>
   <div class="headerRow1">
     <div class="col">
-      <div class="inlineCol">
-        <el-button type="text" @click="newsletter_messagebox">sign up for newsletter</el-button>
-      </div>
     </div>
     <div class="col">
       <div class="top">
@@ -40,26 +37,6 @@ export default {
   },
   components: {
     'wear-nav': WearNav
-  },
-  methods: {
-    newsletter_messagebox() {
-      this.$prompt('Please input your e-mail', 'Sign up for the newsletter', {
-        confirmButtonText: 'OK',
-        cancelButtonText: 'Cancel',
-        inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-        inputErrorMessage: 'Invalid Email'
-      }).then(value => {
-        this.$message({
-          type: 'success',
-          message: 'Your email is:' + value
-        });
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: 'Input canceled'
-        });
-      });
-    }
   }
 }
 </script>
