@@ -71,6 +71,7 @@ header .headerRow1 .top {
 
 /* Header row 2 */
 header .headerRow2  {
+  margin-top: -10px;
   text-align: center
 }
 
