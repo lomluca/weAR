@@ -50,6 +50,10 @@ export default {
 </script>
 
 <style>
+.el-main{
+  min-height: 100%;
+}
+
 .el-carousel__item a {
   width: 100%;
   height: 100%;
