@@ -3,10 +3,16 @@
   <div class="headerRow1">
     <div class="top">
       <div class="col">
-          <a :href="signup_page"><el-button size="mini" type="text">sign in</el-button></a>
+        <a v-if="!username" :href="signup_page"><el-button size="mini" type="text">login</el-button></a>
       </div>
       <div class="col">
-        <a :href="signup_page"><el-button size="mini" type="text">register</el-button></a>
+        <a v-if="!username" :href="signup_page"><el-button size="mini" type="text">register</el-button></a>
+      </div>
+      <div class="col">
+        <a v-if="username" :href="signup_page"><el-button size="mini" type="text">{{ username }}</el-button></a>
+      </div>
+      <div class="col">
+        <a v-if="username" :href="home_page"><el-button @click="logout" size="mini" type="text">logout</el-button></a>
       </div>
     </div>
   </div>
@@ -31,8 +37,25 @@ export default {
       home_page: 'index.html'
     }
   },
+  computed: {
+    username: function() {
+      if (localStorage.fullname) {
+        return "Hi, " + localStorage.fullname
+      }
+      return null
+    }
+  },
   components: {
     'wear-nav': WearNav
+  },
+  methods: {
+    logout: function() {
+      localStorage.removeItem("fullname")
+      localStorage.removeItem("email")
+      localStorage.removeItem("pass")
+      localStorage.removeItem("birthday")
+      username = null
+    }
   }
 }
 </script>

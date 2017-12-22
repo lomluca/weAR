@@ -81,7 +81,7 @@ export default {
           { required: true, validator: validatePass2, trigger: 'blur,change' }
         ],
         birthday: [
-          { trigger: 'blur' }
+          { type: 'date', trigger: 'blur' }
         ]
       },
       birthdatPickerOptions: {
@@ -95,7 +95,12 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // Do nothing, we don't care                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            alert('submit!');
+          localStorage.setItem("fullname", this.registerFormModel.fullname);
+          localStorage.setItem("email", this.registerFormModel.email);
+          localStorage.setItem("pass", this.registerFormModel.pass);
+          localStorage.setItem("birthday", this.registerFormModel.birthday);
+          this.$emit('signupSuccess')
+          // Do nothing, we don't care                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    alert('submit!');
         } else {
           console.log('error submit!!');
           return false;
