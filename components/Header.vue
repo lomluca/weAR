@@ -3,7 +3,7 @@
   <div class="headerRow1">
     <div class="col">
       <div class="inlineCol">
-        <a href="#"><el-button type="text" @click="newsletter_messagebox">sign up for newsletter</el-button></a>
+        <el-button type="text" @click="newsletter_messagebox">sign up for newsletter</el-button>
       </div>
     </div>
     <div class="col">
@@ -12,13 +12,13 @@
           <el-button type="text">sign in</el-button>
         </div>
         <div class="inlineCol">
-          <a href="#"><el-button type="text">register</el-button></a>
+          <a :href="signup_page"><el-button type="text">register</el-button></a>
         </div>
       </div>
     </div>
   </div>
   <div class="headerRow2">
-    <a :href="logo.href"><img :src="logo.asset" :alt="logo.alt" width="50px" height="50px"></a>
+    <a :href="home_page"><img :src="logo.asset" :alt="logo.alt" width="50px" height="50px"></a>
   </div>
   <div class="headerRow3">
     <wear-nav/>
@@ -33,7 +33,9 @@ export default {
   name: 'wear-header',
   data() {
     return {
-      logo: getLogo()
+      logo: getLogo(),
+      signup_page: 'signup.html',
+      home_page: 'index.html'
     }
   },
   components: {
