@@ -10,7 +10,7 @@
   </el-main>
 
   <!-- Footer -->
-  <el-footer>
+  <el-footer height="auto">
     <wear-footer />
   </el-footer>
 </el-container>
@@ -33,5 +33,3 @@ export default {
   }
 }
 </script>
-
-
