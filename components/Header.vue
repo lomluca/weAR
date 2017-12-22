@@ -1,16 +1,12 @@
 <template>
 <header>
   <div class="headerRow1">
-    <div class="col">
-    </div>
-    <div class="col">
-      <div class="top">
-        <div class="inlineCol">
-          <el-button type="text">sign in</el-button>
-        </div>
-        <div class="inlineCol">
-          <a :href="signup_page"><el-button type="text">register</el-button></a>
-        </div>
+    <div class="top">
+      <div class="col">
+          <a :href="signup_page"><el-button size="mini" type="text">sign in</el-button></a>
+      </div>
+      <div class="col">
+        <a :href="signup_page"><el-button size="mini" type="text">register</el-button></a>
       </div>
     </div>
   </div>
@@ -63,23 +59,14 @@ header .headerRow1, header .headerRow2, header .headerRow3 {
   background: #fff
 }
 header .headerRow1 .col {
-  float: left;
-  width: 50%
-}
-header .headerRow1 .col .inlineCol {
   text-transform: uppercase;
-  margin-right: 60px;
-  margin-left: 10px;
-  padding-right: 0;
+  margin-right: 30px;
+  margin-left: 50px;
   display: block;
   float: left
 }
-header .headerRow1 .col .top {
+header .headerRow1 .top {
   float: right
-}
-header .headerRow1 .col .top .inlineCol {
-  margin-right: 10px;
-  margin-left: 60px
 }
 
 /* Header row 2 */
