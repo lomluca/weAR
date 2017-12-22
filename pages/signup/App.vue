@@ -6,7 +6,9 @@
   </el-header>
 
 
+  <!-- Main content -->
   <el-main style="overflow: initial">
+    <wear-register-form />  
   </el-main>
 
   <!-- Footer -->
@@ -19,17 +21,19 @@
 <script>
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
+import WearRegisterForm from '../../components/RegisterForm'
 
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+    
     }
   },
   components: {
     'wear-header': WearHeader,
-    'wear-footer': WearFooter
+    'wear-footer': WearFooter,
+    'wear-register-form': WearRegisterForm
   }
 }
 </script>
