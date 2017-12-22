@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="headerRow2">
-    <a href="#"><img src="../public/assets/logo_wear.png" alt="logo" width="50px" height="50px"></a>
+    <a :href="logo.href"><img :src="logo.asset" :alt="logo.alt" width="50px" height="50px"></a>
   </div>
   <div class="headerRow3">
     <wear-nav/>
@@ -33,7 +33,7 @@ export default {
   name: 'wear-header',
   data() {
     return {
-      title: "wear"
+      logo: getLogo()
     }
   },
   components: {

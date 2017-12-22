@@ -7,12 +7,12 @@
     v-bind:key="category.id">
 
     <!-- Render a standard menu item if no subcategories are found  -->
-    <el-menu-item v-if="!category.subcategories" v-bind:index="category.id">
+    <el-menu-item v-if="!category.subcategories" :index="category.id">
       {{ category.name }}
     </el-menu-item>
 
     <!-- Render a menu with sub items if subcategories are found -->
-    <el-submenu v-else v-bind:index="category.id">
+    <el-submenu v-else :index="category.id">
       <template slot="title">{{ category.name }}</template>
       <el-menu-item v-for="subcategory in category.subcategories"
         v-bind:subcategory="subcategory"

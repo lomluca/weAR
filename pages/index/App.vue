@@ -12,10 +12,10 @@
       <el-carousel indicator-position="outside">
         <el-carousel-item
           v-for="item in carouselData"
-          v-bind:item="item"
-          v-bind:key="item.id" >
-          <a v-bind:href="item.href">
-            <img v-bind:src="item.asset" v-bind:alt="item.alt">
+          :item="item"
+          :key="item.id" >
+          <a :href="item.href">
+            <img :src="item.asset" :alt="item.alt">
           </a>
         </el-carousel-item>
       </el-carousel>
@@ -23,7 +23,7 @@
   </el-main>
 
   <!-- Footer -->
-  <el-footer>
+  <el-footer height="auto">
     <wear-footer />
   </el-footer>
 </el-container>
