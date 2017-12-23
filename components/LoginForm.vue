@@ -17,12 +17,14 @@
 </template>
 
 <script>
+import * as CryptoJS from 'crypto-js'
+
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('Please input the password'));
-      } else if (value != localStorage.pass) {
+      } else if (CryptoJS.SHA256(value) != localStorage.pass) {
         callback(new Error('Wrong password'));
       } else {
         callback();

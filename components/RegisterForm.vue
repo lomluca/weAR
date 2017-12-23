@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import * as CryptoJS from 'crypto-js'
+
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
@@ -98,7 +100,7 @@ export default {
           localStorage.setItem("loggedIn", 0)
           localStorage.setItem("fullname", this.registerFormModel.fullname);
           localStorage.setItem("email", this.registerFormModel.email);
-          localStorage.setItem("pass", this.registerFormModel.pass);
+          localStorage.setItem("pass", CryptoJS.SHA256(this.registerFormModel.pass));
           localStorage.setItem("birthday", this.registerFormModel.birthday);
           this.$emit('signupSuccess')
           // Do nothing, we don't care                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    alert('submit!');
