@@ -8,9 +8,9 @@
 
   <!-- Main content -->
   <el-main style="overflow: initial">
-    
+    <wear-login-form @loginSuccess="loginCompleted"/>
   </el-main>
-
+    
   <!-- Footer -->
   <el-footer height="auto">
     <wear-footer />
@@ -21,6 +21,7 @@
 <script>
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
+import WearLoginForm from '../../components/LoginForm'
 
 export default {
   name: 'app',
@@ -31,10 +32,13 @@ export default {
   },
   components: {
     'wear-header': WearHeader,
-    'wear-footer': WearFooter
+    'wear-footer': WearFooter,
+    'wear-login-form': WearLoginForm
   },
   methods: {
-    
+    loginCompleted: function() {
+      window.location.href = 'index.html'
+    }
   }
 }
 </script>

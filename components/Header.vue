@@ -54,11 +54,7 @@ export default {
   },
   methods: {
     logout: function() {
-      localStorage.removeItem("fullname")
-      localStorage.removeItem("email")
-      localStorage.removeItem("pass")
-      localStorage.removeItem("birthday")
-      username = null
+      localStorage.loggedIn = 0
     }
   }
 }
