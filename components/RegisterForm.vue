@@ -95,6 +95,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          localStorage.setItem("loggedIn", 0)
           localStorage.setItem("fullname", this.registerFormModel.fullname);
           localStorage.setItem("email", this.registerFormModel.email);
           localStorage.setItem("pass", this.registerFormModel.pass);
