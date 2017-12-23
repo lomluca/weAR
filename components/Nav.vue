@@ -17,17 +17,19 @@
       <el-menu-item v-for="subcategory in category.subcategories"
         v-bind:subcategory="subcategory"
         v-bind:index="subcategory.id"
-        v-bind:key="subcategory.id" >
+        v-bind:key="subcategory.id" 
+        style="min-width:unset">
         {{ subcategory.name }}
+      </el-menu-item>
     </el-submenu>
   </div>
 
-  <el-menu-item :style="{}" v-on:keyup.enter="searchItem">
+  <el-menu-item style="float:right" v-on:keyup.enter="searchItem">
     <el-input
       size="mini"
       placeholder="Search item"
       prefix-icon="el-icon-search"
-      v-model="searchbox">
+      v-model="searchbox"/>
   </el-menu-item>
 
 </el-menu>
