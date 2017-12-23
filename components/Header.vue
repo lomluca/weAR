@@ -98,14 +98,13 @@ header .headerRow2  {
   text-align: center;
 }
 
-.headerRow3 {
-  padding-left: 5px;
+header .headerRow3 {
+  padding: 10px 5px 10px 5px;
 }
 
-.headerRow3_logo{
-  padding-top: 15px;
+header .headerRow3_logo{
+  float: left;
   display: none;
-  width: 4%;
 }
 
 </style>
