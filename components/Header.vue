@@ -3,7 +3,7 @@
   <div class="headerRow1">
     <div class="top">
       <div class="col">
-        <a v-if="!username" :href="signup_page"><el-button size="mini" type="text">login</el-button></a>
+        <a v-if="!username" :href="login_page"><el-button size="mini" type="text">login</el-button></a>
       </div>
       <div class="col">
         <a v-if="!username" :href="signup_page"><el-button size="mini" type="text">register</el-button></a>
@@ -37,12 +37,13 @@ export default {
     return {
       logo: getLogo(),
       signup_page: 'signup.html',
-      home_page: 'index.html'
+      home_page: 'index.html',
+      login_page: 'login.html'
     }
   },
   computed: {
     username: function() {
-      if (localStorage.fullname) {
+      if (localStorage.loggedIn == 1) {
         return "Hi, " + localStorage.fullname
       }
       return null
