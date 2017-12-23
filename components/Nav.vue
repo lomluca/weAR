@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <el-button icon="el-icon-menu" class="menuIcon" size="small" @click="showMenu()"></el-button>
+    <el-button icon="el-icon-menu" class="menuIcon" size="small" @click="showMenu"></el-button>
     <template
       v-for="category in categories"
       :category="category">
@@ -43,6 +43,9 @@ export default {
   methods: {
     searchItem: function(event) {
       item = event.target.value; //do something with this
+    },
+    showMenu: function() {
+
     }
   }
 }
@@ -69,6 +72,16 @@ nav #searchBox {
 nav .menuIcon {
   float: left;
   display: none
+}
+
+@media screen and (max-width: 700px) {
+  nav .menuItem:not(:first-child) {
+    display: none;
+  }
+  nav .menuIcon {
+    float: left;
+    display: block;
+  }
 }
 
 </style>
