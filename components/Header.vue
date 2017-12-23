@@ -83,8 +83,7 @@ header .headerRow1, header .headerRow2, header .headerRow3 {
 }
 header .headerRow1 .col {
   text-transform: uppercase;
-  margin-right: 30px;
-  margin-left: 50px;
+  margin-right: 20px;
   display: block;
   float: left;
 }
