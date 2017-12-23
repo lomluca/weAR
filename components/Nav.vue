@@ -22,7 +22,7 @@
     </el-submenu>
   </div>
 
-  <el-menu-item :style="{float: 'right'}" v-on:keyup.enter="searchItem">
+  <el-menu-item :style="{}" v-on:keyup.enter="searchItem">
     <el-input
       size="mini"
       placeholder="Search item"
@@ -52,7 +52,11 @@ export default {
 
 <style>
 .el-menu {
+  display: inline-block;
+  float: right;
+  padding-right: 0px;
+  width: 96%;
   text-transform: uppercase;
-  font-family: Arial, sans-serif
+  font-family: Arial, sans-serif;
 }
 </style>

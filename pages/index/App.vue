@@ -50,6 +50,11 @@ export default {
 </script>
 
 <style>
+.el-header{
+  box-sizing: content-box;
+  padding: 0px;
+}
+
 .el-main{
   min-height: 100%;
 }

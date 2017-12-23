@@ -20,6 +20,9 @@
     <a :href="home_page"><img :src="logo.asset" :alt="logo.alt" width="50px" height="50px"></a>
   </div>
   <div class="headerRow3">
+    <div class="headerRow3_logo">
+      <a :href="home_page"><img :src="logo.asset" :alt="logo.alt" width="25px" height="25px"></a>
+    </div>
     <wear-nav/>
   </div>
 </header>
@@ -79,23 +82,33 @@ header .headerRow1, header .headerRow2, header .headerRow3 {
   width: 100%;
   display: inline-block;
   vertical-align: top;
-  background: #fff
+  background: #fff;
 }
 header .headerRow1 .col {
   text-transform: uppercase;
   margin-right: 30px;
   margin-left: 50px;
   display: block;
-  float: left
+  float: left;
 }
 header .headerRow1 .top {
-  float: right
+  float: right;
 }
 
 /* Header row 2 */
 header .headerRow2  {
   margin-top: -10px;
-  text-align: center
+  text-align: center;
+}
+
+.headerRow3 {
+  padding-left: 5px;
+}
+
+.headerRow3_logo{
+  padding-top: 15px;
+  display: none;
+  width: 4%;
 }
 
 </style>
