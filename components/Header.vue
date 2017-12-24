@@ -94,15 +94,17 @@ header .headerRow1 .top {
 /* Header row 2 */
 header .headerRow2  {
   margin-top: -10px;
+  margin-bottom: -5px;
   text-align: center;
 }
 
 header .headerRow3 {
-  padding: 0px 5px 10px 5px;
+  padding: 10px 5px 10px 5px;
 }
 
 header .headerRow3_logo{
   float: left;
+  padding: 3px;
   display: none;
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button icon="el-icon-menu" id="menuIcon" size="small" v-if="isCollapsed" @click="hidden = !hidden"></el-button>
+    <el-button id="menuIcon" size="small" v-if="isCollapsed" @click="hidden = !hidden">&#9776</el-button>
     <nav :class="[navClasses, {hide: hidden}]">
       <template
       v-for="category in categories"
@@ -113,5 +113,8 @@ export default {
 
 .hide {
   display: none;
+}
+#menuIcon {
+  margin-left: 10px
 }
 </style>
