@@ -1,28 +1,44 @@
 <template>
 <footer>
   <div class="footerColumn1">
-    <h4> Contact Us </h4>
-    <div> <h5> Send us and email </h5> </div>
-    <div> <h5> Customer service </h5> </div>
+    <div class="footerListContainer">
+      <div class="footerHeader"><h4> Contact Us </h4></div>
+      <ul>
+        <li><el-button size="mini" type="text"> Send us an email </el-button></li>
+        <li><el-button size="mini" type="text"> Customer service </el-button></li>
+      </ul>
+    </div>
   </div>
   <div class="footerColumn2">
-    <h4> Help & Info </h4>
-    <div> <h5> Shipping </h5> </div>
-    <div> <h5> Payment </h5> </div>
-    <div> <h5> Size guide </h5> </div>
-    <div> <h5> FAQ </h5> </div>
+    <div class="footerListContainer">
+      <div class="footerHeader"><h4> Help & Info </h4></div>
+      <ul>
+        <li><el-button size="mini" type="text"> Shipping </el-button></li>
+        <li><el-button size="mini" type="text"> Payment </el-button></li>
+        <li><el-button size="mini" type="text"> Size guide </el-button></li>
+        <li><el-button size="mini" type="text"> FAQ </el-button></li>
+      </ul>
+    </div>
   </div>
   <div class="footerColumn3">
-    <h4> About </h4>
-    <div> <h5> About weAR </h5> </div>
-    <div> <h5> Safety, Security and Privacy </h5> </div>
-    <div> <h5> Terms & Conditions </h5> </div>
+    <div class="footerListContainer">
+      <div class="footerHeader"><h4> About </h4></div>
+      <ul>
+        <li><el-button size="mini" type="text"> About weAR </el-button></li>
+        <li><el-button size="mini" type="text"> Safety, Security and Privacy </el-button></li>
+        <li><el-button size="mini" type="text"> Terms & Conditions </el-button></li>
+      </ul>
+    </div>
   </div>
   <div class="footerColumn4">
-    <h4> Connect With Us </h4>
-    <div><a href="#" @click="newsletter_messagebox"><h5>Sign up for newsletter</h5></a></div>
-    <div class="social_icons"></div>
-    <div> <h5> Careers </h5> </div>
+    <div class="footerListContainer">
+      <div class="footerHeader"><h4> Connect With Us </h4></div>
+      <ul>
+        <li><el-button size="mini" type="text" @click="newsletter_messagebox">Sign up for newsletter</el-button></li>
+        <li><el-button size="mini" type="text"> Safety, Security and Privacy </el-button></li>
+        <li><el-button size="mini" type="text"> Careers </el-button></li>
+      </ul>
+    </div>
   </div>
 </footer>
 </template>
@@ -54,7 +70,7 @@ export default {
         });
       });
     }
-  } 
+  }
 }
 </script>
 
@@ -72,15 +88,27 @@ footer .footerColumn1, footer .footerColumn2, footer .footerColumn3, footer .foo
   float: left;
   width: 25%
 }
-footer h4 {
-  color: #303133
+footer .footerListContainer {
+  margin-left: 30px;
 }
-footer h5 {
+footer .footerListContainer .footerHeader {
+  width: 100%
+}
+footer .footerListContainer .footerHeader h4 {
+  float: left;
+  color: #303133;
+}
+footer .footerListContainer ul {
+  display: block;
+  clear: left;
+  list-style-type: none;
+  padding: 0;
+}
+footer .footerListContainer ul li {
+  display: block;
+}
+footer .footerListContainer ul li .el-button {
+  display: block;
   color: #909399;
-  font-size: 80%
-}
-
-footer a {
-  text-decoration: none;
 }
 </style>
