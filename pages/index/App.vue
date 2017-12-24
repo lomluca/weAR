@@ -6,20 +6,8 @@
   </el-header>
 
   <!-- Page's main content -->
-  <el-main style="overflow: initial">
-    <!-- Carousel -->
-    <div class="block">
-      <el-carousel indicator-position="outside">
-        <el-carousel-item
-          v-for="item in carouselData"
-          :item="item"
-          :key="item.id" >
-          <a :href="item.href">
-            <img :src="item.asset" :alt="item.alt">
-          </a>
-        </el-carousel-item>
-      </el-carousel>
-    </div>
+  <el-main>
+    <wear-main />
   </el-main>
 
   <!-- Footer -->
@@ -33,17 +21,14 @@
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
 import WearNav from '../../components/Nav'
+import WearMain from '../../components/Main'
 
 export default {
   name: 'app',
-  data () {
-    return {
-      carouselData: getCarouselData()['data'] // Defined in public/js/model.js
-    }
-  },
   components: {
     'wear-header': WearHeader,
     'wear-nav': WearNav,
+    'wear-main': WearMain,
     'wear-footer': WearFooter
   }
 }
@@ -55,17 +40,8 @@ export default {
   padding: 0px;
 }
 
-.el-main{
-  min-height: 100%;
-}
-
-.el-carousel__item a {
-  width: 100%;
-  height: 100%;
-}
-
-.el-carousel__item img {
-  width: 100%;
-  height: 100%;
+.el-main {
+  height: auto;
+  overflow: initial;
 }
 </style>
