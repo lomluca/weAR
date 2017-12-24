@@ -9,7 +9,7 @@
         <a v-if="!username" :href="signup_page"><el-button size="mini" type="text">register</el-button></a>
       </div>
       <div class="col">
-        <a v-if="username" :href="signup_page"><el-button size="mini" type="text">{{ username }}</el-button></a>
+        <a v-if="username" :href="profile_page"><el-button size="mini" type="text">{{ username }}</el-button></a>
       </div>
       <div class="col">
         <a v-if="username" :href="home_page"><el-button @click="logout" size="mini" type="text">logout</el-button></a>
@@ -38,7 +38,8 @@ export default {
       logo: getLogo(),
       signup_page: 'signup.html',
       home_page: 'index.html',
-      login_page: 'login.html'
+      login_page: 'login.html',
+      profile_page: 'profile.html'
     }
   },
   computed: {

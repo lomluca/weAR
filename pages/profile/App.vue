@@ -1,0 +1,45 @@
+<template>
+<el-container>
+  <!-- Header -->
+  <el-header height="auto">
+    <wear-header />
+  </el-header>
+
+
+  <!-- Main content -->
+  <el-main style="overflow: initial">
+    
+  </el-main>
+
+  <!-- Footer -->
+  <el-footer height="auto">
+    <wear-footer />
+  </el-footer>
+</el-container>
+</template>
+
+<script>
+import WearHeader from '../../components/Header'
+import WearFooter from '../../components/Footer'
+
+export default {
+  name: 'app',
+  data () {
+    return {
+      
+    }
+  },
+  components: {
+    'wear-header': WearHeader,
+    'wear-footer': WearFooter
+  },
+  methods: {
+    
+  },
+  beforeMount() {
+    if(localStorage.loggedIn != 1) {
+      window.location.href = 'index.html'
+    }
+  }
+}
+</script>
