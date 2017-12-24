@@ -29,4 +29,35 @@ function getCategories() {
 }
 
 function query(params) {
+  return {
+    data: [
+      { id: 1, name: 'Floral Midi Wrap Dress', assets: [ '/assets/items/0001/1.jpg', '/assets/items/0001/2.jpg'  ], sizes: [ 'S', 'M', 'L' ], price: 29.99 },
+      { id: 2, name: 'VMCELEB - Blouse', assets: [ '/assets/items/0002/1.jpg', '/assets/items/0002/2.jpg'  ], sizes: [ 'S', 'M', 'L' ], price: 29.99 },
+      { id: 3, name: 'mint&berry - Shirt', assets: [ '/assets/items/0003/1.jpg', '/assets/items/0003/2.jpg'  ], sizes: [ 'S', 'M', 'L' ], price: 39.99 }
+    ]
+  }
+}
+
+function getColors() {
+  return {
+    data: [
+      { id: 1, name: 'Black', value: '#000000' },
+      { id: 2, name: 'Red', value: '#FF4000' },
+      { id: 3, name: 'White', value: '#FFFFFF' },
+      { id: 4, name: 'Grey', value: '#848484' },
+      { id: 5, name: 'Green', value: '#04B404' }
+    ]
+  }
+}
+
+function getBrands() {
+  return {
+    data: [
+      { id: 11, name: 'D&G' },
+      { id: 12, name: 'Armani' },
+      { id: 13, name: 'Gucci' },
+      { id: 14, name: 'Valentino' },
+      { id: 15, name: 'Calvin Klein' }
+    ]
+  }
 }

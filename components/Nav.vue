@@ -24,10 +24,10 @@
 
       <div id="searchBox" :class="[menuClasses, {hide: hidden}]" @keyup.enter="searchItem">
         <el-input
-        size="small"
-        placeholder="Search item"
-        prefix-icon="el-icon-search"
-        v-model="searchbox">
+          size="small"
+          placeholder="Search item"
+          prefix-icon="el-icon-search"
+          v-model="searchbox">
       </div>
     </nav>
   </div>
