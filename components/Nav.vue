@@ -104,7 +104,8 @@ export default {
   display: block;
 }
 .verticalNav .verticalMenuItem {
-  display: block;
+  float: left;
+  clear: left;
 }
 .verticalNav #searchBox {
 
