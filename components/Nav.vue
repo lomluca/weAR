@@ -40,9 +40,9 @@ export default {
     return {
       categories: getCategories()['data'], // Defined in static/js/model.js
       searchbox: '',
-      windowWidth: 0,
-      isCollapsed: false,
-      hidden: false
+      windowWidth: window.innerWidth,
+      isCollapsed: (window.innerWidth < 768),
+      hidden: (window.innerWidth < 768)
     }
   },
   methods: {
