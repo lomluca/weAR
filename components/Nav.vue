@@ -23,11 +23,11 @@
       </template>
 
       <div id="shoppingCart" :class="[menuClasses, {hide: hidden}]">
-        <a><el-button size="small" icon="el-icon-goods"></el-button></a>
+        <wear-shopping-cart/>
       </div>
       <div id="searchBox" :class="[menuClasses, {hide: hidden}]">
         <el-input
-          size="small"
+          size="mini"
           placeholder="Search item"
           prefix-icon="el-icon-search"
           v-model="searchbox"
@@ -38,8 +38,13 @@
 </template>
 
 <script>
+import WearShoppingCart from './ShoppingCart'
+
 export default {
   name: 'wear-nav',
+  components: {
+    'wear-shopping-cart': WearShoppingCart
+  },
   data() {
     return {
       categories: getCategories()['data'], // Defined in static/js/model.js
@@ -99,7 +104,7 @@ export default {
   margin-left: 15px;
 }
 .horizontalNav #shoppingCart {
-  margin-right: 15px;
+  margin-right: 20px;
   float: right;
 }
 .horizontalNav #searchBox {
@@ -114,17 +119,8 @@ export default {
   float: left;
   clear: left;
 }
-.verticalNav #searchBox {
-
-}
 
 .hide {
   display: none;
-}
-#shoppingCart {
-
-}
-#menuIcon {
-
 }
 </style>

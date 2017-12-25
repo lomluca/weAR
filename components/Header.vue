@@ -33,6 +33,9 @@ import WearNav from './Nav'
 
 export default {
   name: 'wear-header',
+  components: {
+    'wear-nav': WearNav
+  },
   data() {
     return {
       logo: getLogo(),

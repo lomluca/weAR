@@ -20,14 +20,12 @@
 <script>
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
-import WearNav from '../../components/Nav'
 import WearMain from '../../components/Main'
 
 export default {
   name: 'app',
   components: {
     'wear-header': WearHeader,
-    'wear-nav': WearNav,
     'wear-main': WearMain,
     'wear-footer': WearFooter
   }
