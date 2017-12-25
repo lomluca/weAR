@@ -14,10 +14,9 @@ function getCarouselData() {
 function getImageBlockData() {
   return {
     data: [
-      { id: 1, asset: '/assets/imageBlock/1.jpg', alt: 'Ad Banner 1', href: '#', position: '0', description: 'A small description'  },
-      { id: 2, asset: '/assets/imageBlock/2.jpg', alt: 'Ad Banner 2', href: '#', position: '1', description: 'A small description'  },
-      { id: 3, asset: '/assets/imageBlock/3.jpg', alt: 'Ad Banner 3', href: '#', position: '0', description: 'A small description'  },
-      { id: 4, asset: '/assets/imageBlock/4.jpg', alt: 'Ad Banner 4', href: '#', position: '1', description: 'A small description'  }
+      { id: 1, asset: '/assets/imageBlock/sweather.jpg', alt: 'Ad Banner 1', href: '#', position: '0', description: 'Sweather 1'  , price: '22,50 €' },
+      { id: 2, asset: '/assets/imageBlock/sweather2.jpg', alt: 'Ad Banner 2', href: '#', position: '1', description: 'Sweather 2' , price: '12,00 €'},
+      { id: 3, asset: '/assets/imageBlock/skirt.jpg', alt: 'Ad Banner 3', href: '#', position: '0', description: 'Skirt', price: '32,50 €' }
     ]
   }
 }

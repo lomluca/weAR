@@ -13,36 +13,22 @@
     </div>
 
     <!-- Other images -->
-    <div class="imageBlock" v-for="item in imageBlockData"
+    <div class="imageBlock" >
+      <div class="blockCol" v-for="item in imageBlockData"
       :item="item"
       :key="item.id">
-      <div class="blockRow">
-        <template v-if="item.position == 0">
-          <div class="blockCol">
-            <div class="imageContainer">
-              <a :href="item.href"><img :src="item.asset" :alt="item.alt"></a>
-            </div>
+        <div class="imageContainer">
+          <a :href="item.href"><img :src="item.asset" :alt="item.alt"></a>
+        </div>
+        
+        <div class="descriptionContainer">
+          <div class="description">
+            {{ item.description }}
           </div>
-          <div class="blockCol">
-            <div class="description">
-              {{ item.description }}
-            </div>
+          <div class="price">
+            {{ item.price }}
           </div>
-        </template>
-        <template v-else>
-          <div class="blockRow">
-            <div class="blockCol">
-              <div class="description">
-                {{ item.description }}
-              </div>
-            </div>
-            <div class="blockCol">
-              <div class="imageContainer">
-                <a :href="item.href"><img :src="item.asset" :alt="item.alt"></a>
-              </div>
-            </div>
-          </div>
-        </template>
+        </div>
       </div>
   </section>
 </template>
@@ -74,18 +60,37 @@ export default {
   margin-bottom: 30px;
 }
 
-.imageBlock .blockRow {
+.imageBlock {
   width: 100%;
   height: auto;
   display: inline-block;
   vertical-align: top;
 }
-.imageBlock .blockRow .blockCol {
-  width: 50%;
+
+.blockCol {
+  width: 33%;
+  height: auto;
   display: inline-block;
-  float: left
 }
-.imageBlock .blockRow .blockCol .imageContainer {
-  overflow: hidden;
+
+.imageContainer {
+  width: 100%;
+  height: 85%;
+}
+
+.descriptionContainer {
+  width: 100%;
+  height: 15%;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.description, .price {
+  width: 50%;
+  display: inline;
+  padding: 10%;
 }
 </style>
