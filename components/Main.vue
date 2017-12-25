@@ -21,13 +21,8 @@
           <a :href="item.href"><img :src="item.asset" :alt="item.alt"></a>
         </div>
         
-        <div class="descriptionContainer">
-          <div class="description">
-            {{ item.description }}
-          </div>
-          <div class="price">
-            {{ item.price }}
-          </div>
+        <div class="description">
+          {{ item.description }}
         </div>
       </div>
   </section>
@@ -78,7 +73,7 @@ export default {
   height: 85%;
 }
 
-.descriptionContainer {
+.description {
   width: 100%;
   height: 15%;
 }
@@ -86,11 +81,5 @@ export default {
 img {
   max-width: 100%;
   max-height: 100%;
-}
-
-.description, .price {
-  width: 50%;
-  display: inline;
-  padding: 10%;
 }
 </style>
