@@ -11,6 +11,17 @@ function getCarouselData() {
   }
 }
 
+function getImageBlockData() {
+  return {
+    data: [
+      { id: 1, asset: '/assets/imageBlock/1.jpg', alt: 'Ad Banner 1', href: '#', position: '0', description: 'A small description'  },
+      { id: 2, asset: '/assets/imageBlock/2.jpg', alt: 'Ad Banner 2', href: '#', position: '1', description: 'A small description'  },
+      { id: 3, asset: '/assets/imageBlock/3.jpg', alt: 'Ad Banner 3', href: '#', position: '0', description: 'A small description'  },
+      { id: 4, asset: '/assets/imageBlock/4.jpg', alt: 'Ad Banner 4', href: '#', position: '1', description: 'A small description'  }
+    ]
+  }
+}
+
 function getLogo() {
   return {
      id: 1, asset: '/assets/logo_wear.png', alt: 'Wear Logo', href: '#'

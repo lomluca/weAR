@@ -13,46 +13,37 @@
     </div>
 
     <!-- Other images -->
-    <div class="imageBlock">
+    <div class="imageBlock" v-for="item in imageBlockData"
+      :item="item"
+      :key="item.id">
       <div class="blockRow">
-        <div class="blockCol">
-          <div class="imageContainer">
-            <a href="#"><img src="/assets/carousel/1.jpg" alt=""></a>
+        <template v-if="item.position == 0">
+          <div class="blockCol">
+            <div class="imageContainer">
+              <a :href="item.href"><img :src="item.asset" :alt="item.alt"></a>
+            </div>
           </div>
-        </div>
-        <div class="blockCol">
-          <div class="description">
-            Prova
+          <div class="blockCol">
+            <div class="description">
+              {{ item.description }}
+            </div>
           </div>
-        </div>
+        </template>
+        <template v-else>
+          <div class="blockRow">
+            <div class="blockCol">
+              <div class="description">
+                {{ item.description }}
+              </div>
+            </div>
+            <div class="blockCol">
+              <div class="imageContainer">
+                <a :href="item.href"><img :src="item.asset" :alt="item.alt"></a>
+              </div>
+            </div>
+          </div>
+        </template>
       </div>
-
-      <div class="blockRow">
-        <div class="blockCol">
-          <div class="description">
-            Prova
-          </div>
-        </div>
-        <div class="blockCol">
-          <div class="imageContainer">
-            <a href="#"><img src="/assets/carousel/2.jpg" alt=""></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="blockRow">
-        <div class="blockCol">
-          <div class="imageContainer">
-            <a href="#"><img src="/assets/carousel/1.jpg" alt=""></a>
-          </div>
-        </div>
-        <div class="blockCol">
-          <div class="description">
-            Prova
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
 </template>
 
@@ -61,7 +52,8 @@ export default {
   name: 'wear-main',
   data () {
     return {
-      carouselData: getCarouselData()['data'] // Defined in public/js/model.js
+      carouselData: getCarouselData()['data'], // Defined in public/js/model.js
+      imageBlockData: getImageBlockData()['data']
     }
   }
 }
