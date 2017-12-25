@@ -67,4 +67,9 @@ export default {
 .query-result-label {
   text-align: left;
 }
+
+.el-main {
+  height: auto;
+  overflow: initial;
+}
 </style>
