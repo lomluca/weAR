@@ -22,12 +22,16 @@
         </el-dropdown>
       </template>
 
-      <div id="searchBox" :class="[menuClasses, {hide: hidden}]" @keyup.enter="searchItem">
+      <div id="shoppingCart" :class="[menuClasses, {hide: hidden}]">
+        <a><el-button size="small" icon="el-icon-goods"></el-button></a>
+      </div>
+      <div id="searchBox" :class="[menuClasses, {hide: hidden}]">
         <el-input
           size="small"
           placeholder="Search item"
           prefix-icon="el-icon-search"
-          v-model="searchbox">
+          v-model="searchbox"
+          @keyup.enter="searchItem">
       </div>
     </nav>
   </div>
@@ -94,8 +98,11 @@ export default {
   display: inline-block;
   margin-left: 15px;
 }
+.horizontalNav #shoppingCart {
+  margin-right: 15px;
+  float: right;
+}
 .horizontalNav #searchBox {
-  margin-right: 20px;
   float: right;
 }
 
@@ -114,7 +121,10 @@ export default {
 .hide {
   display: none;
 }
+#shoppingCart {
+
+}
 #menuIcon {
-  margin-left: 10px
+
 }
 </style>
