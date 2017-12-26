@@ -1,17 +1,15 @@
 <template>
-<el-row>
-  <el-col :xs="4" :sm="4" :md="2" :lg="2" :xl="2"><p>{{ item.name }}</p></el-col>
-
-  <el-col :xs="16" :sm="16" :md="18" :lg="18" :xl="18"><img class="list-item-image" :src="item.assets[0]" :alt="item.name"></el-col>
-
-  <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
-    <el-container direction="vertical">
-      <p>{{ item.price }} €</p>
-      <el-button style="width:100%" type="primary">Try</el-button>
-      <el-button style="width:100%;margin-left:0;">Add to Cart</el-button>
-    </el-container>
-  </el-col>
-</el-row>
+<el-card :body-style="{ padding: '0px' }">
+  <img :src="item.assets[0]" :alt="item.name" class="list-item-image">
+  <div style="padding: 14px;">
+    <span>{{ item.name  }}</span>
+    <div class="bottom clearfix">
+      <span class="price-label">{{ item.price }}</span>
+      <el-button type="primary" class="button">Try</el-button>
+      <el-button class="button">Add To Cart</el-button>
+    </div>
+  </div>
+</el-card>
 </template>
 
 <script>
@@ -27,7 +25,7 @@ export default {
 
 <style>
 .list-item-image {
-  width: 25%;
-  height: 10%;
+  width: 30%;
+  display: block;
 }
 </style>

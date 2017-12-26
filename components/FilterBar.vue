@@ -1,7 +1,7 @@
 <template>
 <el-container direction="vertical">
 
-  <h1>Filters</h1>
+  <h1 style="float: left">Filters</h1>
 
   <el-checkbox v-model="fastShipping" label="Fast Shipping" border></el-checkbox>
 
