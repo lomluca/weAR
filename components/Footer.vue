@@ -1,45 +1,55 @@
 <template>
 <footer>
-  <div class="footerColumn1">
-    <div class="footerListContainer">
-      <div class="footerHeader"><h4> Contact Us </h4></div>
-      <ul>
-        <li><el-button size="mini" type="text"> Send us an email </el-button></li>
-        <li><el-button size="mini" type="text"> Customer service </el-button></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footerColumn2">
-    <div class="footerListContainer">
-      <div class="footerHeader"><h4> Help & Info </h4></div>
-      <ul>
-        <li><el-button size="mini" type="text"> Shipping </el-button></li>
-        <li><el-button size="mini" type="text"> Payment </el-button></li>
-        <li><el-button size="mini" type="text"> Size guide </el-button></li>
-        <li><el-button size="mini" type="text"> FAQ </el-button></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footerColumn3">
-    <div class="footerListContainer">
-      <div class="footerHeader"><h4> About </h4></div>
-      <ul>
-        <li><el-button size="mini" type="text"> About weAR </el-button></li>
-        <li><el-button size="mini" type="text"> Safety, Security and Privacy </el-button></li>
-        <li><el-button size="mini" type="text"> Terms & Conditions </el-button></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footerColumn4">
-    <div class="footerListContainer">
-      <div class="footerHeader"><h4> Connect With Us </h4></div>
-      <ul>
-        <li><el-button size="mini" type="text" @click="newsletter_messagebox">Sign up for newsletter</el-button></li>
-        <li><el-button size="mini" type="text"> Safety, Security and Privacy </el-button></li>
-        <li><el-button size="mini" type="text"> Careers </el-button></li>
-      </ul>
-    </div>
-  </div>
+  <el-row :gutter="10">
+    <el-col :sm="6">
+      <div class="footerColumn1">
+        <div class="footerListContainer">
+          <div class="footerHeader"><h4> Contact Us </h4></div>
+          <ul>
+            <li><el-button size="mini" type="text"> Send us an email </el-button></li>
+            <li><el-button size="mini" type="text"> Customer service </el-button></li>
+          </ul>
+        </div>
+      </div>
+    </el-col>
+    <el-col :sm="6">
+      <div class="footerColumn2">
+        <div class="footerListContainer">
+          <div class="footerHeader"><h4> Help & Info </h4></div>
+          <ul>
+            <li><el-button size="mini" type="text"> Shipping </el-button></li>
+            <li><el-button size="mini" type="text"> Payment </el-button></li>
+            <li><el-button size="mini" type="text"> Size guide </el-button></li>
+            <li><el-button size="mini" type="text"> FAQ </el-button></li>
+          </ul>
+        </div>
+      </div>
+    </el-col>
+    <el-col :sm="6">
+      <div class="footerColumn3">
+        <div class="footerListContainer">
+          <div class="footerHeader"><h4> About </h4></div>
+          <ul>
+            <li><el-button size="mini" type="text"> About weAR </el-button></li>
+            <li><el-button size="mini" type="text"> Safety, Security and Privacy </el-button></li>
+            <li><el-button size="mini" type="text"> Terms & Conditions </el-button></li>
+          </ul>
+        </div>
+      </div>
+    </el-col>
+    <el-col :sm="6">
+      <div class="footerColumn4">
+        <div class="footerListContainer">
+          <div class="footerHeader"><h4> Connect With Us </h4></div>
+          <ul>
+            <li><el-button size="mini" type="text" @click="newsletter_messagebox">Sign up for newsletter</el-button></li>
+            <li><el-button size="mini" type="text"> Safety, Security and Privacy </el-button></li>
+            <li><el-button size="mini" type="text"> Careers </el-button></li>
+          </ul>
+        </div>
+      </div>
+    </el-col>
+  </el-row>
 </footer>
 </template>
 
