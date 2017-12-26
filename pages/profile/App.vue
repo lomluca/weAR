@@ -11,19 +11,41 @@
     <el-row :gutter="10">
       <el-col :sm="8">
         <div class="box">
-          <img class="small" src="/assets/widget-personal-info1.png"><br>
+          <img class="small" src="/assets/widget-personal-info1.png">
           <!--<img class="profile-img":src="sourceImg" v-if="showImg"></img>
           <input type="file" accept="image/*"@change="changePic($event)"></input>-->
           <ul class="list-info">
             <li><span class="ligth-text">fullname</span> <span class="bold-text">{{ fullname }}</span></li>
             <li><span class="ligth-text">email</span> <span class="bold-text">{{ mail }}</span></li>
             <li><span class="ligth-text">birthday</span> <span class="bold-text">{{ birthday }}</span></li>
+            <li><span class="ligth-text">address</span> <span class="bold-text">{{ address }}</span></li>
           </ul>
+          <el-button type="primary" @click="dialogFormVisible = true">Edit</el-button>
+          <el-dialog title="Edit your personal info" :visible.sync="dialogFormVisible">
+            <el-form :model="form">
+              <el-form-item label="fullname" :label-width="formLabelWidth">
+                <el-input v-model="form.fullname" auto-complete="off"></el-input>
+              </el-form-item>
+              <el-form-item label="email" :label-width="formLabelWidth">
+                <el-input v-model="form.email" auto-complete="off"></el-input>
+              </el-form-item>
+              <el-form-item label="birthday" :label-width="formLabelWidth">
+                <el-input v-model="form.birthday" auto-complete="off"></el-input>
+              </el-form-item>
+              <el-form-item label="address" :label-width="formLabelWidth">
+                <el-input v-model="form.address" auto-complete="off"></el-input>
+              </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="dialogFormVisible = false">Cancel</el-button>
+              <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
+            </span>
+          </el-dialog>
         </div>
       </el-col>
       <el-col :sm="16">
         <div class="box">
-          <p class="block-title">PAY</p>
+          <img class="small" src="/assets/credit-card-logo.png">
         </div>
       </el-col>
     </el-row>
@@ -59,8 +81,19 @@ export default {
       fullname: localStorage.fullname,
       mail: localStorage.email,
       birthday: newBirthday,
-      //showImg: false,
-      //sourceImg: ""
+      dialogFormVisible: false,
+      form: {
+          fullname: this.fullname,
+          email: this.mail,
+          birthday: newBirthday,
+          address: this.address
+      },
+      formLabelWidth: '120px',
+    }
+  },
+  computed: {
+    address: function() {
+      return localStorage.address
     }
   },
   components: {
@@ -68,7 +101,7 @@ export default {
     'wear-footer': WearFooter
   },
   methods: {
-    
+
   },
   beforeMount() {
     if(localStorage.loggedIn != 1) {
@@ -82,6 +115,8 @@ export default {
   img.small {
     width: 75px;
     height: 75px;
+    display: block;
+    margin: auto;
   }
   .el-header{
     box-sizing: content-box;
@@ -100,7 +135,7 @@ export default {
   span.light-text {
     font-family: "Helvetica Neue";
     font-size: 14px;
-    font-style: normal;
+    font-style: italic;
     font-variant: normal;
     font-weight: 400;
     line-height: 20px;
