@@ -45,6 +45,7 @@ export default {
   name: 'wear-nav',
   data() {
     return {
+      shopcart_page: 'shopcart.html',
       categories: getCategories()['data'], // Defined in static/js/model.js
       searchbox: '',
       windowWidth: window.innerWidth,
