@@ -27,6 +27,12 @@ function getLogo() {
   }
 }
 
+function getTryOnSample() {
+  return {
+     id: 1, asset: '/assets/try-on_sample.jpg', alt: 'Wear Logo', href: '#'
+  }
+}
+
 function getCategories() {
   return {
     data: [
@@ -34,6 +40,24 @@ function getCategories() {
       { id: 2, name: 'Woman', subcategories: [ { id: 21, name: 'Skirts' }, { id: 22, name: 'Trousers' } ] },
       { id: 3, name: 'Winter Collection' },
       { id: 4, name: 'Promos' }
+    ]
+  }
+}
+
+function getFilters() {
+  return {
+    data: [
+      { id: 1, name: 'Size', subfilters: [ { id: 11, name: 'S' }, { id: 12, name: 'M' }, { id: 13, name: 'L' }, { id: 14, name: 'XL' } ] },
+      { id: 2, name: 'Color', subfilters: [ { id: 21, name: 'Black' }, { id: 22, name: 'Brown' }, { id: 23, name: 'Blue' } ] }
+    ]
+  }
+}
+
+function getClothes() {
+  return {
+    data: [
+      { id: 1, asset: '/assets/try-on_items/shirt.jpg', href: '#' },
+      { id: 2, asset: '/assets/try-on_items/trousers.jpg', href: '#' }
     ]
   }
 }
