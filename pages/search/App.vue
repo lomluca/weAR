@@ -64,6 +64,14 @@ export default {
 </script>
 
 <style>
+.el-header{
+  box-sizing: content-box;
+  padding: 0px;
+}
+.el-footer{
+  box-sizing: content-box;
+  padding: 0px;
+}
 .query-result-label {
   text-align: left;
 }

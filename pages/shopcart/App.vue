@@ -8,7 +8,7 @@
 
     <!-- Main content -->
     <el-main style="overflow: initial">
-      
+
     </el-main>
 
     <!-- Footer -->
@@ -37,6 +37,10 @@ export default {
 </script>
 
 <style>
+.el-header{
+  box-sizing: content-box;
+  padding: 0px;
+}
 .list-item-image {
   width: 25%;
   height: 10%;

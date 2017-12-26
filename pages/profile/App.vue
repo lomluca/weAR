@@ -64,7 +64,7 @@ export default {
     'wear-footer': WearFooter
   },
   methods: {
-    
+
   },
   beforeMount() {
     if(localStorage.loggedIn != 1) {
@@ -75,6 +75,14 @@ export default {
 </script>
 
 <style>
+  .el-header{
+    box-sizing: content-box;
+    padding: 0px;
+  }
+  .el-footer{
+    box-sizing: content-box;
+    padding: 0px;
+  }
   .bg-purple {
     background: #d3dce6;
   }
