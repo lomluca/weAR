@@ -22,16 +22,19 @@
         </el-dropdown>
       </template>
 
-      <div id="shoppingCart" :class="[menuClasses, {hide: hidden}]">
-        <wear-shopping-cart/>
-      </div>
-      <div id="searchBox" :class="[menuClasses, {hide: hidden}]">
-        <el-input
-          size="mini"
-          placeholder="Search item"
-          prefix-icon="el-icon-search"
-          v-model="searchbox"
-          @keyup.enter="searchItem">
+      <div class="rightBlock" :class="[menuClasses, {hide: hidden}]">
+        <div id="searchBox">
+          <el-input
+            size="mini"
+            placeholder="Search item"
+            prefix-icon="el-icon-search"
+            v-model="searchbox"
+            @keyup.enter="searchItem">
+        </div>
+
+        <div id="shoppingCart">
+          <wear-shopping-cart/>
+        </div>
       </div>
     </nav>
   </div>
@@ -96,18 +99,18 @@ export default {
   display: inline-block;
   width: 100%;
   vertical-align: top;
-  font-family: "Times New Roman", Times, serif;
 }
 .horizontalNav .horizontalMenuItem {
   display: inline-block;
   margin-left: 15px;
 }
-.horizontalNav #shoppingCart {
+.horizontalNav .rightBlock {
+  float: right;
   margin-right: 20px;
-  float: right;
 }
-.horizontalNav #searchBox {
-  float: right;
+.horizontalNav .rightBlock #searchBox, .horizontalNav .rightBlock #shoppingCart {
+  display: inline-block;
+  margin-left: 10px;
 }
 
 /* VERTICAL NAV CSS */
