@@ -22,29 +22,27 @@
         </el-dropdown>
       </template>
 
-      <div id="shoppingCart" :class="[menuClasses, {hide: hidden}]">
-        <wear-shopping-cart/>
-      </div>
-      <div id="searchBox" :class="[menuClasses, {hide: hidden}]">
-        <el-input
-          size="mini"
-          placeholder="Search item"
-          prefix-icon="el-icon-search"
-          v-model="searchbox"
-          @keyup.enter="searchItem">
+      <div class="rightBlock" :class="[menuClasses, {hide: hidden}]">
+        <div id="searchBox">
+          <el-input
+            size="mini"
+            placeholder="Search item"
+            prefix-icon="el-icon-search"
+            v-model="searchbox"
+            @keyup.enter="searchItem">
+        </div>
+
+        <div id="shoppingCart">
+          <a :href="shopcart_page"><el-button size="small" icon="el-icon-goods"/></a>
+        </div>
       </div>
     </nav>
   </div>
 </template>
 
 <script>
-import WearShoppingCart from './ShoppingCart'
-
 export default {
   name: 'wear-nav',
-  components: {
-    'wear-shopping-cart': WearShoppingCart
-  },
   data() {
     return {
       categories: getCategories()['data'], // Defined in static/js/model.js
@@ -96,19 +94,18 @@ export default {
   display: inline-block;
   width: 100%;
   vertical-align: top;
-  text-transform: uppercase;
-  font-family: Arial, sans-serif;
 }
 .horizontalNav .horizontalMenuItem {
   display: inline-block;
   margin-left: 15px;
 }
-.horizontalNav #shoppingCart {
+.horizontalNav .rightBlock {
+  float: right;
   margin-right: 20px;
-  float: right;
 }
-.horizontalNav #searchBox {
-  float: right;
+.horizontalNav .rightBlock #searchBox, .horizontalNav .rightBlock #shoppingCart {
+  display: inline-block;
+  margin-left: 10px;
 }
 
 /* VERTICAL NAV CSS */
