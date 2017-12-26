@@ -68,10 +68,7 @@ export default {
     'wear-footer': WearFooter
   },
   methods: {
-    //changePic: function(event) {
-    //  this.sourceImg = URL.createObjectURL(event.target.files[0]);
-    //  this.showImg = true;
-    //}
+    
   },
   beforeMount() {
     if(localStorage.loggedIn != 1) {
@@ -85,6 +82,14 @@ export default {
   img.small {
     width: 75px;
     height: 75px;
+  }
+  .el-header{
+    box-sizing: content-box;
+    padding: 0px;
+  }
+  .el-footer{
+    box-sizing: content-box;
+    padding: 0px;
   }
 
   ul.list-info {

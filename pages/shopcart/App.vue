@@ -1,33 +1,119 @@
 <template>
-<el-row>
-  <el-col :xs="4" :sm="4" :md="2" :lg="2" :xl="2"><p>{{ item.name }}</p></el-col>
+  <el-container>
+    <!-- Header -->
+    <el-header height="auto">
+      <wear-header />
+    </el-header>
 
-  <el-col :xs="16" :sm="16" :md="18" :lg="18" :xl="18"><img class="list-item-image" :src="item.assets[0]" :alt="item.name"></el-col>
+    <!-- Main content -->
+    <el-main>
+      <div class="cartLeftWrapper">
+        <el-table
+          :data="shopcartData">
+          <el-table-column
+            label="Item">
+            <template slot-scope="scope">
+              <div class="shopRowWrapper">
+                <img width="70px" height="70px" :src="scope.row.asset" :alt="scope.row.alt" :href="scope.row.href"/>
+                <span style="margin-left: 10px">{{ scope.row.name }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="Price">
+            <template slot-scope="scope">
+              <div class="shopRowWrapper">
+                <span>{{ scope.row.price }}</span>
+                <i>€</i>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="Quantity">
+            <template slot-scope="scope">
+              <div class="shopRowWrapper">
+                <el-input-number v-model="scope.row.quantity"></el-input-number>
+              </div>
+            </template>
+          </el-table-column>
+        </el-table>
+        <div class="shopCartTableFooter">
+          <h1>Total: x</h1>
+          <el-button>Checkout</el-button>
+        </div>
+      </div>
 
-  <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
-    <el-container direction="vertical">
-      <p>{{ item.price }} €</p>
-      <el-button style="width:100%" type="primary">Try</el-button>
-      <el-button style="width:100%;margin-left:0;">Add to Cart</el-button>
-    </el-container>
-  </el-col>
-</el-row>
+      <div class="cartRightWrapper">
+        <h1>Delivery Address:</h1>
+        <p>some address</p>
+        <el-button>Edit</el-button>
+      </div>
+    </el-main>
+
+    <!-- Footer -->
+    <el-footer height="auto">
+      <wear-footer />
+    </el-footer>
+  </el-container>
 </template>
 
 <script>
+import WearHeader from '../../components/Header'
+import WearFooter from '../../components/Footer'
+
 export default {
-  name: 'wear-shop-cart',
+  name: 'app',
   data: function() {
     return {
-      shopcart: getShopCartData()
+      //!!!!!! non funziona richiamando la funzione da model, non capisco perché
+      shopcartData: [
+        { id: 1, name: 'name', asset: '/assets/carousel/1.jpg', price:'10', quantity:'1', alt: 'Ad Banner 1', href: '#'  },
+        { id: 2, name: 'name', asset: '/assets/carousel/2.jpg', price:'3', quantity:'3', alt: 'Ad Banner 2', href: '#'  },
+        { id: 3, name: 'name', asset: '/assets/carousel/3.jpg', price:'4', quantity:'1', alt: 'Ad Banner 3', href: '#'  },
+        { id: 4, name: 'name', asset: '/assets/carousel/4.jpg', price:'5', quantity:'2', alt: 'Ad Banner 4', href: '#'  },
+        { id: 4, name: 'name', asset: '/assets/carousel/4.jpg', price:'5', quantity:'2', alt: 'Ad Banner 4', href: '#'  },
+        { id: 4, name: 'name', asset: '/assets/carousel/4.jpg', price:'5', quantity:'2', alt: 'Ad Banner 4', href: '#'  },
+        { id: 4, name: 'name', asset: '/assets/carousel/4.jpg', price:'5', quantity:'2', alt: 'Ad Banner 4', href: '#'  }
+      ]
     }
+  },
+  components: {
+    'wear-header': WearHeader,
+    'wear-footer': WearFooter
   }
 }
 </script>
 
 <style>
-.list-item-image {
-  width: 25%;
-  height: 10%;
+.el-header{
+  box-sizing: content-box;
+  padding: 0px;
+}
+.el-footer{
+  box-sizing: content-box;
+  padding: 0px;
+}
+.el-main {
+  overflow: initial;
+  box-sizing: content-box;
+  padding: 0px;
+  height: auto;
+}
+
+.el-main .cartLeftWrapper {
+  width: 70%;
+  display: inline-block;
+  height: auto;
+  float: left
+}
+.el-main .cartRightWrapper {
+  display: inline-block;
+}
+
+.el-main .cartLeftWrapper .shopRowWrapper {
+  float: left;
+}
+.el-main .shopCartTableFooter {
+  float: right;
 }
 </style>
