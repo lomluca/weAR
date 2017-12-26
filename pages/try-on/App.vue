@@ -117,7 +117,7 @@ export default {
   width: 100%;
 }
 
-.invertCamera, .takePicture, shoppingChart {
+.invertCamera, .takePicture, .shoppingChart {
   display: inline-block;
 }
 
