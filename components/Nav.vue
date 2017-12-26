@@ -29,7 +29,7 @@
             placeholder="Search item"
             prefix-icon="el-icon-search"
             v-model="searchbox"
-            @keyup.enter="searchItem">
+            @keyup.enter.native="searchItem">
         </div>
 
         <div id="shoppingCart">
@@ -59,7 +59,9 @@ export default {
   },
   methods: {
     searchItem: function(event) {
-      item = event.target.value; //do something with this
+      var item = event.target.value; //do something with this
+      console.log(item + ' querty ')
+      window.location.href = '/search.html?q=' + item
     }
   },
   computed: {
