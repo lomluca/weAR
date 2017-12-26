@@ -96,8 +96,7 @@ export default {
   display: inline-block;
   width: 100%;
   vertical-align: top;
-  text-transform: uppercase;
-  font-family: Arial, sans-serif;
+  font-family: "Times New Roman", Times, serif;
 }
 .horizontalNav .horizontalMenuItem {
   display: inline-block;

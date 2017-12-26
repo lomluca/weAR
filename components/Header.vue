@@ -3,16 +3,16 @@
   <div class="headerRow1">
     <div class="top">
       <div class="col">
-        <a v-if="!username" :href="login_page"><el-button size="mini" type="text">login</el-button></a>
+        <a v-if="!username" :href="login_page"><el-button size="small" type="text">login</el-button></a>
       </div>
       <div class="col">
-        <a v-if="!username" :href="signup_page"><el-button size="mini" type="text">register</el-button></a>
+        <a v-if="!username" :href="signup_page"><el-button size="small" type="text">register</el-button></a>
       </div>
       <div class="col">
-        <a v-if="username" :href="profile_page"><el-button size="mini" type="text">{{ username }}</el-button></a>
+        <a v-if="username" :href="profile_page"><el-button size="small" type="text">{{ username }}</el-button></a>
       </div>
       <div class="col">
-        <a v-if="username" :href="home_page"><el-button @click="logout" size="mini" type="text">logout</el-button></a>
+        <a v-if="username" :href="home_page"><el-button @click="logout" size="small" type="text">logout</el-button></a>
       </div>
     </div>
   </div>
@@ -74,8 +74,8 @@ header {
 }
 
 header .el-button {
+  color: #303133;
   text-transform: uppercase;
-  color: #303133
 }
 
 /* Header row 1 */
@@ -86,7 +86,6 @@ header .headerRow1, header .headerRow2, header .headerRow3 {
   background: #fff;
 }
 header .headerRow1 .col {
-  text-transform: uppercase;
   margin-right: 20px;
   display: block;
   float: left;

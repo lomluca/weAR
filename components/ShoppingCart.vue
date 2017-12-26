@@ -1,12 +1,16 @@
 <template>
   <div>
     <el-button size="mini" icon="el-icon-goods" @click="isVisible = true"></el-button>
-    <el-dialog title="Shipping address" :visible.sync="isVisible">
+    <el-dialog title="Shopping Cart" :visible.sync="isVisible">
       <el-table :data="gridData">
         <el-table-column property="date" label="Date" width="150"></el-table-column>
         <el-table-column property="name" label="Name" width="200"></el-table-column>
         <el-table-column property="address" label="Address"></el-table-column>
       </el-table>
+      <span slot="footer" class="dialog-footer">
+      <el-button @click="isVisible = false">Cancel</el-button>
+      <el-button type="primary" @click="isVisible = false">Confirm</el-button>
+  </span>
     </el-dialog>
   </div>
 </template>
