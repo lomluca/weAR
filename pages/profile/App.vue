@@ -20,25 +20,25 @@
             <li><span class="ligth-text">birthday</span> <span class="bold-text">{{ birthday }}</span></li>
             <li><span class="ligth-text">address</span> <span class="bold-text">{{ address }}</span></li>
           </ul>
-          <el-button type="primary" @click="dialogFormVisible = true">Edit</el-button>
+          <el-button type="primary" @click="showDialogForm()">Edit</el-button>
           <el-dialog title="Edit your personal info" :visible.sync="dialogFormVisible">
-            <el-form :model="form">
-              <el-form-item label="fullname" :label-width="formLabelWidth">
+            <el-form :model="form" :rules="editFormRules" ref="editFormModel">
+              <el-form-item label="fullname" :label-width="formLabelWidth" prop="fullname">
                 <el-input v-model="form.fullname" auto-complete="off"></el-input>
               </el-form-item>
-              <el-form-item label="email" :label-width="formLabelWidth">
-                <el-input v-model="form.email" auto-complete="off"></el-input>
+              <el-form-item label="email" :label-width="formLabelWidth" prop="email">
+                <el-input type="email" v-model="form.email" auto-complete="off"></el-input>
               </el-form-item>
-              <el-form-item label="birthday" :label-width="formLabelWidth">
-                <el-input v-model="form.birthday" auto-complete="off"></el-input>
+              <el-form-item label="birthday" :label-width="formLabelWidth" prop="birthday">
+                <el-date-picker type="date" v-model="form.birthday" :picker-options="birthdatPickerOptions" style="width:100%"></el-date-picker>
               </el-form-item>
-              <el-form-item label="address" :label-width="formLabelWidth">
+              <el-form-item label="address" :label-width="formLabelWidth" prop="address">
                 <el-input v-model="form.address" auto-complete="off"></el-input>
               </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
               <el-button @click="dialogFormVisible = false">Cancel</el-button>
-              <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
+              <el-button type="primary" @click="submitForm('editFormModel')">Confirm</el-button>
             </span>
           </el-dialog>
         </div>
@@ -69,31 +69,61 @@
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
 
-var fieldsBirthday = localStorage.birthday.split(" ");
-fieldsBirthday.splice(4, 3) //remove time, gmt and cet
-fieldsBirthday.splice(0, 1) //remove day name
-var newBirthday = fieldsBirthday.join(" ")
-
 export default {
   name: 'app',
   data () {
     return {
-      fullname: localStorage.fullname,
-      mail: localStorage.email,
-      birthday: newBirthday,
       dialogFormVisible: false,
+      updateFullname: false,
       form: {
-          fullname: this.fullname,
-          email: this.mail,
-          birthday: newBirthday,
-          address: this.address
+          fullname: "",
+          email: "",
+          birthday: "",
+          address: ""
       },
       formLabelWidth: '120px',
+      editFormRules: {
+        fullname: [
+          { required: true, message: 'Please enter your fullname', trigger: 'blur' }
+        ],
+        email: [
+          { type: 'email', required: true, message: 'Please input correct email address', trigger: 'blur,change' }
+        ],
+        birthday: [
+          { type: 'date', trigger: 'blur' }
+        ]
+      },
+      birthdatPickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        }
+      }
     }
   },
   computed: {
     address: function() {
-      return localStorage.address
+      if (this.dialogFormVisible == false) {
+        return localStorage.address
+      } else return localStorage.address
+    },
+    fullname: function() {
+      if (this.dialogFormVisible == false) {
+        return localStorage.fullname
+      } else return localStorage.fullname
+    },
+    mail: function() {
+      if (this.dialogFormVisible == false) {
+        return localStorage.email
+      } else return localStorage.email
+    },
+    birthday: function() {
+      var fieldsBirthday = localStorage.birthday.split(" ");
+      fieldsBirthday.splice(4, 3) //remove time, gmt and cet
+      fieldsBirthday.splice(0, 1) //remove day name
+      var newBirthday = fieldsBirthday.join(" ")
+      if (this.dialogFormVisible == false) {
+        return newBirthday
+      } else return newBirthday
     }
   },
   components: {
@@ -101,7 +131,27 @@ export default {
     'wear-footer': WearFooter
   },
   methods: {
-
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          localStorage.setItem("fullname", this.form.fullname);
+          localStorage.setItem("email", this.form.email);
+          localStorage.setItem("birthday", this.form.birthday);
+          localStorage.setItem("address", this.form.address);
+          this.dialogFormVisible = false
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    showDialogForm: function() {
+      this.form.fullname = this.fullname
+      this.form.birthday = new Date(this.birthday)
+      this.form.address = this.address
+      this.form.email = this.mail
+      this.dialogFormVisible = true
+    }
   },
   beforeMount() {
     if(localStorage.loggedIn != 1) {
