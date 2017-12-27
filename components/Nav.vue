@@ -33,7 +33,7 @@
         </div>
 
         <div id="shoppingCart">
-          <a :href="shopcart_page"><el-button size="small" icon="el-icon-goods"/></a>
+          <a :href="shopcart_page"><el-badge :value="badgeValue"><el-button size="small" icon="el-icon-goods"/></el-badge></a>
         </div>
       </div>
     </nav>

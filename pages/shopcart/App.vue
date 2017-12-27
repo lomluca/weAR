@@ -32,20 +32,20 @@
             label="Quantity">
             <template slot-scope="scope">
               <div class="shopRowWrapper">
-                <el-input-number v-model="scope.row.quantity"></el-input-number>
+                <el-input-number v-model="scope.row.quantity" size="mini" controls-position="right" @change="changeQuantity(scope.row.id, $event)" :min="0"></el-input-number>
               </div>
             </template>
           </el-table-column>
         </el-table>
         <div class="shopCartTableFooter">
-          <h1>Total: x</h1>
+          <h1>Total: {{ total }}</h1>
           <el-button>Checkout</el-button>
         </div>
       </div>
 
       <div class="cartRightWrapper">
         <h1>Delivery Address:</h1>
-        <p>some address</p>
+        <p>{{ address }}</p>
         <el-button>Edit</el-button>
       </div>
     </el-main>
@@ -74,12 +74,27 @@ export default {
         { id: 4, name: 'name', asset: '/assets/carousel/4.jpg', price:'5', quantity:'2', alt: 'Ad Banner 4', href: '#'  },
         { id: 4, name: 'name', asset: '/assets/carousel/4.jpg', price:'5', quantity:'2', alt: 'Ad Banner 4', href: '#'  },
         { id: 4, name: 'name', asset: '/assets/carousel/4.jpg', price:'5', quantity:'2', alt: 'Ad Banner 4', href: '#'  }
-      ]
+      ],
+      address: localStorage.address
     }
   },
   components: {
     'wear-header': WearHeader,
     'wear-footer': WearFooter
+  },
+  methods: {
+    changeQuantity(id, value) {
+      console.log(id + " " + value)
+    }
+  },
+  computed: {
+    total: function() {
+      var total, i;
+      for(i = 0, total = 0; i < this.shopcartData.length; i++) {
+        total += this.shopcartData[i].price*this.shopcartData[i].quantity;
+      }
+      return total;
+    }
   }
 }
 </script>
