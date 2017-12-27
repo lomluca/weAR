@@ -102,6 +102,7 @@ export default {
           localStorage.setItem("email", this.registerFormModel.email);
           localStorage.setItem("pass", CryptoJS.SHA256(this.registerFormModel.pass));
           localStorage.setItem("birthday", this.registerFormModel.birthday);
+          localStorage.setItem("address", this.registerFormModel.address);
           this.$emit('signupSuccess')
           // Do nothing, we don't care                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    alert('submit!');
         } else {

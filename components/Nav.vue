@@ -33,7 +33,7 @@
         </div>
 
         <div id="shoppingCart">
-          <wear-shopping-cart/>
+          <a :href="shopcart_page"><el-button size="small" icon="el-icon-goods"/></a>
         </div>
       </div>
     </nav>
@@ -41,15 +41,11 @@
 </template>
 
 <script>
-import WearShoppingCart from './ShoppingCart'
-
 export default {
   name: 'wear-nav',
-  components: {
-    'wear-shopping-cart': WearShoppingCart
-  },
   data() {
     return {
+      shopcart_page: 'shopcart.html',
       categories: getCategories()['data'], // Defined in static/js/model.js
       searchbox: '',
       windowWidth: window.innerWidth,

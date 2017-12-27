@@ -10,7 +10,7 @@
   <el-main style="overflow: initial">
     <wear-login-form @loginSuccess="loginCompleted"/>
   </el-main>
-    
+
   <!-- Footer -->
   <el-footer height="auto">
     <wear-footer />
@@ -27,7 +27,7 @@ export default {
   name: 'app',
   data () {
     return {
-      
+
     }
   },
   components: {
@@ -42,3 +42,14 @@ export default {
   }
 }
 </script>
+
+<style>
+.el-header{
+  box-sizing: content-box;
+  padding: 0px;
+}
+.el-footer{
+  box-sizing: content-box;
+  padding: 0px;
+}
+</style>

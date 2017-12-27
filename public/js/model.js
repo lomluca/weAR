@@ -11,6 +11,17 @@ function getCarouselData() {
   }
 }
 
+function getShopCartData() {
+  return {
+    data: [
+      { id: 1, name: 'name', asset: '/assets/carousel/1.jpg', price:'10', alt: 'Ad Banner 1', href: '#'  },
+      { id: 2, name: 'name', asset: '/assets/carousel/2.jpg', price:'3', alt: 'Ad Banner 2', href: '#'  },
+      { id: 3, name: 'name', asset: '/assets/carousel/3.jpg', price:'4', alt: 'Ad Banner 3', href: '#'  },
+      { id: 4, name: 'name', asset: '/assets/carousel/4.jpg', price:'5', alt: 'Ad Banner 4', href: '#'  }
+    ]
+  }
+}
+
 function getImageBlockData() {
   return {
     data: [
@@ -27,6 +38,12 @@ function getLogo() {
   }
 }
 
+function getTryOnSample() {
+  return {
+     id: 1, asset: '/assets/try-on_sample.jpg', alt: 'Wear Logo', href: '#'
+  }
+}
+
 function getCategories() {
   return {
     data: [
@@ -34,6 +51,24 @@ function getCategories() {
       { id: 2, name: 'Woman', subcategories: [ { id: 21, name: 'Skirts' }, { id: 22, name: 'Trousers' } ] },
       { id: 3, name: 'Winter Collection' },
       { id: 4, name: 'Promos' }
+    ]
+  }
+}
+
+function getFilters() {
+  return {
+    data: [
+      { id: 1, name: 'Size', subfilters: [ { id: 11, name: 'S' }, { id: 12, name: 'M' }, { id: 13, name: 'L' }, { id: 14, name: 'XL' } ] },
+      { id: 2, name: 'Color', subfilters: [ { id: 21, name: 'Black' }, { id: 22, name: 'Brown' }, { id: 23, name: 'Blue' } ] }
+    ]
+  }
+}
+
+function getClothes() {
+  return {
+    data: [
+      { id: 1, asset: '/assets/try-on_items/shirt.jpg', href: '#' },
+      { id: 2, asset: '/assets/try-on_items/trousers.jpg', href: '#' }
     ]
   }
 }

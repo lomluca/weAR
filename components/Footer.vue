@@ -1,19 +1,16 @@
 <template>
 <footer>
   <el-row :gutter="10">
-    <el-col :sm="6">
-      <div class="footerColumn1">
+    <el-col :sm="6">   
         <div class="footerListContainer">
           <div class="footerHeader"><h4> Contact Us </h4></div>
           <ul>
             <li><el-button size="mini" type="text"> Send us an email </el-button></li>
             <li><el-button size="mini" type="text"> Customer service </el-button></li>
           </ul>
-        </div>
-      </div>
+        </div> 
     </el-col>
     <el-col :sm="6">
-      <div class="footerColumn2">
         <div class="footerListContainer">
           <div class="footerHeader"><h4> Help & Info </h4></div>
           <ul>
@@ -23,10 +20,8 @@
             <li><el-button size="mini" type="text"> FAQ </el-button></li>
           </ul>
         </div>
-      </div>
     </el-col>
     <el-col :sm="6">
-      <div class="footerColumn3">
         <div class="footerListContainer">
           <div class="footerHeader"><h4> About </h4></div>
           <ul>
@@ -35,10 +30,8 @@
             <li><el-button size="mini" type="text"> Terms & Conditions </el-button></li>
           </ul>
         </div>
-      </div>
     </el-col>
-    <el-col :sm="6">
-      <div class="footerColumn4">
+    <el-col :sm="6">  
         <div class="footerListContainer">
           <div class="footerHeader"><h4> Connect With Us </h4></div>
           <ul>
@@ -47,7 +40,6 @@
             <li><el-button size="mini" type="text"> Careers </el-button></li>
           </ul>
         </div>
-      </div>
     </el-col>
   </el-row>
 </footer>
@@ -92,27 +84,17 @@ footer {
   font-size: 12px;
 }
 /* Footer columns */
-footer .footerColumn1, footer .footerColumn2, footer .footerColumn3, footer .footerColumn4 {
-  display: inline-block;
-  vertical-align: top;
-  float: left;
-  width: 25%
-}
 footer .footerListContainer {
-  margin-left: 30px;
+  /*margin-left: 30px;*/
 }
 footer .footerListContainer .footerHeader {
   width: 100%
 }
 footer .footerListContainer .footerHeader h4 {
-  float: left;
   color: #303133;
 }
 footer .footerListContainer ul {
-  display: block;
-  clear: left;
   list-style-type: none;
-  padding: 0;
 }
 footer .footerListContainer ul li {
   display: block;
