@@ -46,6 +46,37 @@
       <el-col :sm="16">
         <div class="box">
           <img class="small" src="/assets/credit-card-logo.png">
+          <el-button type="primary" @click="dialogCreditCardFormVisible = true">{{ creditCardButtonMessage }}</el-button>
+          <el-dialog title="Credit card info" :visible.sync="dialogCreditCardFormVisible">
+            <el-form :model="creditCardForm" :rules="creditCardFormRules" ref="creditCardFormModel">
+              <el-form-item label="owner" :label-width="formLabelWidth" prop="owner">
+                <el-input v-model="creditCardForm.owner" auto-complete="off"></el-input>
+              </el-form-item>
+              <el-form-item label="number" :label-width="formLabelWidth" prop="cardNumber" style="float: left">
+                <el-input v-model="creditCardForm.cardNumber" auto-complete="off"></el-input>
+              </el-form-item>
+              <img class="credit-card" 
+                   src="/assets/visa.png" 
+                   v-if="isVisa()"
+                   style="position: relative;top: 7px;">
+              <img class="credit-card" 
+                   src="/assets/mastercard.png" 
+                   v-if="isMastercard()"
+                   style="position: relative;top: 7px;">
+              <el-form-item label="Expiration date" :label-width="formLabelWidth" prop="expirationDate" style="clear: left">
+                <el-date-picker
+                  v-model="creditCardForm.expirationDate"
+                  type="month"
+                  placeholder="Pick a month"
+                  style="width:100%">
+                </el-date-picker>
+              </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="dialogCreditCardFormVisible = false">Cancel</el-button>
+              <el-button type="primary" @click="dialogCreditCardFormVisible = false">Confirm</el-button>
+            </span>
+          </el-dialog>
         </div>
       </el-col>
     </el-row>
@@ -69,17 +100,32 @@
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
 
+var payform = require('payform');
+
 export default {
   name: 'app',
   data () {
+    var validateCreditCard = (rule, value, callback) => {
+      if( payform.validateCardNumber(value) ) {
+        callback()
+      } else {
+        callback(new Error('Invalid credit card number'))
+      }
+    }
     return {
       dialogFormVisible: false,
+      dialogCreditCardFormVisible: false,
       updateFullname: false,
       form: {
           fullname: "",
           email: "",
           birthday: "",
           address: ""
+      },
+      creditCardForm: {
+        owner: "",
+        cardNumber: "",
+        expirationDate: ""
       },
       formLabelWidth: '120px',
       editFormRules: {
@@ -91,6 +137,17 @@ export default {
         ],
         birthday: [
           { type: 'date', trigger: 'blur' }
+        ]
+      },
+      creditCardFormRules: {
+        owner: [
+          { required: true, message: 'Please enter the owner', trigger: 'blur' }
+        ],
+        cardNumber: [
+          { required: true, validator: validateCreditCard, trigger: 'blur,change' }
+        ],
+        expirationDate: [
+          { type: 'date', required: true, trigger: 'blur' }
         ]
       },
       birthdatPickerOptions: {
@@ -124,6 +181,12 @@ export default {
       if (this.dialogFormVisible == false) {
         return newBirthday
       } else return newBirthday
+    },
+    creditCardButtonMessage: function() {
+      if(localStorage.creditCard) {
+        return "Edit"
+      }
+      return "Add"
     }
   },
   components: {
@@ -145,6 +208,18 @@ export default {
         }
       });
     },
+    isVisa: function() {
+      if(payform.parseCardType(this.creditCardForm.cardNumber) == 'visa') {
+        return true;
+      }
+      return false;
+    },
+    isMastercard: function() {
+      if(payform.parseCardType(this.creditCardForm.cardNumber) == 'mastercard') {
+        return true;
+      }
+      return false;
+    },
     showDialogForm: function() {
       this.form.fullname = this.fullname
       this.form.birthday = new Date(this.birthday)
@@ -162,6 +237,10 @@ export default {
 </script>
 
 <style>
+  img.credit-card {
+    width: 55px;
+    height: 30px;
+  }
   img.small {
     width: 75px;
     height: 75px;
