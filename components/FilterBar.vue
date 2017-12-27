@@ -3,55 +3,72 @@
 
   <h1 style="text-align:left" class="hidden-xs-only">Filters</h1>
 
-  <el-checkbox v-model="fastShipping" label="Fast Shipping" border class="filter-bar-item"></el-checkbox>
-
   <div class="slider-label" class="filter-bar-item">Price Range</div>
   <el-slider
     v-model="priceRange"
     range
-    :max="maxPrice">
+    :max="_maxPrice"
+    v-on:change="filterChange">
   </el-slider>
 
-  <el-select v-model="color" multiple placeholder="Colors" class="filter-bar-item">
+  <el-select v-model="colors" multiple placeholder="Colors" class="filter-bar-item" v-on:change="filterChange">
     <el-option
-      v-for="item in colors"
-      :key="item.value"
-      :label="item.name"
-      :value="item.value">
-      <span style="float: left">{{ item.name }}</span>
+      v-for="item in _colors"
+      :key="item"
+      :label="item"
+      :value="item">
+      <span style="float: left">{{ item }}</span>
       <div class="color-box" :style="{ backgroundColor: item.value }"></div>
     </el-option>
   </el-select>
 
-  <el-select v-model="brand" multiple placeholder="Brands" class="filter-bar-item">
+  <el-select v-model="brands" multiple placeholder="Brands" class="filter-bar-item" v-on:change="filterChange">
     <el-option
-      v-for="br in brands"
-      :key="br.id"
-      :label="br.name"
-      :value="br.id">
-      <span>{{ br.name }}</span>
+      v-for="br in _brands"
+      :key="br"
+      :label="br"
+      :value="br">
+      <span>{{ br }}</span>
     </el-option>
   </el-select>
 
+  <el-select v-model="sizes" multiple placeholder="Sizes" class="filter-bar-item" v-on:change="filterChange">
+    <el-option
+      v-for="item in _sizes"
+      :key="item"
+      :label="item"
+      :value="item">
+      <span>{{ item }}</span>
+    </el-option>
+  </el-select>
+
+  <el-button type="primary" v-on:click="reset">
+    Reset
+  </el-button>
 </el-container>
 </template>
 
 <script>
-let minPrice = 0.0
-let maxPrice = 270.0
-
 export default {
   name: 'wear-filter-bar',
+  props: ['_brands', '_colors', '_sizes', '_minPrice', '_maxPrice' ],
   data: function() {
     return {
-      minPrice,
-      maxPrice,
-      fastShipping: false,
-      priceRange: [minPrice, maxPrice],
-      color: null,
-      brand: null,
-      colors: getColors()['data'], // available in model.js
-      brands: getBrands()['data'] // available in model.js
+      priceRange: [ this._minPrice, this._maxPrice ],
+      colors: [],
+      brands: [],
+      sizes: []
+    }
+  },
+  methods: {
+    filterChange: function() {
+      this.$emit('filter-change', this.$data.priceRange, this.$data.colors, this.$data.brands, this.$data.sizes)
+    },
+    reset: function() {
+      this.$data.priceRange = [ this._minPrice, this._maxPrice ] 
+      this.$data.colors = []
+      this.$data.brands = []
+      this.$data.sizes = []
     }
   }
 }

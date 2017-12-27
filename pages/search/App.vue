@@ -14,12 +14,16 @@
       <!-- Small screens collapse filters bar -->
       <el-collapse v-model="collapseActive" class="hidden-sm-and-up">
         <el-collapse-item title="Filters" name="Filters">
-          <wear-filter-bar @filterChange="applyFiltering" style="padding-right: 10px">
+          <wear-filter-bar 
+            :_brands="brands" :_colors="colors" :_sizes="sizes" :_minPrice="minPrice" :_maxPrice="maxPrice" 
+            @filter-change="applyFiltering" style="padding-right: 10px">
         </el-collapse-item>
       </el-collapse>
 
       <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" class="hidden-xs-only">
-        <wear-filter-bar @filterChange="applyFiltering" style="padding-right: 10px">
+        <wear-filter-bar 
+          :_brands="brands" :_colors="colors" :_sizes="sizes" :_minPrice="minPrice" :_maxPrice="maxPrice" 
+          @filter-change="applyFiltering" style="padding-right: 10px">
       </el-col>
 
       <!-- Search results -->
@@ -50,13 +54,20 @@ import WearList from '../../components/List'
 // Get query parameters
 let params = (new URL(document.location)).searchParams
 
+let distinctValues = distinctQueryValues(MODEL)
+
 export default {
   name: 'app',
   data () {
     return {
       collapseActive: '',
       query: params.get('q'),
-      items: query(params)['data'] // defined into model.js
+      items: query(params)['data'], // defined into model.js
+      brands: distinctValues.brands,
+      colors: distinctValues.colors,
+      sizes: distinctValues.sizes,
+      minPrice: distinctValues.minPrice,
+      maxPrice: distinctValues.maxPrice
     }
   },
   components: {
@@ -66,8 +77,9 @@ export default {
     'wear-list': WearList
   },
   methods: {
-    applyFiltering: function(p) {
-      // Do nothing for now
+    applyFiltering: function(p, c, b, s) {
+      console.log(p, c, b, s)
+      this.items = query({ q: 'man' })
     }
   }
 }
