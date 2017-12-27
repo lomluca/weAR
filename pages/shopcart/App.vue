@@ -38,15 +38,36 @@
           </el-table-column>
         </el-table>
         <div class="shopCartTableFooter">
-          <h1>Total: {{ total }}</h1>
-          <el-button>Checkout</el-button>
+          <h1>Total: {{ total }}€</h1>
+          <el-button @click="confirmDialog = true">Checkout</el-button>
+          <el-dialog
+            title="Confirm purchase"
+            :visible.sync="confirmDialog"
+            width="30%"
+            :before-close="handleClose">
+            <span>Do you want to confirm your purchases?</span>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="confirmDialog = false">Cancel</el-button>
+              <el-button type="primary" @click="confirmDialog = false">Confirm</el-button>
+            </span>
+          </el-dialog>
         </div>
       </div>
 
       <div class="cartRightWrapper">
-        <h1>Delivery Address:</h1>
-        <p>{{ address }}</p>
-        <el-button>Edit</el-button>
+        <el-card class="box-card">
+          <div slot="header" class="box-card-header">
+            Delivery Address
+          </div>
+          <div class="box-card-body">
+            <el-radio-group v-model="addressChoice" v-for="item in address" :key="item">
+              <el-radio :label="item">{{ item }}</el-radio>
+              <el-button class="el-icon-remove" size="mini" type="danger"></el-button>
+            </el-radio-group>
+            <hr>
+            <el-button class="el-icon-circle-plus" size="mini" type="success">New</el-button>
+          </div>
+        </el-card>
       </div>
     </el-main>
 
@@ -75,7 +96,9 @@ export default {
         { id: 4, name: 'name', asset: '/assets/carousel/4.jpg', price:'5', quantity:'2', alt: 'Ad Banner 4', href: '#'  },
         { id: 4, name: 'name', asset: '/assets/carousel/4.jpg', price:'5', quantity:'2', alt: 'Ad Banner 4', href: '#'  }
       ],
-      address: localStorage.address
+      address: [localStorage.address, 'via roma'],
+      addressChoice: [localStorage.address][0],
+      confirmDialog: false
     }
   },
   components: {
@@ -100,6 +123,7 @@ export default {
 </script>
 
 <style>
+/* general layout */
 .el-header{
   box-sizing: content-box;
   padding: 0px;
@@ -111,24 +135,42 @@ export default {
 .el-main {
   overflow: initial;
   box-sizing: content-box;
-  padding: 0px;
+  padding: 10px;
   height: auto;
 }
 
+/* left Wrapper */
 .el-main .cartLeftWrapper {
   width: 70%;
   display: inline-block;
   height: auto;
   float: left
 }
-.el-main .cartRightWrapper {
-  display: inline-block;
-}
-
 .el-main .cartLeftWrapper .shopRowWrapper {
   float: left;
 }
 .el-main .shopCartTableFooter {
   float: right;
 }
+
+/* Right Wrapper */
+.el-main .cartRightWrapper {
+  display: inline-block;
+  width: 30%;
+}
+/* Address box */
+.el-main .cartRightWrapper .box-card {
+  margin: 0 15px 0 15px;
+}
+.el-main .cartRightWrapper .box-card .box-card-body .el-radio-group {
+  width: 100%;
+}
+.el-main .cartRightWrapper .box-card .box-card-body .el-radio-group .el-radio {
+  float: left;
+}
+.el-main .cartRightWrapper .box-card .box-card-body .el-button {
+  float: right;
+}
+
+
 </style>
