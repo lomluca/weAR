@@ -14,19 +14,24 @@
       <!-- Small screens collapse filters bar -->
       <el-collapse v-model="collapseActive" class="hidden-sm-and-up">
         <el-collapse-item title="Filters" name="Filters">
-          <wear-filter-bar @filterChange="applyFiltering" style="padding-right: 10px">
+          <wear-filter-bar 
+            :_brands="brands" :_colors="colors" :_sizes="sizes" :_minPrice="minPrice" :_maxPrice="maxPrice" 
+            @filter-change="applyFiltering" style="padding-right: 10px">
         </el-collapse-item>
       </el-collapse>
 
       <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" class="hidden-xs-only">
-        <wear-filter-bar @filterChange="applyFiltering" style="padding-right: 10px">
+        <wear-filter-bar 
+          :_brands="brands" :_colors="colors" :_sizes="sizes" :_minPrice="minPrice" :_maxPrice="maxPrice" 
+          @filter-change="applyFiltering" style="padding-right: 10px">
       </el-col>
 
       <!-- Search results -->
       <el-col :xs="24" :sm="18" :md="18" :lg="18" :xl="18">
         <el-container direction="vertical">
-          <h1 class="query-result-label">Results for: {{ query }}</h1>
-          <wear-list :items="items" />
+          <h1 v-if="items && items.length > 0"  class="query-result-label">Results for: {{ query }}</h1>
+          <wear-list v-if="items && items.length > 0" :items="items" />
+          <p v-else>No results found</p>
         </el-container>
       </el-col>
 
@@ -50,13 +55,22 @@ import WearList from '../../components/List'
 // Get query parameters
 let params = (new URL(document.location)).searchParams
 
+let distinctValues = distinctQueryValues(MODEL)
+
+const MODEL_BASELINE = query(params)['data']
+
 export default {
   name: 'app',
   data () {
     return {
       collapseActive: '',
       query: params.get('q'),
-      items: query(params)['data'] // defined into model.js
+      items: query(params)['data'], // defined into model.js
+      brands: distinctValues.brands,
+      colors: distinctValues.colors,
+      sizes: distinctValues.sizes,
+      minPrice: distinctValues.minPrice,
+      maxPrice: distinctValues.maxPrice
     }
   },
   components: {
@@ -66,8 +80,8 @@ export default {
     'wear-list': WearList
   },
   methods: {
-    applyFiltering: function(p) {
-      // Do nothing for now
+    applyFiltering: function(priceRange, colors, brands, sizes) {
+      this.$data.items = query({ priceRange, colors, brands, sizes }, MODEL_BASELINE)['data']
     }
   }
 }
