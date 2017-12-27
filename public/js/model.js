@@ -78,7 +78,12 @@ function query(params) {
     data: [
       { id: 1, name: 'Floral Midi Wrap Dress', assets: [ '/assets/items/0001/1.jpg', '/assets/items/0001/2.jpg'  ], sizes: [ 'S', 'M', 'L' ], price: 29.99 },
       { id: 2, name: 'VMCELEB - Blouse', assets: [ '/assets/items/0002/1.jpg', '/assets/items/0002/2.jpg'  ], sizes: [ 'S', 'M', 'L' ], price: 29.99 },
-      { id: 3, name: 'mint&berry - Shirt', assets: [ '/assets/items/0003/1.jpg', '/assets/items/0003/2.jpg'  ], sizes: [ 'S', 'M', 'L' ], price: 39.99 }
+      { id: 3, name: 'mint&berry - Shirt', assets: [ '/assets/items/0003/1.jpg', '/assets/items/0003/2.jpg'  ], sizes: [ 'S', 'M', 'L' ], price: 39.99 },
+      { id: 4, name: 'ONLMANDY CHOKER DRESS', assets: [ '/assets/items/0004/1.jpg', '/assets/items/0004/2.jpg'  ], sizes: [ 'S', 'M', 'L' ], price: 31.49 },
+      { id: 5, name: 'Summer Dress', assets: [ '/assets/items/0005/1.jpg', '/assets/items/0005/2.jpg'  ], sizes: [ 'S', 'M' ], price: 32.49 },
+      { id: 6, name: 'Long Sleeved Shirt', assets: [ '/assets/items/0006/1.jpg', '/assets/items/0006/2.jpg'  ], sizes: [ 'M', 'L' ], price: 14.99 },
+      { id: 7, name: 'JDYASH - Jacket', assets: [ '/assets/items/0007/1.jpg', '/assets/items/0007/2.jpg'  ], sizes: [ 'S', 'M', 'L' ], price: 20.00 },
+      { id: 8, name: 'Blue T-shirt', assets: [ '/assets/items/0008/1.jpg', '/assets/items/0008/2.jpg'  ], sizes: [ 'S' ], price: 12.99 }
     ]
   }
 }

@@ -10,12 +10,20 @@
   <el-main style="overflow: initial">
     <el-row>
       <!-- Filters bar -->
-      <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+
+      <!-- Small screens collapse filters bar -->
+      <el-collapse v-model="collapseActive" class="hidden-sm-and-up">
+        <el-collapse-item title="Filters" name="Filters">
+          <wear-filter-bar @filterChange="applyFiltering" style="padding-right: 10px">
+        </el-collapse-item>
+      </el-collapse>
+
+      <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" class="hidden-xs-only">
         <wear-filter-bar @filterChange="applyFiltering" style="padding-right: 10px">
       </el-col>
 
       <!-- Search results -->
-      <el-col :xs="18" :sm="18" :md="18" :lg="18" :xl="18">
+      <el-col :xs="24" :sm="18" :md="18" :lg="18" :xl="18">
         <el-container direction="vertical">
           <h1 class="query-result-label">Results for: {{ query }}</h1>
           <wear-list :items="items" />
@@ -33,6 +41,7 @@
 </template>
 
 <script>
+import 'element-ui/lib/theme-chalk/display.css'
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
 import WearFilterBar from '../../components/FilterBar'
@@ -45,6 +54,7 @@ export default {
   name: 'app',
   data () {
     return {
+      collapseActive: '',
       query: params.get('q'),
       items: query(params)['data'] // defined into model.js
     }

@@ -34,6 +34,11 @@ export default {
 
 .list-item-main-label {
   text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  width: 100%; 
+  white-space: nowrap;
+  font-size: 1.2em;
 }
 
 .list-item-image {
@@ -46,11 +51,12 @@ export default {
   margin: 0;
   float: right;
   margin-bottom: 5px;
+  font-size: 0.8em;
 }
 
 .list-item-price-label {
   width: 30%;
-  font-size: 13px;
+  font-size: 1em;
   color: #999;
   text-align: left;
 }
