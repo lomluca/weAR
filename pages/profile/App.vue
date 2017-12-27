@@ -190,27 +190,39 @@ export default {
         return newBirthday
       } else return newBirthday
     },
-    creditCardButtonMessage: function() {
-      if(localStorage.creditCard && this.dialogCreditCardFormVisible == false) {
-        return "Edit"
+    creditCardButtonMessage: {
+      cache: false,
+      get: function() {
+        if(!localStorage.creditCard) {
+          return "Add"
+        } else if(this.dialogCreditCardFormVisible == false) {
+          return "Edit"
+        } else return "Edit"
       }
-      return "Add"
     },
     creditCardNumber: function() {
-      if (this.dialogCreditCardFormVisible == false) {
+      if(!localStorage.creditCard) {
+        return ""
+      } else if (this.dialogCreditCardFormVisible == false) {
         return JSON.parse(localStorage.creditCard).cardNumber
       } else return JSON.parse(localStorage.creditCard).cardNumber
     },
-    owner: function() {
-      if (this.dialogCreditCardFormVisible == false) {
+    owner: function() { 
+      if (!localStorage.creditCard) {
+        return ""
+      } else if (this.dialogCreditCardFormVisible == false) {
         return JSON.parse(localStorage.creditCard).owner
       } else return JSON.parse(localStorage.creditCard).owner
     },
     expirationDate: function() {
-      var date = new Date(JSON.parse(localStorage.creditCard).expirationDate)
-      if (this.dialogCreditCardFormVisible == false) {
-        return date.getFullYear() + "-" + zeroFill(2, date.getMonth() + 1)
-      } else return date.getFullYear() + "-" + zeroFill(2, date.getMonth() + 1)
+      if(!localStorage.creditCard) {
+        return ""
+      } else {
+        var date = new Date(JSON.parse(localStorage.creditCard).expirationDate)
+        if (this.dialogCreditCardFormVisible == false) {
+          return date.getFullYear() + "-" + zeroFill(2, date.getMonth() + 1)
+        } else return date.getFullYear() + "-" + zeroFill(2, date.getMonth() + 1)
+      }
     }
   },
   components: {
