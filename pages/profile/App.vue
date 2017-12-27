@@ -46,7 +46,14 @@
       <el-col :sm="16">
         <div class="box">
           <img class="small" src="/assets/credit-card-logo.png">
-          <el-button type="primary" @click="dialogCreditCardFormVisible = true">{{ creditCardButtonMessage }}</el-button>
+          <template v-if="creditCardButtonMessage == 'Edit'">
+            <ul class="list-info">
+              <li><span class="ligth-text">owner</span> <span class="bold-text">{{ owner }}</span></li>
+              <li><span class="ligth-text">number</span> <span class="bold-text">{{ creditCardNumber }}</span></li>
+              <li><span class="ligth-text">expiration</span> <span class="bold-text">{{ expirationDate }}</span></li>
+            </ul>
+          </template>
+          <el-button type="primary" @click="showCCDialogForm()">{{ creditCardButtonMessage }}</el-button>
           <el-dialog title="Credit card info" :visible.sync="dialogCreditCardFormVisible">
             <el-form :model="creditCardForm" :rules="creditCardFormRules" ref="creditCardFormModel">
               <el-form-item label="owner" :label-width="formLabelWidth" prop="owner">
@@ -74,7 +81,7 @@
             </el-form>
             <span slot="footer" class="dialog-footer">
               <el-button @click="dialogCreditCardFormVisible = false">Cancel</el-button>
-              <el-button type="primary" @click="dialogCreditCardFormVisible = false">Confirm</el-button>
+              <el-button type="primary" @click="submitCCForm('creditCardFormModel')">Confirm</el-button>
             </span>
           </el-dialog>
         </div>
@@ -101,6 +108,7 @@ import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
 
 var payform = require('payform');
+var zeroFill = require('zero-fill')
 
 export default {
   name: 'app',
@@ -183,10 +191,26 @@ export default {
       } else return newBirthday
     },
     creditCardButtonMessage: function() {
-      if(localStorage.creditCard) {
+      if(localStorage.creditCard && this.dialogCreditCardFormVisible == false) {
         return "Edit"
       }
       return "Add"
+    },
+    creditCardNumber: function() {
+      if (this.dialogCreditCardFormVisible == false) {
+        return JSON.parse(localStorage.creditCard).cardNumber
+      } else return JSON.parse(localStorage.creditCard).cardNumber
+    },
+    owner: function() {
+      if (this.dialogCreditCardFormVisible == false) {
+        return JSON.parse(localStorage.creditCard).owner
+      } else return JSON.parse(localStorage.creditCard).owner
+    },
+    expirationDate: function() {
+      var date = new Date(JSON.parse(localStorage.creditCard).expirationDate)
+      if (this.dialogCreditCardFormVisible == false) {
+        return date.getFullYear() + "-" + zeroFill(2, date.getMonth() + 1)
+      } else return date.getFullYear() + "-" + zeroFill(2, date.getMonth() + 1)
     }
   },
   components: {
@@ -204,6 +228,17 @@ export default {
           this.dialogFormVisible = false
         } else {
           console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    submitCCForm: function(formName) {
+      this.$refs[formName].validate((valid) => {
+        if(valid) { 
+          localStorage.setItem("creditCard", JSON.stringify(this.creditCardForm))
+          this.dialogCreditCardFormVisible = false
+        } else {
+          console.log("error submit!");
           return false;
         }
       });
@@ -226,6 +261,16 @@ export default {
       this.form.address = this.address
       this.form.email = this.mail
       this.dialogFormVisible = true
+    },
+    showCCDialogForm: function() {
+      if (this.creditCardButtonMessage == 'Edit') {
+        var date = new Date(JSON.parse(localStorage.creditCard).expirationDate)
+        date.setDate(date.getDate() + 1)
+        this.creditCardForm.owner = this.owner;
+        this.creditCardForm.expirationDate = date;
+        this.creditCardForm.cardNumber = this.creditCardNumber;
+      }
+      this.dialogCreditCardFormVisible = true;
     }
   },
   beforeMount() {

@@ -15,7 +15,8 @@
     "element-ui": "^2.0.8",
     "morgan": "^1.9.0",
     "payform": "^1.2.1",
-    "vue": "^2.4.4"
+    "vue": "^2.4.4",
+    "zero-fill": "^2.2.3"
   },
   "browserslist": [
     "> 1%",
