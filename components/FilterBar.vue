@@ -1,34 +1,35 @@
 <template>
-<el-container direction="vertical">
+<el-container direction="vertical" style="padding:20px">
 
-  <h1 style="float: left">Filters</h1>
+  <h1 style="text-align:left" class="hidden-xs-only">Filters</h1>
 
-  <el-checkbox v-model="fastShipping" label="Fast Shipping" border></el-checkbox>
+  <el-checkbox v-model="fastShipping" label="Fast Shipping" border class="filter-bar-item"></el-checkbox>
 
-  <div class="slider-label">Price Range</div>
+  <div class="slider-label" class="filter-bar-item">Price Range</div>
   <el-slider
     v-model="priceRange"
     range
     :max="maxPrice">
   </el-slider>
 
-  <el-select v-model="color" multiple placeholder="Colors">
+  <el-select v-model="color" multiple placeholder="Colors" class="filter-bar-item">
     <el-option
       v-for="item in colors"
       :key="item.value"
       :label="item.name"
       :value="item.value">
       <span style="float: left">{{ item.name }}</span>
-      <div class="color-box" style="background-color: item.value;"></div>
+      <div class="color-box" :style="{ backgroundColor: item.value }"></div>
     </el-option>
   </el-select>
 
-  <el-select v-model="brand" multiple placeholder="Brands">
+  <el-select v-model="brand" multiple placeholder="Brands" class="filter-bar-item">
     <el-option
       v-for="br in brands"
       :key="br.id"
       :label="br.name"
       :value="br.id">
+      <span>{{ br.name }}</span>
     </el-option>
   </el-select>
 
@@ -57,6 +58,10 @@ export default {
 </script>
 
 <style>
+.filter-bar-item {
+  margin-bottom: 10px;
+}
+
 .slider-label {
 
 }
@@ -65,10 +70,9 @@ export default {
   width: 10px;
   height: 10px;
   display: inline-block;
-  background-color: #ccc;
   position: absolute;
   left: 5px;
-  top: 5px;
+  top: 10px;
 }
 </style>
 
