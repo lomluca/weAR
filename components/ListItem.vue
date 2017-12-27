@@ -1,17 +1,19 @@
 <template>
-<el-row>
-  <el-col :xs="4" :sm="4" :md="2" :lg="2" :xl="2"><p>{{ item.name }}</p></el-col>
-
-  <el-col :xs="16" :sm="16" :md="18" :lg="18" :xl="18"><img class="list-item-image" :src="item.assets[0]" :alt="item.name"></el-col>
-
-  <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
-    <el-container direction="vertical">
-      <p>{{ item.price }} €</p>
-      <el-button style="width:100%" type="primary">Try</el-button>
-      <el-button style="width:100%;margin-left:0;">Add to Cart</el-button>
-    </el-container>
-  </el-col>
-</el-row>
+<el-card class="list-item" :body-style="{ padding: '0px' }">
+  <img :src="item.assets[0]" :alt="item.name" class="list-item-image">
+  <el-container direction="vertical" style="padding: 14px;">
+    <span class="list-item-main-label">{{ item.name  }}</span>
+    <div class="bottom clearfix">
+      <el-row>
+        <span class="list-item-price-label" style="float:left">{{ item.price }} €</span>
+        <el-container style="width:70%;float:right;" direction="vertical">
+          <el-button type="primary" class="list-item-button">Try</el-button>
+          <el-button class="list-item-button" style="margin-left:0">Add To Cart</el-button>
+        <el-container>
+      </el-row>
+    </div>
+  </el-container>
+</el-card>
 </template>
 
 <script>
@@ -26,8 +28,44 @@ export default {
 </script>
 
 <style>
+.list-item {
+  margin: 10px;
+}
+
+.list-item-main-label {
+  text-align: left;
+}
+
 .list-item-image {
-  width: 25%;
-  height: 10%;
+  width: 100%;
+  display: block;
+}
+
+.list-item-button {
+  width: 100%;
+  margin: 0;
+  float: right;
+  margin-bottom: 5px;
+}
+
+.list-item-price-label {
+  width: 30%;
+  font-size: 13px;
+  color: #999;
+  text-align: left;
+}
+
+.bottom {
+  line-height: 12px;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+                  
+.clearfix:after {
+  clear: both
 }
 </style>
