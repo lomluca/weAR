@@ -7,7 +7,7 @@
   <el-slider
     v-model="priceRange"
     range
-    :max="_maxPrice"
+    :max="Math.ceil(_maxPrice)"
     v-on:change="filterChange">
   </el-slider>
 
@@ -69,6 +69,7 @@ export default {
       this.$data.colors = []
       this.$data.brands = []
       this.$data.sizes = []
+      this.$emit('filter-change', this.$data.priceRange, this.$data.colors, this.$data.brands, this.$data.sizes)
     }
   }
 }

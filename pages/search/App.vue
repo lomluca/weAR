@@ -29,8 +29,9 @@
       <!-- Search results -->
       <el-col :xs="24" :sm="18" :md="18" :lg="18" :xl="18">
         <el-container direction="vertical">
-          <h1 class="query-result-label">Results for: {{ query }}</h1>
-          <wear-list :items="items" />
+          <h1 v-if="items && items.length > 0"  class="query-result-label">Results for: {{ query }}</h1>
+          <wear-list v-if="items && items.length > 0" :items="items" />
+          <p v-else>No results found</p>
         </el-container>
       </el-col>
 
@@ -56,6 +57,8 @@ let params = (new URL(document.location)).searchParams
 
 let distinctValues = distinctQueryValues(MODEL)
 
+const MODEL_BASELINE = query(params)['data']
+
 export default {
   name: 'app',
   data () {
@@ -77,9 +80,8 @@ export default {
     'wear-list': WearList
   },
   methods: {
-    applyFiltering: function(p, c, b, s) {
-      console.log(p, c, b, s)
-      this.items = query({ q: 'man' })
+    applyFiltering: function(priceRange, colors, brands, sizes) {
+      this.$data.items = query({ priceRange, colors, brands, sizes }, MODEL_BASELINE)['data']
     }
   }
 }
