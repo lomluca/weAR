@@ -39,7 +39,7 @@
         </el-table>
         <div class="shopCartTableFooter">
           <h1>Total: {{ total }}€</h1>
-          <el-button @click="confirmDialog = true">Checkout</el-button>
+          <el-button @click="checkoutClick">Checkout</el-button>
           <el-dialog
             title="Confirm purchase"
             :visible.sync="confirmDialog"
@@ -56,34 +56,8 @@
 
       <div class="cartRightWrapper">
         <template v-if="loggedIn">
-          <!-- ADDRESS BOX -->
-          <el-card class="box-card">
-            <div slot="header" class="box-card-header">
-              Delivery Address
-            </div>
-            <template v-if="address.length > 0">
-              <el-radio-group v-model="addressChoice" v-for="item in address" :key="item">
-                <el-radio :label="item">{{ item }}</el-radio>
-                <el-button class="el-icon-remove" size="mini" type="danger"></el-button>
-              </el-radio-group>
-              <hr>
-            </template>
-            <el-button class="el-icon-circle-plus" size="mini" type="success">New</el-button>
-          </el-card>
-          <!-- CREDIT CARD BOX -->
-          <el-card class="box-card">
-            <div slot="header" class="box-card-header">
-              Credit Card
-            </div>
-            <template v-if="creditcard.length > 0">
-              <el-radio-group v-model="creditcardChoice" v-for="item in creditcard" :key="item">
-                <el-radio :label="item">{{ item }}</el-radio>
-                <el-button class="el-icon-remove" size="mini" type="danger"></el-button>
-              </el-radio-group>
-              <hr>
-            </template>
-            <el-button class="el-icon-circle-plus" size="mini" type="success">New</el-button>
-          </el-card>
+          <wear-info-box _headerContent="Delivery Address" :_bodyContent="address"/>
+          <wear-info-box _headerContent="Credit Card" :_bodyContent="creditcard"/>
         </template>
         <template v-else>
           <el-card class="box-card">
@@ -105,6 +79,7 @@
 <script>
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
+import WearInfoBox from '../../components/InfoBox'
 
 export default {
   name: 'app',
@@ -112,19 +87,26 @@ export default {
     return {
       shopcartData: getShopCart(),
       address: getAddresses(), //to be changed, it should be already an array
-      addressChoice: getAddresses()[0],
       creditcard: getCards(),
-      creditcardChoice: getCards()[0],
       confirmDialog: false
     }
   },
   components: {
     'wear-header': WearHeader,
-    'wear-footer': WearFooter
+    'wear-footer': WearFooter,
+    'wear-info-box': WearInfoBox
   },
   methods: {
     changeQuantity(id, value) {
       console.log(id + " " + value)
+    },
+    checkoutClick() {
+      if(this.loggedIn) {
+        this.confirmDialog = true
+      }
+      else {
+        this.$message('Please log-in');
+      }
     }
   },
   computed: {
@@ -180,7 +162,7 @@ export default {
   display: inline-block;
   width: 30%;
 }
-/* Address box */
+/* Info box */
 .el-main .cartRightWrapper .box-card {
   margin: 0 15px 15px 15px;
 }
