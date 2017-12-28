@@ -8,50 +8,62 @@
     <!-- Main content -->
     <el-main>
       <div class="cartLeftWrapper">
-        <el-table
-          :data="shopcartData">
-          <el-table-column
-            label="Item">
-            <template slot-scope="scope">
-              <div class="shopRowWrapper">
-                <img width="70px" height="70px" :src="scope.row.asset" :alt="scope.row.alt" :href="scope.row.href"/>
-                <span style="margin-left: 10px">{{ scope.row.name }}</span>
-              </div>
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="Price">
-            <template slot-scope="scope">
-              <div class="shopRowWrapper">
-                <span>{{ scope.row.price }}</span>
-                <i>€</i>
-              </div>
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="Quantity">
-            <template slot-scope="scope">
-              <div class="shopRowWrapper">
-                <el-input-number v-model="scope.row.quantity" size="mini" controls-position="right" @change="changeQuantity(scope.row.id, $event)" :min="0"></el-input-number>
-              </div>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div class="shopCartTableFooter">
-          <h1>Total: {{ total }}€</h1>
-          <el-button @click="checkoutClick">Checkout</el-button>
-          <el-dialog
-            title="Confirm purchase"
-            :visible.sync="confirmDialog"
-            width="30%"
-            :before-close="handleClose">
-            <span>Do you want to confirm your purchases?</span>
-            <span slot="footer" class="dialog-footer">
-              <el-button @click="confirmDialog = false">Cancel</el-button>
-              <el-button type="primary" @click="confirmDialog = false">Confirm</el-button>
-            </span>
-          </el-dialog>
-        </div>
+        <el-card class="box-card">
+          <el-table
+             height="500"
+            :data="shopcartData">
+            <el-table-column
+              label="Item"
+              min-width="400">
+              <template slot-scope="scope">
+                <div class="shopRowWrapper">
+                  <div class="itemWrapper">
+                    <img width="70px" height="70px" :src="scope.row.asset" :alt="scope.row.alt" :href="scope.row.href"/>
+                  </div>
+                  <div class="itemWrapper">
+                    <a style="text-decoration: none" :href="scope.row.href"><span class="itemName">{{ scope.row.name }}</span></a>
+                    <span class="itemDescription">{{ scope.row.description }}</span>
+                  </div>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="Price"
+              width="100">
+              <template slot-scope="scope">
+                <div class="shopRowWrapper">
+                  <span>{{ scope.row.price }}</span>
+                  <i>€</i>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="Quantity"
+              width="150">
+              <template slot-scope="scope">
+                <div class="shopRowWrapper">
+                  <el-input-number v-model="scope.row.quantity" size="mini" controls-position="right" @change="changeQuantity(scope.row.id, $event)" :min="0"></el-input-number>
+                </div>
+              </template>
+            </el-table-column>
+          </el-table>
+
+          <div class="shopCartTableFooter">
+            <h1>Total: {{ total }}€</h1>
+            <el-button @click="checkoutClick">Checkout</el-button>
+            <el-dialog
+              title="Confirm purchase"
+              :visible.sync="confirmDialog"
+              width="30%"
+              :before-close="handleClose">
+              <span>Do you want to confirm your purchases?</span>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="confirmDialog = false">Cancel</el-button>
+                <el-button type="primary" @click="confirmDialog = false">Confirm</el-button>
+              </span>
+            </el-dialog>
+          </div>
+        </el-card>
       </div>
 
       <div class="cartRightWrapper">
@@ -182,46 +194,57 @@ export default {
 }
 
 /* left Wrapper */
-.el-main .cartLeftWrapper {
+.cartLeftWrapper {
   width: 70%;
   display: inline-block;
   height: auto;
   float: left
 }
-.el-main .cartLeftWrapper .shopRowWrapper {
+.cartLeftWrapper .shopRowWrapper {
   float: left;
 }
-.el-main .shopCartTableFooter {
+.cartLeftWrapper .shopRowWrapper .itemWrapper {
+  display: inline-block;
+  height: 100%;
+}
+.cartLeftWrapper .shopRowWrapper .itemWrapper .itemName {
+  font-size: 22px;
+}
+.cartLeftWrapper .shopRowWrapper .itemWrapper .itemDescription {
+  font-size: 12px;
+}
+.shopCartTableFooter {
   float: right;
+  margin-bottom: 10px;
 }
 
 /* Right Wrapper */
-.el-main .cartRightWrapper {
+.cartRightWrapper {
   display: inline-block;
   width: 30%;
 }
 /* Info box */
-.el-main .cartRightWrapper .box-card {
+.cartRightWrapper .box-card {
   margin: 0 15px 15px 15px;
 }
-.el-main .cartRightWrapper .box-card .el-radio-group {
+.cartRightWrapper .box-card .el-radio-group {
   display: table;
   width: 100%;
 }
-.el-main .cartRightWrapper .box-card .el-radio-group .el-radio {
+.cartRightWrapper .box-card .el-radio-group .el-radio {
   float: left;
 }
-.el-main .cartRightWrapper .box-card .el-radio-group .el-radio ul {
+.cartRightWrapper .box-card .el-radio-group .el-radio ul {
   width: 100%;
   display: inline-block;
   list-style-type: none;
   text-align: left
 }
-.el-main .cartRightWrapper .box-card .button-wrapper {
+.cartRightWrapper .box-card .button-wrapper {
   display: table-cell;
   vertical-align: middle;
 }
-.el-main .cartRightWrapper .box-card .button-wrapper .el-button {
+.cartRightWrapper .box-card .button-wrapper .el-button {
   vertical-align: middle;
   display: block;
   margin: 0 auto;
