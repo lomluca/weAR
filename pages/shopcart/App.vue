@@ -55,19 +55,43 @@
       </div>
 
       <div class="cartRightWrapper">
-        <el-card class="box-card">
-          <div slot="header" class="box-card-header">
-            Delivery Address
-          </div>
-          <div class="box-card-body">
-            <el-radio-group v-model="addressChoice" v-for="item in address" :key="item">
-              <el-radio :label="item">{{ item }}</el-radio>
-              <el-button class="el-icon-remove" size="mini" type="danger"></el-button>
-            </el-radio-group>
-            <hr>
+        <template v-if="loggedIn">
+          <!-- ADDRESS BOX -->
+          <el-card class="box-card">
+            <div slot="header" class="box-card-header">
+              Delivery Address
+            </div>
+            <template v-if="address.length > 0">
+              <el-radio-group v-model="addressChoice" v-for="item in address" :key="item">
+                <el-radio :label="item">{{ item }}</el-radio>
+                <el-button class="el-icon-remove" size="mini" type="danger"></el-button>
+              </el-radio-group>
+              <hr>
+            </template>
             <el-button class="el-icon-circle-plus" size="mini" type="success">New</el-button>
-          </div>
-        </el-card>
+          </el-card>
+          <!-- CREDIT CARD BOX -->
+          <el-card class="box-card">
+            <div slot="header" class="box-card-header">
+              Credit Card
+            </div>
+            <template v-if="creditcard.length > 0">
+              <el-radio-group v-model="creditcardChoice" v-for="item in creditcard" :key="item">
+                <el-radio :label="item">{{ item }}</el-radio>
+                <el-button class="el-icon-remove" size="mini" type="danger"></el-button>
+              </el-radio-group>
+              <hr>
+            </template>
+            <el-button class="el-icon-circle-plus" size="mini" type="success">New</el-button>
+          </el-card>
+        </template>
+        <template v-else>
+          <el-card class="box-card">
+            <div class="box-card-body">
+              <h1>Please log-in to select your informations</h1>
+            <div>
+          </el-card>
+        </template>
       </div>
     </el-main>
 
@@ -87,8 +111,10 @@ export default {
   data: function() {
     return {
       shopcartData: getShopCart(),
-      address: [localStorage.address], //to be changed, it should be already an array
-      addressChoice: [localStorage.address][0],
+      address: getAddresses(), //to be changed, it should be already an array
+      addressChoice: getAddresses()[0],
+      creditcard: getCards(),
+      creditcardChoice: getCards()[0],
       confirmDialog: false
     }
   },
@@ -108,6 +134,11 @@ export default {
         total += this.shopcartData[i].price*this.shopcartData[i].quantity;
       }
       return total;
+    },
+    loggedIn: function() {
+      if(localStorage.loggedIn == 1)
+        return true;
+      else return false;
     }
   }
 }
@@ -151,15 +182,15 @@ export default {
 }
 /* Address box */
 .el-main .cartRightWrapper .box-card {
-  margin: 0 15px 0 15px;
+  margin: 0 15px 15px 15px;
 }
-.el-main .cartRightWrapper .box-card .box-card-body .el-radio-group {
+.el-main .cartRightWrapper .box-card .el-radio-group {
   width: 100%;
 }
-.el-main .cartRightWrapper .box-card .box-card-body .el-radio-group .el-radio {
+.el-main .cartRightWrapper .box-card .el-radio-group .el-radio {
   float: left;
 }
-.el-main .cartRightWrapper .box-card .box-card-body .el-button {
+.el-main .cartRightWrapper .box-card .el-button {
   float: right;
 }
 

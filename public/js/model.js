@@ -31,8 +31,48 @@ function addToCart(newItem) {
 }
 
 function getShopCart() {
-  if(localStorage['shopcart'])
-    return JSON.parse(localStorage['shopcart']);
+  if(localStorage.shopcart)
+    return JSON.parse(localStorage.shopcart);
+  else {
+    return [];
+  }
+}
+
+function addCard(newCard) {
+  var cards;
+  if(localStorage.cards) {
+    cards = JSON.parse(localStorage.cards);
+    cards.push(newCard);
+  }
+  else {
+    cards = [newCard];
+  }
+  localStorage.cards = JSON.stringify(cards);
+}
+
+function getCards() {
+  if(localStorage.cards)
+    return JSON.parse(localStorage.cards);
+  else {
+    return [];
+  }
+}
+
+function addAddress(newAddress) {
+  var address;
+  if(localStorage.address) {
+    address = JSON.parse(localStorage.address);
+    address.push(newAddress);
+  }
+  else {
+    address = [newAddress];
+  }
+  localStorage.address = JSON.stringify(address);
+}
+
+function getAddresses() {
+  if(localStorage.address)
+    return JSON.parse(localStorage.address);
   else {
     return [];
   }
