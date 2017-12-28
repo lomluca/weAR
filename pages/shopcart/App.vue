@@ -82,51 +82,7 @@
               </el-radio-group>
               <hr>
             </template>
-            <v-app>
-              <v-layout row justify-center>
-                <v-dialog v-model="dialog" persistent max-width="500px">
-                  <v-btn color="primary" dark slot="activator">New Address</v-btn>
-                  <v-card>
-                    <v-card-title>
-                      <span class="headline">Shipping Address</span>
-                    </v-card-title>
-                    <v-card-text>
-                      <v-container grid-list-md>
-                        <v-layout wrap>
-                          <v-flex xs12 sm6 md4>
-                            <v-text-field label="First and last name" hint="example: John Smith" required></v-text-field>
-                          </v-flex>
-                          <v-flex xs12>
-                            <v-text-field label="Street" hint="example: 10, Avenue des Begonias"
-                              persistent-hint
-                              required></v-text-field>
-                          </v-flex>
-                          <v-flex xs12>
-                            <v-text-field label="City" required></v-text-field>
-                          </v-flex>
-                          <v-flex xs12 sm6>
-                            <v-select
-                              label="Country"
-                              required
-                              :items="['France', 'Italy', 'Germany', 'Spain']"
-                            ></v-select>
-                          </v-flex>
-                          <v-text-field label="Additional info" hint="example: floor 1"
-                              required
-                          ></v-text-field>
-                        </v-layout>
-                      </v-container>
-                      <small>*indicates required field</small>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="blue darken-1" flat @click.native="dialog = false">Close</v-btn>
-                      <v-btn color="blue darken-1" flat @click.native="dialog = false">Save</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-layout>
-            </v-app>
+            <el-button class="el-icon-circle-plus" size="mini" type="success">New</el-button>
           </el-card>
           <!-- credit card box -->
           <el-card class="box-card">
@@ -181,8 +137,7 @@ export default {
       addressChoice: getAddresses()[0],
       creditcard: getCards(),
       cardChoice: getCards()[0],
-      confirmDialog: false,
-      dialog: false
+      confirmDialog: false
     }
   },
   components: {
