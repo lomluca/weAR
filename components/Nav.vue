@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button id="menuIcon" size="small" v-if="isCollapsed" @click="hidden = !hidden">&#9776</el-button>
+    <el-button id="menuIcon" class="collapse-menu-button" size="small" v-if="isCollapsed" @click="hidden = !hidden">&#9776</el-button>
     <nav :class="[navClasses, {hide: hidden}]">
       <template
       v-for="category in categories"
@@ -22,7 +22,7 @@
         </el-dropdown>
       </template>
 
-      <div class="rightBlock" :class="[menuClasses, {hide: hidden}]">
+      <div class="rightBlock" :class="[searchBarClasses, {hide: hidden}]">
         <div id="searchBox">
           <el-input
             size="mini"
@@ -32,7 +32,7 @@
             @keyup.enter.native="searchItem">
         </div>
 
-        <div id="shoppingCart">
+        <div id="shoppingCart" :class="[badgeClasses, {hide: hidden}]">
           <a :href="shopcart_page">
             <el-badge :value="badgeValue"><el-button size="small" icon="el-icon-goods" @click="addItem"/></el-badge>
           </a>
@@ -78,6 +78,18 @@ export default {
         horizontalMenuItem: !this.isCollapsed
       }
     },
+    searchBarClasses: function() {
+      return {
+        verticalNavSearchBar: this.isCollapsed,
+        horizontalMenuItem: !this.isCollapsed
+      }
+    },
+    badgeClasses: function() {
+      return {
+        verticalNavBadge: this.isCollapsed,
+        horizontalNavBadge: !this.isCollapsed
+      }
+    },
     badgeValue: function() {
       return getShopCart().length
     }
@@ -100,6 +112,12 @@ export default {
 </script>
 
 <style>
+.collapse-menu-button {
+  float: right;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
 /* HORIZONTAL NAV CSS */
 .horizontalNav {
   display: inline-block;
@@ -119,13 +137,29 @@ export default {
   margin-left: 10px;
 }
 
+.horizontalNavBadge {
+  
+}
+
 /* VERTICAL NAV CSS */
 .verticalNav {
   display: block;
+  width: 100%;
+  padding: 10px;
 }
 .verticalNav .verticalMenuItem {
   float: left;
   clear: left;
+}
+
+.verticalNavSearchBar {
+  float: left;
+  clear: left;
+  width: 100%;
+}
+
+.verticalNavBadge {
+  padding-top: 15px;
 }
 
 .hide {
