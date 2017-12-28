@@ -46,14 +46,15 @@
       <el-col :sm="16">
         <div class="box">
           <img class="small" src="/assets/credit-card-logo.png">
-          <template v-if="creditCardButtonMessage == 'Edit'">
+          <template v-for="card in cards">
+            <el-button style="float: right;position: relative;top: 50px;" type="primary" icon="el-icon-delete"></el-button>
             <ul class="list-info">
-              <li><span class="ligth-text">owner</span> <span class="bold-text">{{ owner }}</span></li>
-              <li><span class="ligth-text">number</span> <span class="bold-text">{{ creditCardNumber }}</span></li>
-              <li><span class="ligth-text">expiration</span> <span class="bold-text">{{ expirationDate }}</span></li>
+              <li><span class="ligth-text">owner</span> <span class="bold-text">{{ card.owner }}</span></li>
+              <li><span class="ligth-text">number</span> <span class="bold-text">{{ card.cardNumber }}</span></li>
+              <li><span class="ligth-text">expiration</span> <span class="bold-text">{{ card.expirationDate }}</span></li>
             </ul>
           </template>
-          <el-button type="primary" @click="showCCDialogForm()">{{ creditCardButtonMessage }}</el-button>
+          <el-button type="primary" @click="dialogCreditCardFormVisible = true">Add</el-button>
           <el-dialog title="Credit card info" :visible.sync="dialogCreditCardFormVisible">
             <el-form :model="creditCardForm" :rules="creditCardFormRules" ref="creditCardFormModel">
               <el-form-item label="owner" :label-width="formLabelWidth" prop="owner">
@@ -124,6 +125,7 @@ export default {
       dialogFormVisible: false,
       dialogCreditCardFormVisible: false,
       updateFullname: false,
+      cards: JSON.parse(localStorage.cards),
       form: {
           fullname: "",
           email: "",
@@ -189,40 +191,6 @@ export default {
       if (this.dialogFormVisible == false) {
         return newBirthday
       } else return newBirthday
-    },
-    creditCardButtonMessage: {
-      cache: false,
-      get: function() {
-        if(!localStorage.creditCard) {
-          return "Add"
-        } else if(this.dialogCreditCardFormVisible == false) {
-          return "Edit"
-        } else return "Edit"
-      }
-    },
-    creditCardNumber: function() {
-      if(!localStorage.creditCard) {
-        return ""
-      } else if (this.dialogCreditCardFormVisible == false) {
-        return JSON.parse(localStorage.creditCard).cardNumber
-      } else return JSON.parse(localStorage.creditCard).cardNumber
-    },
-    owner: function() { 
-      if (!localStorage.creditCard) {
-        return ""
-      } else if (this.dialogCreditCardFormVisible == false) {
-        return JSON.parse(localStorage.creditCard).owner
-      } else return JSON.parse(localStorage.creditCard).owner
-    },
-    expirationDate: function() {
-      if(!localStorage.creditCard) {
-        return ""
-      } else {
-        var date = new Date(JSON.parse(localStorage.creditCard).expirationDate)
-        if (this.dialogCreditCardFormVisible == false) {
-          return date.getFullYear() + "-" + zeroFill(2, date.getMonth() + 1)
-        } else return date.getFullYear() + "-" + zeroFill(2, date.getMonth() + 1)
-      }
     }
   },
   components: {
@@ -246,8 +214,10 @@ export default {
     },
     submitCCForm: function(formName) {
       this.$refs[formName].validate((valid) => {
-        if(valid) { 
-          localStorage.setItem("creditCard", JSON.stringify(this.creditCardForm))
+        if(valid) {
+          var cards = JSON.parse(localStorage.cards)
+          cards.push(this.creditCardForm)
+          localStorage.setItem("cards", JSON.stringify(cards))
           this.dialogCreditCardFormVisible = false
         } else {
           console.log("error submit!");
@@ -273,16 +243,6 @@ export default {
       this.form.address = this.address
       this.form.email = this.mail
       this.dialogFormVisible = true
-    },
-    showCCDialogForm: function() {
-      if (this.creditCardButtonMessage == 'Edit') {
-        var date = new Date(JSON.parse(localStorage.creditCard).expirationDate)
-        date.setDate(date.getDate() + 1)
-        this.creditCardForm.owner = this.owner;
-        this.creditCardForm.expirationDate = date;
-        this.creditCardForm.cardNumber = this.creditCardNumber;
-      }
-      this.dialogCreditCardFormVisible = true;
     }
   },
   beforeMount() {

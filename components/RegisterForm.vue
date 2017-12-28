@@ -103,6 +103,8 @@ export default {
           localStorage.setItem("pass", CryptoJS.SHA256(this.registerFormModel.pass));
           localStorage.setItem("birthday", this.registerFormModel.birthday);
           localStorage.setItem("address", this.registerFormModel.address);
+          var emptyArray = []
+          localStorage.setItem("cards", JSON.stringify(emptyArray))
           this.$emit('signupSuccess')
           // Do nothing, we don't care                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    alert('submit!');
         } else {
