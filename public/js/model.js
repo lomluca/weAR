@@ -118,10 +118,10 @@ function getTryOnSample() {
 function getCategories() {
   return {
     data: [
-      { id: 1, name: 'Man', subcategories: [ { id: 11, name: 'Shirts' }, { id: 12, name: 'Pants' } ] },
-      { id: 2, name: 'Woman', subcategories: [ { id: 21, name: 'Skirts' }, { id: 22, name: 'Trousers' } ] },
-      { id: 3, name: 'Winter Collection' },
-      { id: 4, name: 'Promos' }
+      { id: 1, name: 'Man', subcategories: [ { id: 11, name: 'Shirts', href: '/search.html?q=man' }, { id: 12, name: 'Pants', href: '/search.html?q=man' } ], href: '/search.html?q=man' },
+      { id: 2, name: 'Woman', subcategories: [ { id: 21, name: 'Skirts', href: '/search.html?q=woman' }, { id: 22, name: 'Trousers', href: '/search.html?q=woman' } ], href: '/search.html?q=woman' },
+      { id: 3, name: 'Winter Collection', href: '/search.html?q=man' },
+      { id: 4, name: 'Promos', href: '/search.html?q=man' }
     ]
   }
 }
