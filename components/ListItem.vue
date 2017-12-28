@@ -8,7 +8,7 @@
         <span class="list-item-price-label" style="float:left">{{ item.price }} €</span>
         <el-container style="width:70%;float:right;" direction="vertical">
           <el-button type="primary" class="list-item-button">Try</el-button>
-          <el-button class="list-item-button" style="margin-left:0">Add To Cart</el-button>
+          <el-button class="list-item-button" style="margin-left:0" @click="addToCart(item)">Add To Cart</el-button>
         <el-container>
       </el-row>
     </div>
@@ -23,6 +23,17 @@ export default {
   data: function() {
     return {
     }
+  },
+  methods: {
+    addToCart(item) {
+      addToCart(item);
+      this.$message({
+        showClose: true,
+        message: 'Item successfully added',
+        type: 'success',
+        duration: 1000
+      });
+    }
   }
 }
 </script>
@@ -35,8 +46,8 @@ export default {
 .list-item-main-label {
   text-align: left;
   text-overflow: ellipsis;
-  overflow: hidden; 
-  width: 100%; 
+  overflow: hidden;
+  width: 100%;
   white-space: nowrap;
   font-size: 1.2em;
 }
@@ -70,7 +81,7 @@ export default {
   display: table;
   content: "";
 }
-                  
+
 .clearfix:after {
   clear: both
 }
