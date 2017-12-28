@@ -46,15 +46,15 @@
       <el-col :sm="16">
         <div class="box">
           <img class="small" src="/assets/credit-card-logo.png">
-          <template v-for="card in cards">
-            <el-button style="float: right;position: relative;top: 50px;" type="primary" icon="el-icon-delete"></el-button>
+          <template v-for="(card, index) in cards">
+            <el-button style="float: right;position: relative;top: 50px;" type="primary" icon="el-icon-delete" @click="deleteCard(index)"></el-button>
             <ul class="list-info">
               <li><span class="ligth-text">owner</span> <span class="bold-text">{{ card.owner }}</span></li>
               <li><span class="ligth-text">number</span> <span class="bold-text">{{ card.cardNumber }}</span></li>
               <li><span class="ligth-text">expiration</span> <span class="bold-text">{{ card.expirationDate }}</span></li>
             </ul>
           </template>
-          <el-button type="primary" @click="dialogCreditCardFormVisible = true">Add</el-button>
+          <el-button type="primary" @click="showCCDialogForm()">Add</el-button>
           <el-dialog title="Credit card info" :visible.sync="dialogCreditCardFormVisible">
             <el-form :model="creditCardForm" :rules="creditCardFormRules" ref="creditCardFormModel">
               <el-form-item label="owner" :label-width="formLabelWidth" prop="owner">
@@ -124,8 +124,8 @@ export default {
     return {
       dialogFormVisible: false,
       dialogCreditCardFormVisible: false,
-      updateFullname: false,
       cards: JSON.parse(localStorage.cards),
+      updateFullname: false,
       form: {
           fullname: "",
           email: "",
@@ -216,14 +216,23 @@ export default {
       this.$refs[formName].validate((valid) => {
         if(valid) {
           var cards = JSON.parse(localStorage.cards)
-          cards.push(this.creditCardForm)
+          var newCard = this.creditCardForm
+          newCard.expirationDate = newCard.expirationDate.getFullYear() + '-' + zeroFill(2, newCard.expirationDate.getMonth() + 1)
+          cards.push(newCard)
           localStorage.setItem("cards", JSON.stringify(cards))
+          this.cards = cards
           this.dialogCreditCardFormVisible = false
         } else {
           console.log("error submit!");
           return false;
         }
       });
+    },
+    deleteCard: function(index) {
+      var cards = JSON.parse(localStorage.cards)
+      cards.splice(index, 1)
+      localStorage.setItem("cards", JSON.stringify(cards))
+      this.cards = cards
     },
     isVisa: function() {
       if(payform.parseCardType(this.creditCardForm.cardNumber) == 'visa') {
@@ -243,6 +252,12 @@ export default {
       this.form.address = this.address
       this.form.email = this.mail
       this.dialogFormVisible = true
+    },
+    showCCDialogForm: function() {
+      this.creditCardForm.owner = ""
+      this.creditCardForm.expirationDate = ""
+      this.creditCardForm.cardNumber = ""
+      this.dialogCreditCardFormVisible = true
     }
   },
   beforeMount() {
