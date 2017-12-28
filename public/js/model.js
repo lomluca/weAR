@@ -15,7 +15,15 @@ const MODEL = [
   // Those are men clothing items
   { id: 11, name: 'JUST DO IT FULL ZIP', assets: [ '/assets/items/0011/1.jpg', '/assets/items/0011/2.jpg'  ], brand: 'Nike', sizes: [ 'S', 'M', 'L', 'XL' ], colors: [ 'Black' ], price: 59.99 },
   { id: 12, name: 'ONSVANCE SKINNY', assets: [ '/assets/items/0012/1.jpg', '/assets/items/0012/2.jpg'  ], brand: 'Only & Sons', sizes: [ 'M', 'L' ], colors: [ 'Black', 'White', 'Brown', 'Grey' ], price: 59.99 },
-
+  // Those are the popular items
+  { id: 21, name: 'WATCH HAT', assets: [ '/assets/items/0021/1.jpg', '/assets/items/0021/2.jpg'  ], brand: 'Carhartt', sizes: [ 'M' ], colors: [ 'Black', 'Red', 'Grey' ], price: 18.99 },
+  { id: 22, name: 'Jacket', assets: [ '/assets/items/0022/1.jpg', '/assets/items/0022/2.jpg'  ], brand: 'Zalando Essentials', sizes: [ 'S', 'M', 'L', 'XL' ], colors: [ 'Black' ], price: 35.99 },
+  { id: 23, name: 'CHARLINE - Sneakers', assets: [ '/assets/items/0023/1.jpg', '/assets/items/0023/2.jpg'  ], brand: 'le coq sportif', sizes: [ '37', '38', '39', '40' ], colors: [ 'Pink' ], price: 74.99 },
+  { id: 24, name: 'EXPLORATEUR MID SPORT ', assets: [ '/assets/items/0024/1.jpg', '/assets/items/0024/2.jpg'  ], brand: 'Lacoste', sizes: [ '42', '43' ], colors: [ 'Kaki' ], price: 129.95 },
+  { id: 25, name: 'LOIS FRILL', assets: [ '/assets/items/0025/1.jpg', '/assets/items/0025/2.jpg'  ], brand: 'French Connection', sizes: [ 'M', 'L' ], colors: [ 'Black', 'White', 'Red' ], price: 84.99 },
+  { id: 26, name: 'SPRINTYLL SCARF', assets: [ '/assets/items/0026/1.jpg', '/assets/items/0026/2.jpg'  ], brand: 'Diesel', sizes: [  ], colors: [ 'Black', 'White', 'Red' ], price: 84.99 },
+  { id: 27, name: 'Sandals with Heels', assets: [ '/assets/items/0027/1.jpg', '/assets/items/0027/2.jpg'  ], brand: 'Anna Field', sizes: [ '38', '39', '40' ], colors: [ 'Pink', 'White', 'Silver' ], price: 29.99 },
+  
 ]
 
 function addToCart(newItem) {
@@ -89,13 +97,9 @@ function getCarouselData() {
   }
 }
 
-function getImageBlockData() {
+function getPopularItems() {
   return {
-    data: [
-      { id: 1, asset: '/assets/imageBlock/sweather.jpg', alt: 'Ad Banner 1', href: '#', position: '0', description: 'Sweather 1' },
-      { id: 2, asset: '/assets/imageBlock/sweather2.jpg', alt: 'Ad Banner 2', href: '#', position: '1', description: 'Sweather 2' },
-      { id: 3, asset: '/assets/imageBlock/skirt.jpg', alt: 'Ad Banner 3', href: '#', position: '0', description: 'Skirt' }
-    ]
+    data: MODEL.filter(function(item) { return item.id > 20 && item.id <= 30  })
   }
 }
 
