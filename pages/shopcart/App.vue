@@ -56,8 +56,44 @@
 
       <div class="cartRightWrapper">
         <template v-if="loggedIn">
-          <wear-info-box _headerContent="Delivery Address" :_bodyContent="address"/>
-          <wear-info-box _headerContent="Credit Card" :_bodyContent="creditcard"/>
+          <!-- address box -->
+          <el-card class="box-card">
+            <div slot="header" class="box-card-header">
+              <span>Delivery Address</span>
+            </div>
+            <template v-if="address.length > 0">
+              <el-radio-group v-model="addressChoice" v-for="item in address" :key="item">
+                <el-radio :label="item">{{ item }}</el-radio>
+                <div class='button-wrapper'>
+                  <el-button class="el-icon-remove" size="mini" type="danger"></el-button>
+                </div>
+              </el-radio-group>
+              <hr>
+            </template>
+            <el-button class="el-icon-circle-plus" size="mini" type="success">New</el-button>
+          </el-card>
+          <!-- credit card box -->
+          <el-card class="box-card">
+            <div slot="header" class="box-card-header">
+              <span>Credit Card</span>
+            </div>
+            <template v-if="creditcard.length > 0">
+              <el-radio-group v-model="cardChoice" v-for="item in creditcard" :key="item">
+                <el-radio :label="item">
+                  <ul>
+                    <li>{{ item.owner }}</li>
+                    <li>{{ item.cardNumber }}</li>
+                    <li>{{ item.expirationDate }}</li>
+                  </ul>
+                </el-radio>
+                <div class='button-wrapper'>
+                  <el-button class="el-icon-remove" size="mini" type="danger"></el-button>
+                </div>
+              </el-radio-group>
+              <hr>
+            </template>
+            <el-button class="el-icon-circle-plus" size="mini" type="success">New</el-button>
+          </el-card>
         </template>
         <template v-else>
           <el-card class="box-card">
@@ -79,22 +115,22 @@
 <script>
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
-import WearInfoBox from '../../components/InfoBox'
 
 export default {
   name: 'app',
   data: function() {
     return {
       shopcartData: getShopCart(),
-      address: getAddresses(), //to be changed, it should be already an array
+      address: getAddresses(),
+      addressChoice: getAddresses()[0],
       creditcard: getCards(),
+      cardChoice: getCards()[0],
       confirmDialog: false
     }
   },
   components: {
     'wear-header': WearHeader,
-    'wear-footer': WearFooter,
-    'wear-info-box': WearInfoBox
+    'wear-footer': WearFooter
   },
   methods: {
     changeQuantity(id, value) {
@@ -105,7 +141,9 @@ export default {
         this.confirmDialog = true
       }
       else {
-        this.$message('Please log-in');
+        this.$alert('Please log-in to continue', 'Message', {
+          confirmButtonText: 'OK'
+        });
       }
     }
   },
@@ -167,14 +205,25 @@ export default {
   margin: 0 15px 15px 15px;
 }
 .el-main .cartRightWrapper .box-card .el-radio-group {
+  display: table;
   width: 100%;
 }
 .el-main .cartRightWrapper .box-card .el-radio-group .el-radio {
   float: left;
 }
-.el-main .cartRightWrapper .box-card .el-button {
-  float: right;
+.el-main .cartRightWrapper .box-card .el-radio-group .el-radio ul {
+  width: 100%;
+  display: inline-block;
+  list-style-type: none;
+  text-align: left
 }
-
-
+.el-main .cartRightWrapper .box-card .button-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+.el-main .cartRightWrapper .box-card .button-wrapper .el-button {
+  vertical-align: middle;
+  display: block;
+  margin: 0 auto;
+}
 </style>
