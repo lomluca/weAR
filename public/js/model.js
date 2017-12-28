@@ -15,8 +15,28 @@ const MODEL = [
   // Those are men clothing items
   { id: 11, name: 'JUST DO IT FULL ZIP', assets: [ '/assets/items/0011/1.jpg', '/assets/items/0011/2.jpg'  ], brand: 'Nike', sizes: [ 'S', 'M', 'L', 'XL' ], colors: [ 'Black' ], price: 59.99 },
   { id: 12, name: 'ONSVANCE SKINNY', assets: [ '/assets/items/0012/1.jpg', '/assets/items/0012/2.jpg'  ], brand: 'Only & Sons', sizes: [ 'M', 'L' ], colors: [ 'Black', 'White', 'Brown', 'Grey' ], price: 59.99 },
-  
+
 ]
+
+function addToCart(newItem) {
+  var cart;
+  if(localStorage.shopcart) {
+    cart = JSON.parse(localStorage.shopcart);
+    cart.push(newItem);
+  }
+  else {
+    cart = [newItem];
+  }
+  localStorage.shopcart = JSON.stringify(cart);
+}
+
+function getShopCart() {
+  if(localStorage['shopcart'])
+    return JSON.parse(localStorage['shopcart']);
+  else {
+    return [];
+  }
+}
 
 function getCarouselData() {
   return {
@@ -25,17 +45,6 @@ function getCarouselData() {
       { id: 2, asset: '/assets/carousel/2.jpg', alt: 'Ad Banner 2', href: '#'  },
       { id: 3, asset: '/assets/carousel/3.jpg', alt: 'Ad Banner 3', href: '#'  },
       { id: 4, asset: '/assets/carousel/4.jpg', alt: 'Ad Banner 4', href: '#'  }
-    ]
-  }
-}
-
-function getShopCartData() {
-  return {
-    data: [
-      { id: 1, name: 'name', asset: '/assets/carousel/1.jpg', price:'10', alt: 'Ad Banner 1', href: '#'  },
-      { id: 2, name: 'name', asset: '/assets/carousel/2.jpg', price:'3', alt: 'Ad Banner 2', href: '#'  },
-      { id: 3, name: 'name', asset: '/assets/carousel/3.jpg', price:'4', alt: 'Ad Banner 3', href: '#'  },
-      { id: 4, name: 'name', asset: '/assets/carousel/4.jpg', price:'5', alt: 'Ad Banner 4', href: '#'  }
     ]
   }
 }
@@ -91,7 +100,7 @@ function getClothes() {
   }
 }
 
-function query(params, items = MODEL) { 
+function query(params, items = MODEL) {
   var q = params.get ? params.get('q') : params['q']
   if(q) {
     q = q.toLowerCase()
@@ -142,7 +151,7 @@ function query(params, items = MODEL) {
         for(var j = 0; j < item.sizes.length; j++)
           if(sizes[i] == item.sizes[j]) return true
       return false
-    })  
+    })
 
   return {
     data

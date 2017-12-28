@@ -33,7 +33,9 @@
         </div>
 
         <div id="shoppingCart">
-          <a :href="shopcart_page"><el-badge :value="badgeValue"><el-button size="small" icon="el-icon-goods"/></el-badge></a>
+          <a :href="shopcart_page">
+            <el-badge :value="badgeValue"><el-button size="small" icon="el-icon-goods" @click="addItem"/></el-badge>
+          </a>
         </div>
       </div>
     </nav>
@@ -55,9 +57,20 @@ export default {
   },
   methods: {
     searchItem: function(event) {
-      var item = event.target.value; //do something with this
+      var item = event.target.value;
       console.log(item + ' querty ')
       window.location.href = '/search.html?q=' + item
+    },
+    //to be removed
+    addItem: function() {
+      var item = { id: 1, name: 'name', asset: '/assets/carousel/1.jpg', price:'10', quantity:'1', alt: 'Ad Banner 1', href: '#'  };
+      addToCart(item);
+      item = { id: 2, name: 'name', asset: '/assets/carousel/2.jpg', price:'3', quantity:'3', alt: 'Ad Banner 2', href: '#'  }
+      addToCart(item);
+      item = { id: 3, name: 'name', asset: '/assets/carousel/3.jpg', price:'4', quantity:'1', alt: 'Ad Banner 3', href: '#'  }
+      addToCart(item);
+      item = { id: 4, name: 'name', asset: '/assets/carousel/4.jpg', price:'5', quantity:'2', alt: 'Ad Banner 4', href: '#'  }
+      addToCart(item);
     }
   },
   computed: {
@@ -72,6 +85,9 @@ export default {
         verticalMenuItem: this.isCollapsed,
         horizontalMenuItem: !this.isCollapsed
       }
+    },
+    badgeValue: function() {
+      return getShopCart().length
     }
   },
   watch: {
