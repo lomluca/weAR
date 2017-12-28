@@ -21,10 +21,6 @@
     <el-date-picker type="date" v-model="registerFormModel.birthday" :picker-options="birthdatPickerOptions" style="width:100%"></el-date-picker>
   </el-form-item>
  
-  <el-form-item label="Address" prop="address">
-    <el-input type="text" v-model="registerFormModel.address" auto-complete="off"></el-input>
-  </el-form-item> 
- 
   <el-form-item>
     <el-button type="primary" @click="submitForm('registerFormModel')">Submit</el-button>
     <el-button @click="resetForm('registerFormModel')">Reset</el-button>
@@ -61,9 +57,7 @@ export default {
       registerFormModel: {
         fullname: '',
         email: '',
-        address: '',
         email: '',
-        address: '',
         pass: '',
         checkPass: '',
         birthday: '',
@@ -102,11 +96,11 @@ export default {
           localStorage.setItem("email", this.registerFormModel.email);
           localStorage.setItem("pass", CryptoJS.SHA256(this.registerFormModel.pass));
           localStorage.setItem("birthday", this.registerFormModel.birthday);
-          localStorage.setItem("address", this.registerFormModel.address);
           var emptyArray = []
           localStorage.setItem("cards", JSON.stringify(emptyArray))
+          localStorage.setItem("addresses", JSON.stringify(emptyArray))
           this.$emit('signupSuccess')
-          // Do nothing, we don't care                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    alert('submit!');
+          // Do nothing, we don't care alert('submit!');
         } else {
           console.log('error submit!!');
           return false;
