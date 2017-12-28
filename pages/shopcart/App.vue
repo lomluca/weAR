@@ -18,7 +18,7 @@
               <template slot-scope="scope">
                 <div class="shopRowWrapper">
                   <div class="itemWrapper">
-                    <img width="70px" height="70px" :src="scope.row.asset" :alt="scope.row.alt" :href="scope.row.href"/>
+                    <img width="70px" height="70px" :src="scope.row.assets[0]" :alt="scope.row.alt" :href="scope.row.href"/>
                   </div>
                   <div class="itemWrapper">
                     <a style="text-decoration: none" :href="scope.row.href"><span class="itemName">{{ scope.row.name }}</span></a>
@@ -42,7 +42,7 @@
               width="150">
               <template slot-scope="scope">
                 <div class="shopRowWrapper">
-                  <el-input-number v-model="scope.row.quantity" size="mini" controls-position="right" @change="changeQuantity(scope.row.id, $event)" :min="0"></el-input-number>
+                  <el-input-number value="1" size="mini" controls-position="right" @change="changeQuantity(scope.row.id, $event)" :min="0"></el-input-number>
                 </div>
               </template>
             </el-table-column>
