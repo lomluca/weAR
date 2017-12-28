@@ -7,7 +7,7 @@
       :category="category">
         <!-- Render a standard menu item if no subcategories are found  -->
         <div :class="[menuClasses, {hide: hidden}]" v-if="!category.subcategories">
-          <a><el-button size="medium" type="text">{{ category.name }}</el-button></a>
+          <a><el-button size="medium" type="text" v-on:click="navigate(category.href)">{{ category.name }}</el-button></a>
         </div>
 
         <!-- Render a menu with sub items if subcategories are found -->
@@ -16,7 +16,7 @@
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item v-for="subcategory in category.subcategories"
             :subcategory="subcategory">
-              {{ subcategory.name }}
+              <span v-on:click="navigate(subcategory.href)">{{ subcategory.name }}</span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -71,6 +71,9 @@ export default {
       addToCart(item);
       item = { id: 4, name: 'name', asset: '/assets/carousel/4.jpg', price:'5', quantity:'2', alt: 'Ad Banner 4', href: '#'  }
       addToCart(item);
+    },
+    navigate: function(href) {
+      window.location.href = href
     }
   },
   computed: {

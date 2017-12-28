@@ -20,18 +20,10 @@
     </div>
 
     <!-- Other images -->
-    <div class="imageBlock" >
-      <div class="blockCol" v-for="item in imageBlockData"
-      :item="item"
-      :key="item.id">
-        <div class="imageContainer">
-          <a :href="item.href"><img :src="item.asset" :alt="item.alt"></a>
-        </div>
-
-        <div class="description">
-          {{ item.description }}
-        </div>
-      </div>
+    <el-container direction="vertical">
+      <h1 class="homepage-header">Most Popular</h1>
+      <wear-list :items="popularItems" />
+    </el-container>
   </el-main>
 
   <!-- Footer -->
@@ -44,18 +36,20 @@
 <script>
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
+import WearList from '../../components/List'
 
 export default {
   name: 'app',
   data () {
     return {
       carouselData: getCarouselData()['data'], // Defined in public/js/model.js
-      imageBlockData: getImageBlockData()['data']
+      popularItems: getPopularItems()['data'], // Defined in public/js/model.js
     }
   },
   components: {
     'wear-header': WearHeader,
-    'wear-footer': WearFooter
+    'wear-footer': WearFooter,
+    'wear-list': WearList
   }
 }
 </script>
@@ -108,8 +102,8 @@ export default {
   height: 15%;
 }
 
-img {
-  max-width: 100%;
-  max-height: 100%;
+.homepage-header {
+  width: 100%;
+  text-align: left;
 }
 </style>
