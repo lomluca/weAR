@@ -13,10 +13,10 @@
   "dependencies": {
     "crypto-js": "^3.1.9-1",
     "element-ui": "^2.0.8",
+    "express": "^4.16.2",
     "morgan": "^1.9.0",
     "payform": "^1.2.1",
     "vue": "^2.4.4",
-    "vuetify": "^0.17.6",
     "zero-fill": "^2.2.3"
   },
   "browserslist": [
