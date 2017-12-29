@@ -28,7 +28,6 @@ export default {
   props: ['visible'],
   data () {
     return {
-      activeName: 'first',
       form: {
           street: "",
           city: "",

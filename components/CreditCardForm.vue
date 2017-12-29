@@ -48,7 +48,6 @@ export default {
       }
     }
     return {
-      activeName: 'first',
       creditCardForm: {
         owner: "",
         cardNumber: "",

@@ -56,37 +56,9 @@
                   <li><span class="ligth-text">expiration</span> <span class="bold-text">{{ card.expirationDate }}</span></li>
                 </ul>
               </template>
-              <el-button type="primary" @click="showCCDialogForm()">Add</el-button>
-              <el-dialog title="Add a credit card" :visible.sync="dialogCreditCardFormVisible">
-                <el-form :model="creditCardForm" :rules="creditCardFormRules" ref="creditCardFormModel">
-                  <el-form-item label="owner" :label-width="formLabelWidth" prop="owner">
-                    <el-input v-model="creditCardForm.owner" auto-complete="off"></el-input>
-                  </el-form-item>
-                  <el-form-item label="number" :label-width="formLabelWidth" prop="cardNumber" style="float: left">
-                    <el-input v-model="creditCardForm.cardNumber" auto-complete="off"></el-input>
-                  </el-form-item>
-                  <img class="credit-card" 
-                       src="/assets/visa.png" 
-                       v-if="isVisa()"
-                       style="position: relative;top: 7px;">
-                  <img class="credit-card" 
-                       src="/assets/mastercard.png" 
-                       v-if="isMastercard()"
-                       style="position: relative;top: 7px;">
-                  <el-form-item label="Expiration date" :label-width="formLabelWidth" prop="expirationDate" style="clear: left">
-                    <el-date-picker
-                      v-model="creditCardForm.expirationDate"
-                      type="month"
-                      placeholder="Pick a month"
-                      style="width:100%">
-                    </el-date-picker>
-                  </el-form-item>
-                </el-form>
-                <span slot="footer" class="dialog-footer">
-                  <el-button @click="dialogCreditCardFormVisible = false">Cancel</el-button>
-                  <el-button type="primary" @click="submitCCForm('creditCardFormModel')">Confirm</el-button>
-                </span>
-              </el-dialog>
+              <el-button type="primary" @click="cardDialogFormVisible = true">Add</el-button>
+              <!-- credit card dialog -->
+              <wear-card-form :visible.sync="cardDialogFormVisible"/>
             </el-tab-pane>
             <el-tab-pane label="Addresses" name="second">
               <template v-for="(address, index) in addresses">
@@ -98,31 +70,13 @@
                   <li><span class="ligth-text">country</span> <span class="bold-text">{{ address.country }}</span></li>
                 </ul>
               </template>
-              <el-button type="primary" @click="showDialogForm()">Add</el-button>
-              <el-dialog title="Add a new address" :visible.sync="dialogFormVisible">
-                <el-form :model="form" :rules="editFormRules" ref="editFormModel">
-                  <el-form-item label="street" :label-width="formLabelWidth" prop="street">
-                    <el-input v-model="form.street" auto-complete="off"></el-input>
-                  </el-form-item>
-                  <el-form-item label="city" :label-width="formLabelWidth" prop="city">
-                    <el-input v-model="form.city" auto-complete="off"></el-input>
-                  </el-form-item>
-                  <el-form-item label="zip code" :label-width="formLabelWidth" prop="zipCode">
-                    <el-input v-model="form.zipCode" auto-complete="off"></el-input>
-                  </el-form-item>
-                  <el-form-item label="country" :label-width="formLabelWidth" prop="country">
-                    <el-input v-model="form.country" auto-complete="off"></el-input>
-                  </el-form-item>
-                </el-form>
-                <span slot="footer" class="dialog-footer">
-                  <el-button @click="dialogFormVisible = false">Cancel</el-button>
-                  <el-button type="primary" @click="submitForm('editFormModel')">Confirm</el-button>
-                </span>
-              </el-dialog>
+              <el-button type="primary" @click="addressDialogFormVisible = true">Add</el-button>
+              <!-- address dialog -->
+              <wear-address-form :visible.sync="addressDialogFormVisible"/>
             </el-tab-pane>
           </el-tabs>
           <!--<img class="small" src="/assets/credit-card-logo.png">-->
-          
+
         </div>
       </el-col>
     </el-row>
@@ -145,69 +99,19 @@
 <script>
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
-
-var payform = require('payform');
-var zeroFill = require('zero-fill')
+import WearAddressForm from '../../components/AddressForm'
+import WearCardForm from '../../components/CreditCardForm'
 
 export default {
   name: 'app',
   data () {
-    var validateCreditCard = (rule, value, callback) => {
-      if( payform.validateCardNumber(value) ) {
-        callback()
-      } else {
-        callback(new Error('Invalid credit card number'))
-      }
-    }
     return {
       activeName: 'first',
-      dialogFormVisible: false,
-      dialogCreditCardFormVisible: false,
+      addressDialogFormVisible: false,
+      cardDialogFormVisible: false,
       cards: JSON.parse(localStorage.cards),
       addresses: JSON.parse(localStorage.addresses),
       updateFullname: false,
-      form: {
-          street: "",
-          city: "",
-          zipCode: "",
-          country: ""
-      },
-      creditCardForm: {
-        owner: "",
-        cardNumber: "",
-        expirationDate: ""
-      },
-      formLabelWidth: '120px',
-      editFormRules: {
-        street: [
-          { required: true, message: 'Please enter the street address', trigger: 'blur' }
-        ],
-        city: [
-          { required: true, message: 'Please enter the city', trigger: 'blur' }
-        ],
-        zipCode: [
-          { required: true, message: 'Please enter the zip code', trigger: 'blur' }
-        ],
-        country: [
-          { required: true, message: 'Please enter the country', trigger: 'blur' }
-        ]
-      },
-      creditCardFormRules: {
-        owner: [
-          { required: true, message: 'Please enter the owner', trigger: 'blur' }
-        ],
-        cardNumber: [
-          { required: true, validator: validateCreditCard, trigger: 'blur,change' }
-        ],
-        expirationDate: [
-          { type: 'date', required: true, trigger: 'blur' }
-        ]
-      },
-      birthdatPickerOptions: {
-        disabledDate(time) {
-          return time.getTime() > Date.now();
-        }
-      }
     }
   },
   computed: {
@@ -238,41 +142,23 @@ export default {
   },
   components: {
     'wear-header': WearHeader,
-    'wear-footer': WearFooter
+    'wear-footer': WearFooter,
+    'wear-address-form': WearAddressForm,
+    'wear-card-form': WearCardForm
+  },
+  watch: {
+    addressDialogFormVisible: function() {
+      if(!this.addressDialogFormVisible)
+        this.addresses = JSON.parse(localStorage.addresses);
+    },
+    cardDialogFormVisible: function() {
+      if(!this.cardDialogFormVisible)
+        this.cards = JSON.parse(localStorage.cards);
+    }
   },
   methods: {
     handleClick(tab, event) {
         console.log(tab, event);
-    },
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          var addresses = JSON.parse(localStorage.addresses)
-          addresses.push(this.form)
-          localStorage.setItem("addresses", JSON.stringify(addresses))
-          this.addresses = addresses
-          this.dialogFormVisible = false
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
-    },
-    submitCCForm: function(formName) {
-      this.$refs[formName].validate((valid) => {
-        if(valid) {
-          var cards = JSON.parse(localStorage.cards)
-          var newCard = this.creditCardForm
-          newCard.expirationDate = newCard.expirationDate.getFullYear() + '-' + zeroFill(2, newCard.expirationDate.getMonth() + 1)
-          cards.push(newCard)
-          localStorage.setItem("cards", JSON.stringify(cards))
-          this.cards = cards
-          this.dialogCreditCardFormVisible = false
-        } else {
-          console.log("error submit!");
-          return false;
-        }
-      });
     },
     deleteCard: function(index) {
       var cards = JSON.parse(localStorage.cards)
@@ -285,31 +171,6 @@ export default {
       addresses.splice(index, 1)
       localStorage.setItem("addresses", JSON.stringify(addresses))
       this.addresses = addresses
-    },
-    isVisa: function() {
-      if(payform.parseCardType(this.creditCardForm.cardNumber) == 'visa') {
-        return true;
-      }
-      return false;
-    },
-    isMastercard: function() {
-      if(payform.parseCardType(this.creditCardForm.cardNumber) == 'mastercard') {
-        return true;
-      }
-      return false;
-    },
-    showDialogForm: function() {
-      this.form.street = ""
-      this.form.zipCode = ""
-      this.form.country = ""
-      this.form.city = ""
-      this.dialogFormVisible = true
-    },
-    showCCDialogForm: function() {
-      this.creditCardForm.owner = ""
-      this.creditCardForm.expirationDate = ""
-      this.creditCardForm.cardNumber = ""
-      this.dialogCreditCardFormVisible = true
     }
   },
   beforeMount() {
