@@ -116,8 +116,8 @@ function addAddress(newAddress) {
 }
 
 function getAddresses() {
-  if(localStorage.address)
-    return JSON.parse(localStorage.address);
+  if(localStorage.addresses)
+    return JSON.parse(localStorage.addresses);
   else {
     return [];
   }

@@ -60,7 +60,7 @@
           </el-table>
 
           <div class="shopCartTableFooter">
-            <h1>Total: {{ total }}€</h1>
+            <h1>Total: {{ total.toFixed(2) }}€</h1>
             <el-button @click="checkoutClick">Checkout</el-button>
             <el-dialog
               title="Confirm purchase"
@@ -86,7 +86,13 @@
             </div>
             <template v-if="address.length > 0">
               <el-radio-group v-model="addressChoice" v-for="item in address" :key="item">
-                <el-radio :label="item">{{ item }}</el-radio>
+                <el-radio :label="item">
+                  <ul>
+                    <li>{{ item.street }}</li>
+                    <li>{{ item.city }}, {{ item.zipCode }}</li>
+                    <li>{{ item.country }}</li>
+                  </ul>
+                </el-radio>
                 <div class='button-wrapper'>
                   <el-button class="el-icon-remove" size="mini" type="danger"></el-button>
                 </div>
