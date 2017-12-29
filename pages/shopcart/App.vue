@@ -46,6 +46,17 @@
                 </div>
               </template>
             </el-table-column>
+            <el-table-column
+              label="Remove"
+              width="70">
+              <template slot-scope="scope">
+                <el-button
+                size="mini"
+                type="danger"
+                icon="el-icon-remove"
+                @click="deleteCartItem(scope.row.id)"></el-button>
+              </template>
+            </el-table-column>
           </el-table>
 
           <div class="shopCartTableFooter">
@@ -200,6 +211,9 @@ export default {
           confirmButtonText: 'OK'
         });
       }
+    },
+    deleteCartItem(id) {
+      deleteCartItem(id);
     }
   },
   computed: {

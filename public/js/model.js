@@ -35,6 +35,14 @@ function contains(array, item) {
   return false;
 }
 
+function indexOf(array, id) {
+  for(var i = 0; i < array.length; i++) {
+    if(array[i].id == id)
+      return i;
+  }
+  return -1;
+}
+
 // add new item to shopcart, if it doesn't exist, create it!
 // add also quantity count to localStorage
 function addToCart(newItem) {
@@ -52,6 +60,18 @@ function addToCart(newItem) {
   //quantity count for each element in the shopcart
   localStorage[newItem.id] = (localStorage[newItem.id]) ? parseInt(localStorage[newItem.id]) + 1 : 1;
   localStorage.shopcart = JSON.stringify(cart);
+}
+
+function deleteCartItem(id) {
+  var cart = JSON.parse(localStorage.shopcart);
+  const index = indexOf(cart, id);
+
+  //delete item from cart
+  cart.splice(index, 1);
+  localStorage.shopcart = JSON.stringify(cart);
+
+  //delete quantity from localStorage
+  localStorage.removeItem(id);
 }
 
 
