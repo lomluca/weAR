@@ -7,42 +7,40 @@
 
   <!-- Page's main content -->
   <el-main>
-  	<div class="leftContainer">
-	    <div :class="filterContainer"
-	      v-for="filter in filters"
-	      :filter="filter">
-	        <!-- Render a menu with sub items if subcategories are found -->
-	        <el-dropdown :class="[verticalMenuItem, {hide: hidden}]">
-	          <el-button size="medium" type="text">{{ filter.name }}<i class="el-icon-arrow-down el-icon--right"/></el-button>
-	          <el-dropdown-menu slot="dropdown">
-	            <el-dropdown-item v-for="subfilter in filter.subfilters"
-	            :subfilter="subfilter">
-	              {{ subfilter.name }}
-	            </el-dropdown-item>
-	          </el-dropdown-menu>
-	        </el-dropdown>
-	    </div>
+    <!-- Medium/Large displays -->
+    <el-row class="hidden-sm-and-down">
+      
+      <el-col :md="4" :lg="3" :xl="2">
+        <wear-item-property-selector :item="item" />
+      </el-col>
+      
+      <el-col :md="16" :lg="18" :xl="20">
+        <wear-arcabin :item="item" />
+      </el-col>
 
-	    <el-button class="addChart" type="primary">Add to Chart</el-button>
-	</div>
+      <el-col :md="4" :lg="3" :xl="2">
+        <wear-releated-items-list :item="item" />
+      </el-col>
+    
+    </el-row>
 
-	<div class="centerContainer">
-		<img :src="center_img.asset" :alt="center_img.alt" width="100%" height="100%">
-	</div>
+    <!-- Small displays -->
+    <el-row class="hidden-md-and-up">
+      
+      <el-col :xs="24" :sm="24">
+        <wear-arcabin :item="item" />
+      </el-col>
+      
+      <el-col :xs="12" :sm="12">
+        <wear-item-property-selector :item="item" />
+      </el-col>
 
-	<div class="rightContainer">
-		<div :class="clothesContainer"
-	      v-for="item in clothes"
-	      :item="item">
-	      	<img :src="item.asset" width="100%" height="auto">
-	    </div>
+      <el-col :xs="12" :sm="12">
+        <wear-releated-items-list :item="item" />
+      </el-col>
 
-	    <div class="buttonsContainer">
-	    	<el-button size="mini" type="text" class="invertCamera" type="primary">Invert Camera</el-button>
-	    	<el-button size="mini" type="text" class="takePicture" type="primary">Take Picture</el-button>
-	    	<el-button size="mini" type="text" class="shoppingChart" type="primary">Shopping Chart</el-button>
-	    </div>
-	</div>
+    </el-row>
+
   </el-main>
 
   <!-- Footer -->
@@ -55,20 +53,26 @@
 <script>
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
+import WearARCabin from '../../components/ARCabin'
+import WearItemPropertySelector from '../../components/ItemPropertySelector'
+import WearReleatedItemsList from '../../components/ReleatedItemsList'
+
+// Get query parameters
+let params = (new URL(document.location)).searchParams
 
 export default {
   name: 'app',
   data () {
     return {
-      center_img: getTryOnSample(),
-      filters: getFilters()['data'], // Defined in static/js/model.js
-      clothes: getClothes()['data'], // Defined in static/js/model.js
-      hidden: (window.innerWidth < 768)
+      item: getItem(params.get('id'))['data'] // Defined in model.js  
     }
   },
   components: {
     'wear-header': WearHeader,
-    'wear-footer': WearFooter
+    'wear-footer': WearFooter,
+    'wear-arcabin': WearARCabin,
+    'wear-item-property-selector': WearItemPropertySelector,
+    'wear-releated-items-list': WearReleatedItemsList
   }
 }
 </script>
