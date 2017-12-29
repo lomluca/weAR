@@ -26,21 +26,31 @@ const MODEL = [
 
 ]
 
+//Used to check if an item with id (id) is contained into the array
+function contains(array, item) {
+  for(var i = 0; i < array.length; i++) {
+    if(array[i].id == item.id)
+      return true;
+  }
+  return false;
+}
+
+// add new item to shopcart, if it doesn't exist, create it!
+// add also quantity count to localStorage
 function addToCart(newItem) {
   var cart;
+  //check if shopcart exist in localStorage, otherwise create it
   if(localStorage.shopcart) {
     cart = JSON.parse(localStorage.shopcart);
-    cart.push(newItem);
+    if(!contains(cart, newItem))
+      cart.push(newItem);
   }
   else {
     cart = [newItem];
   }
-  if(localStorage[newItem.id]) {
-    localStorage[newItem.id]++;
-  }
-  else {
-    localStorage[newItem.id] = 1;
-  }
+
+  //quantity count for each element in the shopcart
+  localStorage[newItem.id] = (localStorage[newItem.id]) ? parseInt(localStorage[newItem.id]) + 1 : 1;
   localStorage.shopcart = JSON.stringify(cart);
 }
 
