@@ -23,7 +23,7 @@ const MODEL = [
   { id: 25, name: 'LOIS FRILL', assets: [ '/assets/items/0025/1.jpg', '/assets/items/0025/2.jpg'  ], brand: 'French Connection', sizes: [ 'M', 'L' ], colors: [ 'Black', 'White', 'Red' ], price: 84.99 },
   { id: 26, name: 'SPRINTYLL SCARF', assets: [ '/assets/items/0026/1.jpg', '/assets/items/0026/2.jpg'  ], brand: 'Diesel', sizes: [  ], colors: [ 'Black', 'White', 'Red' ], price: 84.99 },
   { id: 27, name: 'Sandals with Heels', assets: [ '/assets/items/0027/1.jpg', '/assets/items/0027/2.jpg'  ], brand: 'Anna Field', sizes: [ '38', '39', '40' ], colors: [ 'Pink', 'White', 'Silver' ], price: 29.99 },
-  
+
 ]
 
 function addToCart(newItem) {
@@ -35,8 +35,15 @@ function addToCart(newItem) {
   else {
     cart = [newItem];
   }
+  if(localStorage[newItem.id]) {
+    localStorage[newItem.id]++;
+  }
+  else {
+    localStorage[newItem.id] = 1;
+  }
   localStorage.shopcart = JSON.stringify(cart);
 }
+
 
 function getShopCart() {
   if(localStorage.shopcart)

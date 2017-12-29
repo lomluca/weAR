@@ -42,7 +42,7 @@
               width="150">
               <template slot-scope="scope">
                 <div class="shopRowWrapper">
-                  <el-input-number value="1" size="mini" controls-position="right" @change="changeQuantity(scope.row.id, $event)" :min="0"></el-input-number>
+                  <el-input-number v-model="quantities[scope.row.id]" @change="changeQuantity(scope.row.id, $event)" size="mini" controls-position="right" min="0"></el-input-number>
                 </div>
               </template>
             </el-table-column>
@@ -164,6 +164,7 @@ export default {
       addressChoice: getAddresses()[0],
       creditcard: getCards(),
       cardChoice: getCards()[0],
+      quantities: [],
       confirmDialog: false,
       dialogFormVisible: false,
       form: {
@@ -179,9 +180,16 @@ export default {
     'wear-header': WearHeader,
     'wear-footer': WearFooter
   },
+  created: function() {
+    //initialize quantities with localStorage content
+    //localStorage is not responsive, we need an object defined in the vue instance
+    for(var i = 0; i < this.shopcartData.length; i++) {
+      this.quantities[this.shopcartData[i].id] = localStorage[this.shopcartData[i].id];
+    }
+  },
   methods: {
     changeQuantity(id, value) {
-      console.log(id + " " + value)
+      localStorage[id] = value;
     },
     checkoutClick() {
       if(this.loggedIn) {
@@ -198,7 +206,7 @@ export default {
     total: function() {
       var total, i;
       for(i = 0, total = 0; i < this.shopcartData.length; i++) {
-        total += this.shopcartData[i].price*this.shopcartData[i].quantity;
+        total += this.shopcartData[i].price*this.quantities[this.shopcartData[i].id];
       }
       return total;
     },
