@@ -61,6 +61,8 @@ export default {
 .property-container {
   width: 100%;
   height: 100%;
+  padding: 20px;
+  line-height: 50px;
 }
 
 .property-name {

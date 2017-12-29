@@ -8,42 +8,26 @@
   <!-- Page's main content -->
   <el-main>
     <!-- On small screens item's property selector is collapsible -->
-    <el-collapse v-model="collapseActive" class="hidden-md-and-up">
-      <el-collapse-item>
+    <el-collapse class="collapsible-selector hidden-md-and-up" v-model="collapseActive">
+      <el-collapse-item title="Pick Size and Color">
         <wear-item-property-selector :item="item" />
       </el-collapse-item>
     </el-collapse>
 
-    <!-- Medium/Large displays -->
-    <el-row class="hidden-sm-and-down">
-      <el-col :md="4" :lg="3" :xl="2">
+    <el-row>
+      <el-col :md="4" :lg="3" :xl="2" class="hidden-sm-and-down">
         <wear-item-property-selector :item="item" /> 
       </el-col>
-      
-      <el-col :md="20" :lg="21" :xl="22">
+        
+      <el-col :xs="24" :sm="24" :md="20" :lg="21" :xl="22">
         <wear-arcabin :item="item" />
       </el-col>
 
-      <el-col :md="24" :lg="24" :xl="24">
-        <h1 style="text-align: left">Releated Items</h1>
+      <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+        <h1 class="releated-label">Releated Items</h1>
         <wear-list :items="releatedItems" />
         <!-- <wear-releated-items-list :item="item" /> -->
       </el-col>
-    
-    </el-row>
-
-    <!-- Small displays -->
-    <el-row class="hidden-md-and-up">
-      
-      <el-col :xs="24" :sm="24">
-        <wear-arcabin :item="item" />
-      </el-col>
-      
-      <el-col :xs="24" :sm="24">
-        <h1 style="text-align: left">Releated Items</h1>
-        <wear-list :items="releatedItems" />
-      </el-col>
-
     </el-row>
 
   </el-main>
@@ -75,7 +59,8 @@ export default {
   data () {
     return {
       item: getItem(params.get('id'))['data'], // Defined in model.js  
-      releatedItems
+      releatedItems,
+      collapseActive: false
     }
   },
   components: {
@@ -90,7 +75,6 @@ export default {
 </script>
 
 <style>
-
 .el-main {
   height: 100%;
   overflow: initial;
@@ -103,6 +87,14 @@ export default {
 
 .hide {
   display: none;
+}
+
+.releated-label {
+  text-align: left;
+}
+
+.collapsible-selector {
+  margin: 10px;
 }
 
 .leftContainer, .rightContainer, .centerContainer{
