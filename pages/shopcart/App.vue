@@ -99,33 +99,7 @@
               </el-radio-group>
               <hr>
             </template>
-            <el-button class="el-icon-circle-plus" size="mini" type="success" @click="dialogFormVisible = true">New</el-button>
-
-            <el-dialog title="Shipping address" :visible.sync="dialogFormVisible">
-              <el-form :model="form">
-                <el-form-item label="First an last name" :label-width="formLabelWidth">
-                  <el-input v-model="form.name" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="Street" :label-width="formLabelWidth">
-                  <el-input v-model="form.street" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="City" :label-width="formLabelWidth">
-                  <el-input v-model="form.city" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="Country" :label-width="formLabelWidth">
-                  <el-select v-model="form.country" placeholder="Please select a country">
-                    <el-option label="France" value="France"></el-option>
-                    <el-option label="Italy" value="Italy"></el-option>
-                    <el-option label="Germany" value="Germany"></el-option>
-                    <el-option label="Spain" value="Spain"></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-form>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">Cancel</el-button>
-                <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
-              </span>
-            </el-dialog>
+            <el-button class="el-icon-circle-plus" size="mini" type="success">New</el-button>
 
           </el-card>
           <!-- credit card box -->
@@ -148,7 +122,10 @@
               </el-radio-group>
               <hr>
             </template>
-            <el-button class="el-icon-circle-plus" size="mini" type="success">New</el-button>
+            <el-button class="el-icon-circle-plus" size="mini" type="success" @click="cardDialogFormVisible = true">New</el-button>
+
+            <!-- credit card dialog -->
+            <wear-card-form :visible.sync="cardDialogFormVisible"/>
           </el-card>
         </template>
         <template v-else>
@@ -171,6 +148,7 @@
 <script>
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
+import WearCardForm from '../../components/CreditCardForm'
 
 export default {
   name: 'app',
@@ -183,7 +161,8 @@ export default {
       cardChoice: getCards()[0],
       quantities: [],
       confirmDialog: false,
-      dialogFormVisible: false,
+      addressDialogFormVisible: false,
+      cardDialogFormVisible: false,
       form: {
         name: '',
         street: '',
@@ -195,7 +174,8 @@ export default {
   },
   components: {
     'wear-header': WearHeader,
-    'wear-footer': WearFooter
+    'wear-footer': WearFooter,
+    'wear-card-form': WearCardForm
   },
   created: function() {
     //initialize quantities with localStorage content
