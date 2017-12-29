@@ -50,11 +50,10 @@
               label="Remove"
               width="70">
               <template slot-scope="scope">
-                <el-button
-                size="mini"
-                type="danger"
-                icon="el-icon-remove"
-                @click="deleteCartItem(scope.row.id)"></el-button>
+                <div class="shopRowWrapper">
+                  <el-button size="mini" type="danger" icon="el-icon-remove"
+                  @click="deleteCartItem(scope.row.id)"></el-button>
+                </div>
               </template>
             </el-table-column>
           </el-table>
@@ -158,9 +157,9 @@ export default {
     return {
       shopcartData: getShopCart(),
       address: getAddresses(),
-      addressChoice: getAddresses()[0],
+      addressChoice: '',
       creditcard: getCards(),
-      cardChoice: getCards()[0],
+      cardChoice: '',
       quantities: [],
       confirmDialog: false,
       addressDialogFormVisible: false,
@@ -203,6 +202,7 @@ export default {
     },
     deleteCartItem(id) {
       deleteCartItem(id);
+      this.shopcartData = getShopCart();
     }
   },
   computed: {
