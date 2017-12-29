@@ -7,42 +7,29 @@
 
   <!-- Page's main content -->
   <el-main>
-  	<div class="leftContainer">
-	    <div :class="filterContainer"
-	      v-for="filter in filters"
-	      :filter="filter">
-	        <!-- Render a menu with sub items if subcategories are found -->
-	        <el-dropdown :class="[verticalMenuItem, {hide: hidden}]">
-	          <el-button size="medium" type="text">{{ filter.name }}<i class="el-icon-arrow-down el-icon--right"/></el-button>
-	          <el-dropdown-menu slot="dropdown">
-	            <el-dropdown-item v-for="subfilter in filter.subfilters"
-	            :subfilter="subfilter">
-	              {{ subfilter.name }}
-	            </el-dropdown-item>
-	          </el-dropdown-menu>
-	        </el-dropdown>
-	    </div>
+    <!-- On small screens item's property selector is collapsible -->
+    <el-collapse class="collapsible-selector hidden-md-and-up" v-model="collapseActive">
+      <el-collapse-item title="Pick Size and Color">
+        <wear-item-property-selector :item="item" />
+      </el-collapse-item>
+    </el-collapse>
 
-	    <el-button class="addChart" type="primary">Add to Chart</el-button>
-	</div>
+    <el-row>
+      <el-col :md="4" :lg="3" :xl="2" class="hidden-sm-and-down">
+        <wear-item-property-selector :item="item" /> 
+      </el-col>
+        
+      <el-col :xs="24" :sm="24" :md="20" :lg="21" :xl="22">
+        <wear-arcabin :item="item" />
+      </el-col>
 
-	<div class="centerContainer">
-		<img :src="center_img.asset" :alt="center_img.alt" width="100%" height="100%">
-	</div>
+      <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+        <h1 class="releated-label">Releated Items</h1>
+        <wear-list :items="releatedItems" />
+        <!-- <wear-releated-items-list :item="item" /> -->
+      </el-col>
+    </el-row>
 
-	<div class="rightContainer">
-		<div :class="clothesContainer"
-	      v-for="item in clothes"
-	      :item="item">
-	      	<img :src="item.asset" width="100%" height="auto">
-	    </div>
-
-	    <div class="buttonsContainer">
-	    	<el-button size="mini" type="text" class="invertCamera" type="primary">Invert Camera</el-button>
-	    	<el-button size="mini" type="text" class="takePicture" type="primary">Take Picture</el-button>
-	    	<el-button size="mini" type="text" class="shoppingChart" type="primary">Shopping Chart</el-button>
-	    </div>
-	</div>
   </el-main>
 
   <!-- Footer -->
@@ -53,28 +40,39 @@
 </template>
 
 <script>
+import 'element-ui/lib/theme-chalk/display.css';
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
+import WearARCabin from '../../components/ARCabin'
+import WearItemPropertySelector from '../../components/ItemPropertySelector'
+import WearList from '../../components/List'
+
+// Get query parameters
+let params = (new URL(document.location)).searchParams
+
+let releatedItems = getReleatedItems(getItem(params.get('id')))['data'] // Defined in model.js
+console.log(releatedItems)
 
 export default {
   name: 'app',
   data () {
     return {
-      center_img: getTryOnSample(),
-      filters: getFilters()['data'], // Defined in static/js/model.js
-      clothes: getClothes()['data'], // Defined in static/js/model.js
-      hidden: (window.innerWidth < 768)
+      item: getItem(params.get('id'))['data'], // Defined in model.js  
+      releatedItems,
+      collapseActive: false
     }
   },
   components: {
     'wear-header': WearHeader,
-    'wear-footer': WearFooter
+    'wear-footer': WearFooter,
+    'wear-arcabin': WearARCabin,
+    'wear-item-property-selector': WearItemPropertySelector,
+    'wear-list': WearList
   }
 }
 </script>
 
 <style>
-
 .el-main {
   height: 100%;
   overflow: initial;
@@ -87,6 +85,14 @@ export default {
 
 .hide {
   display: none;
+}
+
+.releated-label {
+  text-align: left;
+}
+
+.collapsible-selector {
+  margin: 10px;
 }
 
 .leftContainer, .rightContainer, .centerContainer{

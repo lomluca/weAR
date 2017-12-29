@@ -146,12 +146,6 @@ function getLogo() {
   }
 }
 
-function getTryOnSample() {
-  return {
-     id: 1, asset: '/assets/try-on_sample.jpg', alt: 'Wear Logo', href: '#'
-  }
-}
-
 function getCategories() {
   return {
     data: [
@@ -159,24 +153,6 @@ function getCategories() {
       { id: 2, name: 'Woman', subcategories: [ { id: 21, name: 'Skirts', href: '/search.html?q=woman' }, { id: 22, name: 'Trousers', href: '/search.html?q=woman' } ], href: '/search.html?q=woman' },
       { id: 3, name: 'Winter Collection', href: '/search.html?q=man' },
       { id: 4, name: 'Promos', href: '/search.html?q=man' }
-    ]
-  }
-}
-
-function getFilters() {
-  return {
-    data: [
-      { id: 1, name: 'Size', subfilters: [ { id: 11, name: 'S' }, { id: 12, name: 'M' }, { id: 13, name: 'L' }, { id: 14, name: 'XL' } ] },
-      { id: 2, name: 'Color', subfilters: [ { id: 21, name: 'Black' }, { id: 22, name: 'Brown' }, { id: 23, name: 'Blue' } ] }
-    ]
-  }
-}
-
-function getClothes() {
-  return {
-    data: [
-      { id: 1, asset: '/assets/try-on_items/shirt.jpg', href: '#' },
-      { id: 2, asset: '/assets/try-on_items/trousers.jpg', href: '#' }
     ]
   }
 }
@@ -239,6 +215,30 @@ function query(params, items = MODEL) {
   }
 }
 
+function getItem(id) {
+  return {
+    data: MODEL.filter(function(item) { return item.id == id } )[0]
+  }
+}
+
+function getReleatedItems(item) {
+  if(item.id <= 10) {
+    return {
+      data: MODEL.filter(function(item) { return item.id <= 10 } )
+    } 
+  }
+  else if(item.id > 10 && item.id <= 20) {
+    return {
+      data: MODEL.filter(function(item) { return item.id > 10 && item.id <= 20 } )
+    } 
+  }
+  else {
+    return {
+      data: MODEL.filter(function(item) { return item.id > 20 } )
+    }
+  }
+}
+
 // Return an object containing all distinct colors, brands and sizes for a given model subset
 function distinctQueryValues(items) {
   var brands = []
@@ -266,41 +266,5 @@ function distinctQueryValues(items) {
     sizes,
     minPrice,
     maxPrice
-  }
-}
-
-function getColorCode(color) {
-  color = color.toLowerCase()
-  if(color == 'black')
-    return '#000'
-  else if(color == 'white')
-    return '#fff'
-  else if(color == 'red')
-    return '#ff4000'
-  else if(color == 'grey')
-    return '#848484'
-}
-
-function getColors() {
-  return {
-    data: [
-      { id: 1, name: 'Black', value: '#000000' },
-      { id: 2, name: 'Red', value: '#FF4000' },
-      { id: 3, name: 'White', value: '#FFFFFF' },
-      { id: 4, name: 'Grey', value: '#848484' },
-      { id: 5, name: 'Green', value: '#04B404' }
-    ]
-  }
-}
-
-function getBrands() {
-  return {
-    data: [
-      { id: 11, name: 'D&G' },
-      { id: 12, name: 'Armani' },
-      { id: 13, name: 'Gucci' },
-      { id: 14, name: 'Valentino' },
-      { id: 15, name: 'Calvin Klein' }
-    ]
   }
 }

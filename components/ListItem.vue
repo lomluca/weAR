@@ -7,7 +7,7 @@
       <el-row>
         <span class="list-item-price-label" style="float:left">{{ item.price }} €</span>
         <el-container style="width:70%;float:right;" direction="vertical">
-          <el-button type="primary" class="list-item-button">Try</el-button>
+          <el-button type="primary" class="list-item-button" @click="tryOn(item)">Try</el-button>
           <el-button class="list-item-button" style="margin-left:0" @click="addToCart(item)">Add To Cart</el-button>
         <el-container>
       </el-row>
@@ -33,6 +33,9 @@ export default {
         type: 'success',
         duration: 1000
       });
+    },
+    tryOn(item) {
+      window.location.href = 'try-on.html?id=' + this.item.id
     }
   }
 }

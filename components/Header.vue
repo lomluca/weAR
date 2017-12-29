@@ -64,9 +64,6 @@ export default {
 }
 </script>
 
-
-
-
 <style>
 header {
   width: 100%;
