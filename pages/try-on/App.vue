@@ -45,7 +45,6 @@ import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
 import WearARCabin from '../../components/ARCabin'
 import WearItemPropertySelector from '../../components/ItemPropertySelector'
-import WearReleatedItemsList from '../../components/ReleatedItemsList'
 import WearList from '../../components/List'
 
 // Get query parameters
@@ -68,7 +67,6 @@ export default {
     'wear-footer': WearFooter,
     'wear-arcabin': WearARCabin,
     'wear-item-property-selector': WearItemPropertySelector,
-    'wear-releated-items-list': WearReleatedItemsList,
     'wear-list': WearList
   }
 }
