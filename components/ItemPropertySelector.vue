@@ -1,8 +1,8 @@
 <template>
-<el-container direction="vertical">
+<el-container class="property-container" direction="vertical">
 
   <!-- Item's name -->
-  <h1>{{ item.name }}</h1>
+  <h1 class="property-title">{{ item.name }}</h1>
 
   <!-- Color selector -->
   <el-select v-model="color" placeholder="Color" class="property-color" v-on:change="propertyChange">
@@ -30,7 +30,7 @@
   <!-- Bottom bar -->
   <el-container class="property-bottombar" direction="vertical">
     <p class="property-price">{{ item.price }} €</p>
-    <el-button type="primary">Add to Cart</el-button>
+    <el-button type="primary" @click="addToCart(item)">Add to Cart</el-button>
   </el-container>
 
 </el-container>
@@ -49,21 +49,39 @@ export default {
   methods: {
     propertyChange() {
       this.$emit('property-change', this.$data.color, this.$data.size)
+    },
+    addToCart(item) {
+      addToCart(item) // Implemented in model.js
     }
   }
 }
 </script>
 
-</style>
+<style>
+.property-container {
+  width: 100%;
+  height: 100%;
+}
+
+.property-name {
+  width: 100%;
+  text-align: left;
+}
+
 .property-color {
+  width: 100%;
 }
 
 .property-size {
+  width: 100%;
 }
 
 .property-bottombar {
+  float: bottom;
 }
 
 .property-price {
+  width: 100%;
+  text-align: right;
 }
 </style>

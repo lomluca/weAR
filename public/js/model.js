@@ -184,8 +184,22 @@ function getItem(id) {
   }
 }
 
-function getSuggestions(item) {
-  // TODO
+function getReleatedItems(item) {
+  if(item.id <= 10) {
+    return {
+      data: MODEL.filter(function(item) { return item.id <= 10 } )
+    } 
+  }
+  else if(item.id > 10 && item.id <= 20) {
+    return {
+      data: MODEL.filter(function(item) { return item.id > 10 && item.id <= 20 } )
+    } 
+  }
+  else {
+    return {
+      data: MODEL.filter(function(item) { return item.id > 20 } )
+    }
+  }
 }
 
 // Return an object containing all distinct colors, brands and sizes for a given model subset
