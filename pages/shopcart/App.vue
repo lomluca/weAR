@@ -84,7 +84,7 @@
               <span>Delivery Address</span>
             </div>
             <template v-if="address.length > 0">
-              <el-radio-group v-model="addressChoice" v-for="item in address" :key="item">
+              <el-radio-group v-model="addressChoice" v-for="(item, index) in address" :key="item">
                 <el-radio :label="item">
                   <ul>
                     <li>{{ item.street }}</li>
@@ -93,7 +93,7 @@
                   </ul>
                 </el-radio>
                 <div class='button-wrapper'>
-                  <el-button class="el-icon-remove" size="mini" type="danger"></el-button>
+                  <el-button class="el-icon-remove" size="mini" type="danger" @click="deleteAddress(index)"></el-button>
                 </div>
               </el-radio-group>
               <hr>
@@ -109,7 +109,7 @@
               <span>Credit Card</span>
             </div>
             <template v-if="creditcard.length > 0">
-              <el-radio-group v-model="cardChoice" v-for="item in creditcard" :key="item">
+              <el-radio-group v-model="cardChoice" v-for="(item, index) in creditcard" :key="item">
                 <el-radio :label="item">
                   <ul>
                     <li>{{ item.owner }}</li>
@@ -118,7 +118,7 @@
                   </ul>
                 </el-radio>
                 <div class='button-wrapper'>
-                  <el-button class="el-icon-remove" size="mini" type="danger"></el-button>
+                  <el-button class="el-icon-remove" size="mini" type="danger" @click="deleteCard(index)"></el-button>
                 </div>
               </el-radio-group>
               <hr>
@@ -203,6 +203,14 @@ export default {
     deleteCartItem(id) {
       deleteCartItem(id);
       this.shopcartData = getShopCart();
+    },
+    deleteCard(index) {
+      deleteCard(index);
+      this.creditcard = getCards();
+    },
+    deleteAddress(index) {
+      deleteAddress(index);
+      this.address = getAddresses();
     }
   },
   computed: {
@@ -217,6 +225,16 @@ export default {
       if(localStorage.loggedIn == 1)
         return true;
       else return false;
+    }
+  },
+  watch: {
+    addressDialogFormVisible: function() {
+      if(!this.addressDialogFormVisible)
+        this.address = getAddresses();
+    },
+    cardDialogFormVisible: function() {
+      if(!this.cardDialogFormVisible)
+        this.creditcard = getCards();
     }
   }
 }

@@ -160,17 +160,13 @@ export default {
     handleClick(tab, event) {
         console.log(tab, event);
     },
-    deleteCard: function(index) {
-      var cards = JSON.parse(localStorage.cards)
-      cards.splice(index, 1)
-      localStorage.setItem("cards", JSON.stringify(cards))
-      this.cards = cards
+    deleteCard(index) {
+      deleteCard(index);
+      this.cards = getCards();
     },
-    deleteAddress: function(index) {
-      var addresses = JSON.parse(localStorage.addresses)
-      addresses.splice(index, 1)
-      localStorage.setItem("addresses", JSON.stringify(addresses))
-      this.addresses = addresses
+    deleteAddress(index) {
+      deleteAddress(index);
+      this.addresses = getAddresses();
     }
   },
   beforeMount() {

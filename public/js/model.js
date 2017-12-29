@@ -62,6 +62,8 @@ function addToCart(newItem) {
   localStorage.shopcart = JSON.stringify(cart);
 }
 
+//delete shopping cart element by id (each elem has an id)
+//return new shopping cart
 function deleteCartItem(id) {
   var cart = JSON.parse(localStorage.shopcart);
   const index = indexOf(cart, id);
@@ -95,6 +97,14 @@ function addCard(newCard) {
   localStorage.cards = JSON.stringify(cards);
 }
 
+//delete card by index
+//return new card set
+function deleteCard(index) {
+  var cards = JSON.parse(localStorage.cards)
+  cards.splice(index, 1)
+  localStorage.setItem("cards", JSON.stringify(cards))
+}
+
 function getCards() {
   if(localStorage.cards)
     return JSON.parse(localStorage.cards);
@@ -113,6 +123,14 @@ function addAddress(newAddress) {
     address = [newAddress];
   }
   localStorage.address = JSON.stringify(address);
+}
+
+//delete address by index
+//return new address set
+function deleteAddress(index) {
+  var addresses = JSON.parse(localStorage.addresses)
+  addresses.splice(index, 1)
+  localStorage.setItem("addresses", JSON.stringify(addresses))
 }
 
 function getAddresses() {
@@ -225,12 +243,12 @@ function getReleatedItems(item) {
   if(item.id <= 10) {
     return {
       data: MODEL.filter(function(item) { return item.id <= 10 } )
-    } 
+    }
   }
   else if(item.id > 10 && item.id <= 20) {
     return {
       data: MODEL.filter(function(item) { return item.id > 10 && item.id <= 20 } )
-    } 
+    }
   }
   else {
     return {
