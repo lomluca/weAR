@@ -99,7 +99,9 @@
               </el-radio-group>
               <hr>
             </template>
-            <el-button class="el-icon-circle-plus" size="mini" type="success">New</el-button>
+            <el-button class="el-icon-circle-plus" size="mini" type="success" @click="addressDialogFormVisible = true">New</el-button>
+            <!-- address dialog -->
+            <wear-address-form :visible.sync="addressDialogFormVisible"/>
 
           </el-card>
           <!-- credit card box -->
@@ -123,7 +125,6 @@
               <hr>
             </template>
             <el-button class="el-icon-circle-plus" size="mini" type="success" @click="cardDialogFormVisible = true">New</el-button>
-
             <!-- credit card dialog -->
             <wear-card-form :visible.sync="cardDialogFormVisible"/>
           </el-card>
@@ -149,6 +150,7 @@
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
 import WearCardForm from '../../components/CreditCardForm'
+import WearAddressForm from '../../components/AddressForm'
 
 export default {
   name: 'app',
@@ -175,7 +177,8 @@ export default {
   components: {
     'wear-header': WearHeader,
     'wear-footer': WearFooter,
-    'wear-card-form': WearCardForm
+    'wear-card-form': WearCardForm,
+    'wear-address-form': WearAddressForm
   },
   created: function() {
     //initialize quantities with localStorage content
