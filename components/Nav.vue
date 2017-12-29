@@ -43,6 +43,8 @@
 </template>
 
 <script>
+let lastScrollTop = 0
+
 export default {
   name: 'wear-nav',
   data() {
@@ -63,7 +65,21 @@ export default {
     },
     navigate: function(href) {
       window.location.href = href
+    },
+    handleScroll: function(event) {
+      // Hide nav bar in case of scrolling down when it is visible on small devices
+      let st = $(window).scrollTop()
+      if(!this.$data.hidden && this.$data.isCollapsed && st - lastScrollTop > 10) {
+        this.$data.hidden = true
+      }
+      lastScrollTop = st
     }
+  },
+  created() {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll)
   },
   computed: {
     navClasses: function() {
