@@ -67,32 +67,6 @@ export default {
   created: function() {
       getGeoAddress(this);
   },
-  computed: {
-    address: function() {
-      if (this.dialogFormVisible == false) {
-        return localStorage.address
-      } else return localStorage.address
-    },
-    fullname: function() {
-      if (this.dialogFormVisible == false) {
-        return localStorage.fullname
-      } else return localStorage.fullname
-    },
-    mail: function() {
-      if (this.dialogFormVisible == false) {
-        return localStorage.email
-      } else return localStorage.email
-    },
-    birthday: function() {
-      var fieldsBirthday = localStorage.birthday.split(" ");
-      fieldsBirthday.splice(4, 3) //remove time, gmt and cet
-      fieldsBirthday.splice(0, 1) //remove day name
-      var newBirthday = fieldsBirthday.join(" ")
-      if (this.dialogFormVisible == false) {
-        return newBirthday
-      } else return newBirthday
-    }
-  },
   watch: {
     visible: function() {
       // When the internal value changes, we $emit an event

@@ -106,6 +106,8 @@ export default {
   name: 'app',
   data () {
     return {
+      fullname: localStorage.fullname,
+      mail: localStorage.email,
       activeName: 'first',
       addressDialogFormVisible: false,
       cardDialogFormVisible: false,
@@ -115,21 +117,6 @@ export default {
     }
   },
   computed: {
-    address: function() {
-      if (this.dialogFormVisible == false) {
-        return localStorage.address
-      } else return localStorage.address
-    },
-    fullname: function() {
-      if (this.dialogFormVisible == false) {
-        return localStorage.fullname
-      } else return localStorage.fullname
-    },
-    mail: function() {
-      if (this.dialogFormVisible == false) {
-        return localStorage.email
-      } else return localStorage.email
-    },
     birthday: function() {
       var fieldsBirthday = localStorage.birthday.split(" ");
       fieldsBirthday.splice(4, 3) //remove time, gmt and cet
