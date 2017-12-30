@@ -175,7 +175,7 @@ function getGeoAddress(self){
                   }
                   for(var i=0;i<results[0].address_components.length;i++){
                     var types = results[0].address_components[i].types;
-                    if(types=="locality,political"){
+                    if(types=="administrative_area_level_3,political"){
                        gCity = results[0].address_components[i].short_name;
                      }
                   }for(var i=0;i<results[0].address_components.length;i++){
@@ -198,7 +198,7 @@ function getGeoAddress(self){
                   }
                   
                   self.geoAddress = { street: gStreet, city: gCity, province: gProvince, zip: gZip, country: gCountry };
-                  console.log(gStreet); console.log(gCity); console.log(gProvince); console.log(gZip);
+                  //console.log(gStreet); console.log(gCity); console.log(gProvince); console.log(gZip);
               }
           }
       );
