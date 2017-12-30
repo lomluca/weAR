@@ -15,15 +15,13 @@
       </el-form-item>
     </el-form>
 
-    <br>Street: <input type="text" :value="geoAddress.street"/>
-    <br>City: <input type="text" :value="geoAddress.city"/>
-    <br>Province: <input type="text" :value="geoAddress.province"/>
-    <br>Zip: <input type="text" :value="geoAddress.zip"/>
-    <br>Country: <input type="text" :value="geoAddress.country"/>
-
     <span slot="footer" class="dialog-footer">
+      <el-button type="primary" 
+                 icon="el-icon-location-outline"
+                 @click="getMyCurrentPosition()"
+                 :loading="loadingPosition">My current location</el-button>
       <el-button @click="visible = false">Cancel</el-button>
-      <el-button type="primary" @click="submitForm('editFormModel')">Confirm</el-button>
+      <el-button type="success" @click="submitForm('editFormModel')">Confirm</el-button>
     </span>
   </el-dialog>
 </template>
@@ -41,6 +39,7 @@ export default {
           zipCode: "",
           country: ""
       },
+      loadingPosition: false,
       formLabelWidth: '120px',
       editFormRules: {
         street: [
@@ -64,17 +63,25 @@ export default {
       geoAddress: {street: '', city: '', province: '', zip: '', country: ''}
     }
   },
-  created: function() {
-      getGeoAddress(this);
-  },
   watch: {
     visible: function() {
       // When the internal value changes, we $emit an event
       // v-model will automatically update the parent value
       this.$emit('update:visible', this.visible);
+    },
+    geoAddress: function(response) {
+      this.loadingPosition = false
+      this.form.street = response.street;
+      this.form.city = response.city + ", " + response.province;
+      this.form.zipCode = response.zip;
+      this.form.country = response.country
     }
   },
   methods: {
+    getMyCurrentPosition: function() {
+      this.loadingPosition = true;
+      getGeoAddress(this);
+    },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
