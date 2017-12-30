@@ -141,6 +141,71 @@ function getAddresses() {
   }
 }
 
+function getGeoAddress(self){
+  var currgeocoder;
+  var gStreet, gCity, gProvince, gZip, gCountry;
+  
+
+  navigator.geolocation.getCurrentPosition(
+    function( position ){ // success cb
+
+      /* Current Coordinate */
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+      var google_map_pos = new google.maps.LatLng( lat, lng );
+
+      /* Use Geocoder to get address */
+      var google_maps_geocoder = new google.maps.Geocoder();
+      google_maps_geocoder.geocode(
+          { 'latLng': google_map_pos },
+          function( results, status ) {
+              if ( status == google.maps.GeocoderStatus.OK && results[0] ) {
+                  console.log( results[0]);
+                  for(var i=0;i<results[0].address_components.length;i++){
+                    var types = results[0].address_components[i].types;
+                    if(types=="street_number"){
+                       gStreet = results[0].address_components[i].short_name;
+                     }
+                  }
+                  for(var i=0;i<results[0].address_components.length;i++){
+                    var types = results[0].address_components[i].types;
+                    if(types=="route"){
+                       gStreet += " " + results[0].address_components[i].short_name;
+                     }
+                  }
+                  for(var i=0;i<results[0].address_components.length;i++){
+                    var types = results[0].address_components[i].types;
+                    if(types=="locality,political"){
+                       gCity = results[0].address_components[i].short_name;
+                     }
+                  }for(var i=0;i<results[0].address_components.length;i++){
+                    var types = results[0].address_components[i].types;
+                    if(types=="administrative_area_level_2,political"){
+                       gProvince = results[0].address_components[i].short_name;
+                     }
+                  }
+                  for(var i=0;i<results[0].address_components.length;i++){
+                    var types = results[0].address_components[i].types;
+                    if(types=="postal_code"){
+                       gZip = results[0].address_components[i].short_name;
+                     }
+                  }
+                  for(var i=0;i<results[0].address_components.length;i++){
+                    var types = results[0].address_components[i].types;
+                    if(types=="country,political"){
+                       gCountry = results[0].address_components[i].long_name;
+                     }
+                  }
+                  
+                  self.geoAddress = { street: gStreet, city: gCity, province: gProvince, zip: gZip, country: gCountry };
+                  console.log(gStreet); console.log(gCity); console.log(gProvince); console.log(gZip);
+              }
+          }
+      );
+    }
+  );
+}
+
 function getCarouselData() {
   return {
     data: [

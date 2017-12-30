@@ -14,6 +14,13 @@
         <el-input v-model="form.country" auto-complete="off"></el-input>
       </el-form-item>
     </el-form>
+
+    <br>Street: <input type="text" :value="geoAddress.street"/>
+    <br>City: <input type="text" :value="geoAddress.city"/>
+    <br>Province: <input type="text" :value="geoAddress.province"/>
+    <br>Zip: <input type="text" :value="geoAddress.zip"/>
+    <br>Country: <input type="text" :value="geoAddress.country"/>
+
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">Cancel</el-button>
       <el-button type="primary" @click="submitForm('editFormModel')">Confirm</el-button>
@@ -53,8 +60,12 @@ export default {
         disabledDate(time) {
           return time.getTime() > Date.now();
         }
-      }
+      },
+      geoAddress: {street: '', city: '', province: '', zip: '', country: ''}
     }
+  },
+  created: function() {
+      getGeoAddress(this);
   },
   computed: {
     address: function() {
