@@ -60,7 +60,7 @@ export default {
         email: '',
         pass: '',
         checkPass: '',
-        birthday: '',
+        birthday: null,
         acceptConditions: true
       },
       registerFormRules: {
