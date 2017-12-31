@@ -31,7 +31,8 @@ export default {
         showClose: true,
         message: 'Item successfully added',
         type: 'success',
-        duration: 1000
+        duration: 1000,
+        customClass: 'wear-message'
       });
     },
     tryOn(item) {
@@ -87,5 +88,9 @@ export default {
 
 .clearfix:after {
   clear: both
+}
+
+.wear-message {
+  z-index: 9999 !important;
 }
 </style>
