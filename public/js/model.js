@@ -26,6 +26,19 @@ const MODEL = [
 
 ]
 
+// Creating some usefull events
+var lsEvents = {
+  shoppingCartInsert: null,
+  shoppingCartRemove: null
+}
+function registerLsEvent(name, callback, overwrite = false) {
+  if(overwrite || lsEvents[name] == null) lsEvents[name] = callback
+  else throw 'Event handler for event \'' + name + '\' already set'
+}
+function unregisterLsEvent(name) {
+  lsEvents[name] = null
+}
+
 //Used to check if an item with id (id) is contained into the array
 function contains(array, item) {
   for(var i = 0; i < array.length; i++) {
@@ -60,6 +73,11 @@ function addToCart(newItem) {
   //quantity count for each element in the shopcart
   localStorage[newItem.id] = (localStorage[newItem.id]) ? parseInt(localStorage[newItem.id]) + 1 : 1;
   localStorage.shopcart = JSON.stringify(cart);
+
+  // Emit event
+  if(lsEvents['shoppingCartInsert'] != null) {
+    lsEvents['shoppingCartInsert']()
+  }
 }
 
 //delete shopping cart element by id (each elem has an id)
@@ -74,6 +92,11 @@ function deleteCartItem(id) {
 
   //delete quantity from localStorage
   localStorage.removeItem(id);
+
+  // Emit event
+  if(lsEvents['shoppingCartRemove'] != null) {
+    lsEvents['shoppingCartRemove']()
+  }
 }
 
 
@@ -83,6 +106,15 @@ function getShopCart() {
   else {
     return [];
   }
+}
+
+function getShopCartItemsCount() {
+  var count = 0
+  var cart = JSON.parse(localStorage.shopcart)
+  for(var item in cart) {
+    count += parseInt(localStorage[cart[item].id])
+  }
+  return count
 }
 
 function addCard(newCard) {
