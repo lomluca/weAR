@@ -6,7 +6,7 @@
   </el-header>
 
   <!-- Page's main content -->
-  <el-main>
+  <el-main height="auto">
     <!-- On small screens item's property selector is collapsible -->
     <el-collapse class="collapsible-selector hidden-md-and-up" v-model="collapseActive">
       <el-collapse-item title="Pick Size and Color">
@@ -14,6 +14,7 @@
       </el-collapse-item>
     </el-collapse>
 
+    <!-- Item's property selector and AR viewer -->
     <el-row>
       <el-col :md="4" :lg="3" :xl="2" class="hidden-sm-and-down">
         <wear-item-property-selector :item="item" /> 
@@ -21,12 +22,14 @@
         
       <el-col :xs="24" :sm="24" :md="20" :lg="21" :xl="22">
         <wear-arcabin :item="item" />
-      </el-col>
-
+      </el-col>      
+    </el-row>
+  
+    <!-- Releated Items -->
+    <el-row>
       <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
         <h1 class="releated-label">Releated Items</h1>
         <wear-list :items="releatedItems" />
-        <!-- <wear-releated-items-list :item="item" /> -->
       </el-col>
     </el-row>
 
@@ -51,7 +54,6 @@ import WearList from '../../components/List'
 let params = (new URL(document.location)).searchParams
 
 let releatedItems = getReleatedItems(getItem(params.get('id')))['data'] // Defined in model.js
-console.log(releatedItems)
 
 export default {
   name: 'app',
@@ -83,10 +85,6 @@ export default {
   clear: left;
 }
 
-.hide {
-  display: none;
-}
-
 .releated-label {
   text-align: left;
 }
@@ -94,37 +92,4 @@ export default {
 .collapsible-selector {
   margin: 10px;
 }
-
-.leftContainer, .rightContainer, .centerContainer{
-  height: 100%;
-  display: inline-block;
-  vertical-align: top;
-}
-
-.leftContainer {
-  width: 15%;
-  margin-right: 3%;
-}
-
-.centerContainer {
-  width: 55%;
-}
-
-.rightContainer {
-  width: 20%;
-  overflow: auto;
-}
-
-.addChart {
-  margin-top: 10%;
-}
-
-.buttonsContainer {
-  width: 100%;
-}
-
-.invertCamera, .takePicture, .shoppingChart {
-  display: inline-block;
-}
-
 </style>
