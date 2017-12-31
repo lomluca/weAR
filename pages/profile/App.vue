@@ -56,7 +56,7 @@
                   <li><span class="ligth-text">expiration</span> <span class="bold-text">{{ card.expirationDate }}</span></li>
                 </ul>
               </template>
-              <el-button type="primary" @click="cardDialogFormVisible = true">Add</el-button>
+              <el-button type="primary" @click="cardDialogFormVisible = true" icon="el-icon-circle-plus">Add</el-button>
               <!-- credit card dialog -->
               <wear-card-form :visible.sync="cardDialogFormVisible"/>
             </el-tab-pane>
@@ -70,7 +70,7 @@
                   <li><span class="ligth-text">country</span> <span class="bold-text">{{ address.country }}</span></li>
                 </ul>
               </template>
-              <el-button type="primary" @click="addressDialogFormVisible = true">Add</el-button>
+              <el-button type="primary" @click="addressDialogFormVisible = true" icon="el-icon-circle-plus">Add</el-button>
               <!-- address dialog -->
               <wear-address-form :visible.sync="addressDialogFormVisible"/>
             </el-tab-pane>
@@ -184,6 +184,10 @@ export default {
     padding: 0px;
   }
 
+  .el-main {
+    background-color: white;
+  }
+
   ul.list-info {
     list-style-type: none;
     text-align: left;
@@ -217,7 +221,7 @@ export default {
   }
 
   .box {
-    background-color: whitesmoke;
+    background-color: white;
     padding: 10px;
     margin: 5px;
     min-height: 36px;
