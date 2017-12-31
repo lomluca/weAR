@@ -2,11 +2,25 @@
   <div>
     <el-button id="menuIcon" class="collapse-menu-button" size="small" v-if="isCollapsed" @click="hidden = !hidden">&#9776</el-button>
     <nav :class="[navClasses, {hide: hidden}]">
+      <!-- Render login, register, profile and logout links when collapsed -->
+      <div v-if="isCollapsed && !username" :class="[menuClasses, {hide: hidden}]">
+        <a><el-button size="medium" type="text" v-on:click="navigate(login_page)">LOGIN</el-button></a>
+      </div>
+      <div v-if="isCollapsed && !username" :class="[menuClasses, {hide: hidden}]">
+        <a><el-button size="medium" type="text" v-on:click="navigate(signup_page)">REGISTER</el-button></a>
+      </div>
+      <div v-if="isCollapsed && username" :class="[menuClasses, {hide: hidden}]">
+        <a><el-button size="medium" type="text" v-on:click="navigate(profile_page)">{{ username }}</el-button></a>
+      </div>
+      <div v-if="isCollapsed && username" :class="[menuClasses, {hide: hidden}]">
+        <a><el-button size="medium" type="text" v-on:click="navigate(home_page)">LOGOUT</el-button></a>
+      </div>
+
       <template
       v-for="category in categories"
       :category="category">
         <!-- Render a standard menu item if no subcategories are found  -->
-        <div :class="[menuClasses, {hide: hidden}]" v-if="!category.subcategories">
+        <div :class="[menuClasses, {hide: hidden}]">
           <a><el-button size="medium" type="text" v-on:click="navigate(category.href)">{{ category.name }}</el-button></a>
         </div>
 
@@ -49,6 +63,10 @@ export default {
   name: 'wear-nav',
   data() {
     return {
+      signup_page: 'signup.html',
+      home_page: 'index.html',
+      login_page: 'login.html',
+      profile_page: 'profile.html',
       shopcart_page: 'shopcart.html',
       categories: getCategories()['data'], // Defined in model.js
       searchbox: '',
@@ -90,6 +108,12 @@ export default {
     unregisterLsEvent('shoppingCartRemove')
   },
   computed: {
+    username: function() {
+      if (localStorage.loggedIn == 1) {
+        return "Hi, " + localStorage.fullname
+      }
+      return null
+    },
     navClasses: function() {
       return {
         verticalNav: this.isCollapsed,
