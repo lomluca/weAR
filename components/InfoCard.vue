@@ -5,7 +5,7 @@
     </div>
     <template v-if="content.length > 0">
       <el-radio-group v-model="contentChoice" v-for="(item, index) in content" :key="item">
-        <el-radio :label="item">
+        <el-radio :label="index">
           <component :is="innerTable" :item="item"></component>
         </el-radio>
         <div class='button-wrapper'>
@@ -25,7 +25,7 @@ export default {
   data: function() {
     return {
       content: this.getContent(),
-      contentChoice: ''
+      contentChoice: 0
     }
   },
   watch: {
