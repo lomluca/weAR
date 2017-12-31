@@ -1,20 +1,18 @@
 <template>
-  <el-dialog title="Add a credit card" :visible.sync="visible">
-    <el-form :model="creditCardForm" :rules="creditCardFormRules" ref="creditCardFormModel">
+  <el-dialog title="Add a credit card" :visible.sync="visible" :fullscreen="fullscreenDialog">
+    <el-form :model="creditCardForm" :rules="creditCardFormRules" ref="creditCardFormModel" :label-position="labelPosition">
       <el-form-item label="owner" :label-width="formLabelWidth" prop="owner">
         <el-input v-model="creditCardForm.owner" auto-complete="off"></el-input>
       </el-form-item>
-      <el-form-item label="number" :label-width="formLabelWidth" prop="cardNumber" style="float: left">
+      <el-form-item label="number" :label-width="formLabelWidth" prop="cardNumber">
         <el-input v-model="creditCardForm.cardNumber" auto-complete="off"></el-input>
       </el-form-item>
       <img class="credit-card"
            src="/assets/visa.png"
-           v-if="isVisa()"
-           style="position: relative;top: 7px;">
+           v-if="isVisa()">
       <img class="credit-card"
            src="/assets/mastercard.png"
-           v-if="isMastercard()"
-           style="position: relative;top: 7px;">
+           v-if="isMastercard()">
       <el-form-item label="Expiration date" :label-width="formLabelWidth" prop="expirationDate" style="clear: left">
         <el-date-picker
           v-model="creditCardForm.expirationDate"
@@ -53,6 +51,9 @@ export default {
         cardNumber: "",
         expirationDate: ""
       },
+      labelPosition: (window.innerWidth < 768) ? "top" : "right",
+      fullscreenDialog: (window.innerWidth < 768),
+      windowWidth: window.innerWidth,
       formLabelWidth: '120px',
       creditCardFormRules: {
         owner: [
@@ -67,11 +68,24 @@ export default {
       }
     }
   },
+  mounted() {
+    let that = this;
+    this.$nextTick(function() {
+      window.addEventListener('resize', function(e) {
+        that.windowWidth = window.innerWidth;
+      });
+    })
+  },
   watch: {
     visible: function() {
       // When the internal value changes, we $emit an event
       // v-model will automatically update the parent value
       this.$emit('update:visible', this.visible);
+    },
+    windowWidth(newWidth, oldWidth) {
+      this.labelPosition = (newWidth < 768) ? "top" : "right";
+      this.fullscreenDialog = (newWidth < 768);
+      console.log("updated!")
     }
   },
   methods: {

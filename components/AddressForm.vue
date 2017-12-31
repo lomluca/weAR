@@ -1,15 +1,20 @@
 <template>
-  <el-dialog title="Add a new address" :visible.sync="visible">
-    <el-form :model="form" :rules="editFormRules" ref="editFormModel">
+  <el-dialog title="Add a new address" :visible.sync="visible" :fullscreen="fullscreenDialog">
+    <el-form :model="form" :rules="editFormRules" ref="editFormModel"
+             :label-position="labelPosition">
+
       <el-form-item label="street" :label-width="formLabelWidth" prop="street">
         <el-input v-model="form.street" auto-complete="off"></el-input>
       </el-form-item>
+
       <el-form-item label="city" :label-width="formLabelWidth" prop="city">
         <el-input v-model="form.city" auto-complete="off"></el-input>
       </el-form-item>
+
       <el-form-item label="zip code" :label-width="formLabelWidth" prop="zipCode">
         <el-input v-model="form.zipCode" auto-complete="off"></el-input>
       </el-form-item>
+
       <el-form-item label="country" :label-width="formLabelWidth" prop="country">
         <el-input v-model="form.country" auto-complete="off"></el-input>
       </el-form-item>
@@ -40,7 +45,10 @@ export default {
           country: ""
       },
       loadingPosition: false,
+      windowWidth: window.innerWidth,
       formLabelWidth: '120px',
+      labelPosition: (window.innerWidth < 768) ? "top" : "right",
+      fullscreenDialog: (window.innerWidth < 768),
       editFormRules: {
         street: [
           { required: true, message: 'Please enter the street address', trigger: 'blur' }
@@ -75,7 +83,19 @@ export default {
       this.form.city = response.city + ", " + response.province;
       this.form.zipCode = response.zip;
       this.form.country = response.country
+    },
+    windowWidth(newWidth, oldWidth) {
+      this.labelPosition = (newWidth < 768) ? "top" : "right";
+      this.fullscreenDialog = (newWidth < 768);
     }
+  },
+  mounted() {
+    let that = this;
+    this.$nextTick(function() {
+      window.addEventListener('resize', function(e) {
+        that.windowWidth = window.innerWidth;
+      });
+    })
   },
   methods: {
     getMyCurrentPosition: function() {
