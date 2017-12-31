@@ -1,6 +1,6 @@
 <template>
 <header>
-  <div class="headerRow1">
+  <div class="headerRow1" v-if="!isCollapsed">
     <div class="top">
       <div class="col">
         <a v-if="!username" :href="login_page"><el-button size="small" type="text">login</el-button></a>
@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  <div class="headerRow2">
+  <div class="headerRow2" :class="{ paddedLogo: isCollapsed }">
     <a :href="home_page"><img :src="logo.asset" :alt="logo.alt" width="50px" height="50px"></a>
   </div>
   <div class="headerRow3">
@@ -42,7 +42,8 @@ export default {
       signup_page: 'signup.html',
       home_page: 'index.html',
       login_page: 'login.html',
-      profile_page: 'profile.html'
+      profile_page: 'profile.html',
+      isCollapsed: (window.innerWidth < 768)
     }
   },
   computed: {
@@ -59,8 +60,17 @@ export default {
   methods: {
     logout: function() {
       localStorage.loggedIn = 0
+    },
+    handleResize: function(event) {
+      this.$data.isCollapsed = window.innerWidth < 768
     }
-  }
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize)
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize)
+  },
 }
 </script>
 
@@ -108,4 +118,7 @@ header .headerRow3_logo{
   display: none;
 }
 
+.paddedLogo {
+  padding-top: 20px;
+}
 </style>
