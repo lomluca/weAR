@@ -3,7 +3,7 @@
     <el-table height="500" :data="shopcartData">
       <el-table-column
         label="Item"
-        min-width="400">
+        >
         <template slot-scope="scope">
           <div class="shopRowWrapper">
             <div class="itemWrapper">

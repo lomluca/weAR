@@ -7,29 +7,45 @@
 
     <!-- Main content -->
     <el-main>
-      <!-- LEFT WRAPPER -->
-      <div class="cartLeftWrapper">
-        <wear-shop-cart :visible.sync="confirmDialogVisible"/>
-      </div>
+      <template v-if="!isCollapsed">
+        <!-- LEFT WRAPPER -->
+        <div class="cartLeftWrapper">
+          <wear-shop-cart :visible.sync="confirmDialogVisible"/>
+        </div>
 
-      <!-- RIGHT WRAPPER -->
-      <div class="cartRightWrapper">
-        <template v-if="loggedIn">
-          <!-- address box -->
-          <wear-info-box headerTitle="Delivery Address" :getContent="getAddresses" :deleteItem="deleteAddress" :visible.sync="addressDialogFormVisible" :innerTable="addressTable"/>
-          <wear-address-form :visible.sync="addressDialogFormVisible"/>
-          <!-- credit card box -->
-          <wear-info-box headerTitle="Credit Card" :getContent="getCards" :deleteItem="deleteCard" :visible.sync="cardDialogFormVisible" :innerTable="cardTable"/>
-          <wear-card-form :visible.sync="cardDialogFormVisible"/>
-        </template>
-        <template v-else>
-          <el-card class="box-card">
-            <div class="box-card-body">
-              <h1>Please log-in to select your informations</h1>
-            <div>
-          </el-card>
-        </template>
-      </div>
+        <!-- RIGHT WRAPPER -->
+        <div class="cartRightWrapper">
+          <template v-if="loggedIn">
+            <!-- address box -->
+            <wear-info-box headerTitle="Delivery Address" :getContent="getAddresses" :deleteItem="deleteAddress" :visible.sync="addressDialogFormVisible" :innerTable="addressTable"/>
+            <wear-address-form :visible.sync="addressDialogFormVisible"/>
+            <!-- credit card box -->
+            <wear-info-box headerTitle="Credit Card" :getContent="getCards" :deleteItem="deleteCard" :visible.sync="cardDialogFormVisible" :innerTable="cardTable"/>
+            <wear-card-form :visible.sync="cardDialogFormVisible"/>
+          </template>
+          <template v-else>
+            <el-card class="box-card">
+              <div class="box-card-body">
+                <h1>Please log-in to select your informations</h1>
+              <div>
+            </el-card>
+          </template>
+        </div>
+      </template>
+
+      <template v-else>
+        <el-tabs type="card">
+          <el-tab-pane label="ShopCart">
+            <wear-shop-cart :visible.sync="confirmDialogVisible"/>
+          </el-tab-pane>
+          <el-tab-pane label="Address">
+            <wear-info-box headerTitle="Delivery Address" :getContent="getAddresses" :deleteItem="deleteAddress" :visible.sync="addressDialogFormVisible" :innerTable="addressTable"/>
+          </el-tab-pane>
+          <el-tab-pane label="Credit Card">
+            <wear-info-box headerTitle="Credit Card" :getContent="getCards" :deleteItem="deleteCard" :visible.sync="cardDialogFormVisible" :innerTable="cardTable"/>
+          </el-tab-pane>
+        </el-tabs>
+      </template>
     </el-main>
 
     <!-- Footer -->
@@ -59,8 +75,7 @@ export default {
       addressTable: WearAddressTable,
       cardTable: WearCardTable,
       windowWidth: window.innerWidth,
-      isCollapsed: (window.innerWidth < 768),
-      hidden: (window.innerWidth < 768)
+      isCollapsed: (window.innerWidth < 768)
     }
   },
   components: {
@@ -98,7 +113,6 @@ export default {
   watch: {
     windowWidth(newWidth, oldWidth) {
       this.isCollapsed = (newWidth < 768);
-      this.hidden = this.isCollapsed;
     }
   },
   mounted() {
@@ -127,6 +141,7 @@ export default {
   box-sizing: content-box;
   padding: 10px;
   height: auto;
+  background-color: white
 }
 
 /* left Wrapper */
@@ -136,7 +151,6 @@ export default {
   height: auto;
   float: left
 }
-
 /* Right Wrapper */
 .cartRightWrapper {
   display: inline-block;
@@ -146,4 +160,6 @@ export default {
 .box-card {
   margin: 0 15px 15px 15px;
 }
+
+
 </style>
