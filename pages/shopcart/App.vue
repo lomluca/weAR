@@ -7,76 +7,10 @@
 
     <!-- Main content -->
     <el-main>
+      <!-- LEFT WRAPPER -->
       <div class="cartLeftWrapper">
-        <el-card class="box-card">
-          <el-table
-             height="500"
-            :data="shopcartData">
-            <el-table-column
-              label="Item"
-              min-width="400">
-              <template slot-scope="scope">
-                <div class="shopRowWrapper">
-                  <div class="itemWrapper">
-                    <img width="70px" height="70px" :src="scope.row.assets[0]" :alt="scope.row.alt" :href="scope.row.href"/>
-                  </div>
-                  <div class="itemWrapper">
-                    <a style="text-decoration: none" :href="scope.row.href"><span class="itemName">{{ scope.row.name }}</span></a>
-                    <span class="itemDescription">{{ scope.row.description }}</span>
-                  </div>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="Price"
-              width="100">
-              <template slot-scope="scope">
-                <div class="shopRowWrapper">
-                  <span>{{ scope.row.price }}</span>
-                  <i>€</i>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="Quantity"
-              width="150">
-              <template slot-scope="scope">
-                <div class="shopRowWrapper">
-                  <el-input-number v-model="quantities[scope.row.id]" @change="changeQuantity(scope.row.id, $event)" size="mini" controls-position="right" min="0"></el-input-number>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="Remove"
-              width="70">
-              <template slot-scope="scope">
-                <div class="shopRowWrapper">
-                  <el-button size="mini" type="danger" icon="el-icon-remove"
-                  @click="deleteCartItem(scope.row.id)"></el-button>
-                </div>
-              </template>
-            </el-table-column>
-          </el-table>
-
-          <div class="shopCartTableFooter">
-            <h1>Total: {{ total.toFixed(2) }}€</h1>
-            <el-button @click="checkoutClick">Checkout</el-button>
-            <el-dialog
-              title="Confirm purchase"
-              :visible.sync="confirmDialog"
-              width="30%"
-              :before-close="handleClose">
-              <span>Do you want to confirm your purchases?</span>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="confirmDialog = false">Cancel</el-button>
-                <el-button type="primary" @click="confirmDialog = false">Confirm</el-button>
-              </span>
-            </el-dialog>
-          </div>
-        </el-card>
+        <wear-shop-cart :visible.sync="confirmDialogVisible"/>
       </div>
-
-
 
       <!-- RIGHT WRAPPER -->
       <div class="cartRightWrapper">
@@ -108,6 +42,7 @@
 <script>
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
+import WearShopCart from '../../components/ShopCartTable'
 import WearCardForm from '../../components/CreditCardForm'
 import WearAddressForm from '../../components/AddressForm'
 import WearInfoCard from '../../components/InfoCard'
@@ -118,9 +53,7 @@ export default {
   name: 'app',
   data: function() {
     return {
-      shopcartData: getShopCart(),
-      quantities: [],
-      confirmDialog: false,
+      confirmDialogVisible: false,
       addressDialogFormVisible: false,
       cardDialogFormVisible: false,
       addressTable: WearAddressTable,
@@ -133,20 +66,15 @@ export default {
   components: {
     'wear-header': WearHeader,
     'wear-footer': WearFooter,
+    'wear-shop-cart': WearShopCart,
     'wear-card-form': WearCardForm,
     'wear-address-form': WearAddressForm,
     'wear-info-box': WearInfoCard,
     WearAddressTable,
     WearCardTable
   },
-  created: function() {
-    //initialize quantities with localStorage content
-    //localStorage is not responsive, we need an object defined in the vue instance
-    for(var i = 0; i < this.shopcartData.length; i++) {
-      this.quantities[this.shopcartData[i].id] = localStorage[this.shopcartData[i].id];
-    }
-  },
   methods: {
+    //those methods are necessary for the InfoBox components
     getAddresses() {
       return getAddresses();
     },
@@ -158,38 +86,9 @@ export default {
     },
     deleteAddress(index) {
       deleteAddress(index);
-    },
-    changeQuantity(id, value) {
-      localStorage[id] = value;
-    },
-    checkoutClick() {
-      if(this.loggedIn && shopcartData.length > 0) {
-        this.confirmDialog = true
-      }
-      else if(!this.loggedIn){
-        this.$alert('Please log-in to continue', 'Message', {
-          confirmButtonText: 'OK'
-        });
-      }
-      else {
-        this.$alert('Please add at least an item', 'Message', {
-          confirmButtonText: 'OK'
-        });
-      }
-    },
-    deleteCartItem(id) {
-      deleteCartItem(id);
-      this.shopcartData = getShopCart();
     }
   },
   computed: {
-    total: function() {
-      var total, i;
-      for(i = 0, total = 0; i < this.shopcartData.length; i++) {
-        total += this.shopcartData[i].price*this.quantities[this.shopcartData[i].id];
-      }
-      return total;
-    },
     loggedIn: function() {
       if(localStorage.loggedIn == 1)
         return true;
@@ -237,23 +136,6 @@ export default {
   height: auto;
   float: left
 }
-.cartLeftWrapper .shopRowWrapper {
-  float: left;
-}
-.cartLeftWrapper .shopRowWrapper .itemWrapper {
-  display: inline-block;
-  height: 100%;
-}
-.cartLeftWrapper .shopRowWrapper .itemWrapper .itemName {
-  font-size: 22px;
-}
-.cartLeftWrapper .shopRowWrapper .itemWrapper .itemDescription {
-  font-size: 12px;
-}
-.shopCartTableFooter {
-  float: right;
-  margin-bottom: 10px;
-}
 
 /* Right Wrapper */
 .cartRightWrapper {
@@ -261,29 +143,7 @@ export default {
   width: 30%;
 }
 /* Info box */
-.cartRightWrapper .box-card {
+.box-card {
   margin: 0 15px 15px 15px;
-}
-.cartRightWrapper .box-card .el-radio-group {
-  display: table;
-  width: 100%;
-}
-.cartRightWrapper .box-card .el-radio-group .el-radio {
-  float: left;
-}
-.cartRightWrapper .box-card .el-radio-group .el-radio ul {
-  width: 100%;
-  display: inline-block;
-  list-style-type: none;
-  text-align: left
-}
-.cartRightWrapper .box-card .button-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-}
-.cartRightWrapper .box-card .button-wrapper .el-button {
-  vertical-align: middle;
-  display: block;
-  margin: 0 auto;
 }
 </style>
