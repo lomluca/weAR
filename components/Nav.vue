@@ -69,7 +69,7 @@ export default {
     handleScroll: function(event) {
       // Hide nav bar in case of scrolling down when it is visible on small devices
       let st = $(window).scrollTop()
-      if(!this.$data.hidden && this.$data.isCollapsed && st - lastScrollTop > 10) {
+      if(!this.$data.hidden && this.$data.isCollapsed && st - lastScrollTop > 75) {
         this.$data.hidden = true
       }
       lastScrollTop = st

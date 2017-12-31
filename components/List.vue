@@ -1,7 +1,7 @@
 <template>
 <el-container direction="vertical">
   <el-row>
-    <el-col v-for="item in items" :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
+    <el-col v-for="item in items" :xs="24" :sm="12" :md="6" :lg="6" :xl="4">
       <wear-list-item :item="item" />
     </el-col>
   </el-row>
