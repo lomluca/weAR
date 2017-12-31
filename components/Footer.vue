@@ -68,7 +68,8 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: 'Input canceled'
+          message: 'Input canceled',
+          customClass: 'wear-message'
         });
       });
     }
@@ -102,5 +103,9 @@ footer .footerListContainer ul li {
 footer .footerListContainer ul li .el-button {
   display: block;
   color: #909399;
+}
+
+.wear-message {
+  z-index: 9999 !important;
 }
 </style>
