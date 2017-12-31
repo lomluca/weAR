@@ -150,7 +150,7 @@ function getCards() {
 
 function addAddress(newAddress) {
   var address;
-  if(localStorage.address) {
+  if(localStorage.addresses) {
     address = JSON.parse(localStorage.address);
     address.push(newAddress);
   }
@@ -163,7 +163,7 @@ function addAddress(newAddress) {
 //delete address by index
 //return new address set
 function deleteAddress(index) {
-  if(!localStorage.address) throw 'ERROR. Cannot delete item from empty shopping cart'
+  if(!localStorage.addresses) throw 'ERROR. Cannot delete item from empty shopping cart'
   var addresses = JSON.parse(localStorage.addresses)
   addresses.splice(index, 1)
   localStorage.setItem("addresses", JSON.stringify(addresses))
