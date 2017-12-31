@@ -17,10 +17,10 @@
       </div>
 
       <template
-      v-for="category in categories"
-      :category="category">
+        v-for="category in categories"
+        :category="category">
         <!-- Render a standard menu item if no subcategories are found  -->
-        <div :class="[menuClasses, {hide: hidden}]">
+        <div :class="[menuClasses, {hide: hidden}]" v-if="!category.subcategories || category.subcategories.length == 0">
           <a><el-button size="medium" type="text" v-on:click="navigate(category.href)">{{ category.name }}</el-button></a>
         </div>
 
@@ -30,10 +30,11 @@
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item v-for="subcategory in category.subcategories"
             :subcategory="subcategory">
-              <span v-on:click="navigate(subcategory.href)">{{ subcategory.name }}</span>
+              <span style="text-transform:uppercase" v-on:click="navigate(subcategory.href)">{{ subcategory.name }}</span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
+
       </template>
 
       <div class="rightBlock" :class="[searchBarClasses, {hide: hidden}]">
