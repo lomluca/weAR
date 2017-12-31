@@ -50,11 +50,12 @@ export default {
   data() {
     return {
       shopcart_page: 'shopcart.html',
-      categories: getCategories()['data'], // Defined in static/js/model.js
+      categories: getCategories()['data'], // Defined in model.js
       searchbox: '',
       windowWidth: window.innerWidth,
       isCollapsed: (window.innerWidth < 768),
-      hidden: (window.innerWidth < 768)
+      hidden: (window.innerWidth < 768),
+      badgeValue: getShopCartItemsCount() // Defined in model.js
     }
   },
   methods: {
@@ -73,13 +74,20 @@ export default {
         this.$data.hidden = true
       }
       lastScrollTop = st
+    },
+    handleShoppingCartChange: function() {
+      this.$data.badgeValue = getShopCartItemsCount()
     }
   },
   created() {
     window.addEventListener('scroll', this.handleScroll)
+    registerLsEvent('shoppingCartInsert', this.handleShoppingCartChange)
+    registerLsEvent('shoppingCartRemove', this.handleShoppingCartChange)
   },
   destroyed() {
     window.removeEventListener('scroll', this.handleScroll)
+    unregisterLsEvent('shoppingCartInsert')
+    unregisterLsEvent('shoppingCartRemove')
   },
   computed: {
     navClasses: function() {
@@ -105,9 +113,6 @@ export default {
         verticalNavBadge: this.isCollapsed,
         horizontalNavBadge: !this.isCollapsed
       }
-    },
-    badgeValue: function() {
-      return getShopCart().length
     }
   },
   watch: {
