@@ -2,11 +2,25 @@
   <div>
     <el-button id="menuIcon" class="collapse-menu-button" size="small" v-if="isCollapsed" @click="hidden = !hidden">&#9776</el-button>
     <nav :class="[navClasses, {hide: hidden}]">
+      <!-- Render login, register, profile and logout links when collapsed -->
+      <div v-if="isCollapsed && !username" :class="[menuClasses, {hide: hidden}]">
+        <a><el-button size="medium" type="text" v-on:click="navigate(login_page)">LOGIN</el-button></a>
+      </div>
+      <div v-if="isCollapsed && !username" :class="[menuClasses, {hide: hidden}]">
+        <a><el-button size="medium" type="text" v-on:click="navigate(signup_page)">REGISTER</el-button></a>
+      </div>
+      <div v-if="isCollapsed && username" :class="[menuClasses, {hide: hidden}]">
+        <a><el-button size="medium" type="text" v-on:click="navigate(profile_page)">{{ username }}</el-button></a>
+      </div>
+      <div v-if="isCollapsed && username" :class="[menuClasses, {hide: hidden}]">
+        <a><el-button size="medium" type="text" v-on:click="navigate(home_page)">LOGOUT</el-button></a>
+      </div>
+
       <template
       v-for="category in categories"
       :category="category">
         <!-- Render a standard menu item if no subcategories are found  -->
-        <div :class="[menuClasses, {hide: hidden}]" v-if="!category.subcategories">
+        <div :class="[menuClasses, {hide: hidden}]">
           <a><el-button size="medium" type="text" v-on:click="navigate(category.href)">{{ category.name }}</el-button></a>
         </div>
 
@@ -49,12 +63,17 @@ export default {
   name: 'wear-nav',
   data() {
     return {
+      signup_page: 'signup.html',
+      home_page: 'index.html',
+      login_page: 'login.html',
+      profile_page: 'profile.html',
       shopcart_page: 'shopcart.html',
-      categories: getCategories()['data'], // Defined in static/js/model.js
+      categories: getCategories()['data'], // Defined in model.js
       searchbox: '',
       windowWidth: window.innerWidth,
       isCollapsed: (window.innerWidth < 768),
-      hidden: (window.innerWidth < 768)
+      hidden: (window.innerWidth < 768),
+      badgeValue: getShopCartItemsCount() // Defined in model.js
     }
   },
   methods: {
@@ -69,19 +88,32 @@ export default {
     handleScroll: function(event) {
       // Hide nav bar in case of scrolling down when it is visible on small devices
       let st = $(window).scrollTop()
-      if(!this.$data.hidden && this.$data.isCollapsed && st - lastScrollTop > 10) {
+      if(!this.$data.hidden && this.$data.isCollapsed && st - lastScrollTop > 75) {
         this.$data.hidden = true
       }
       lastScrollTop = st
+    },
+    handleShoppingCartChange: function() {
+      this.$data.badgeValue = getShopCartItemsCount()
     }
   },
   created() {
     window.addEventListener('scroll', this.handleScroll)
+    registerLsEvent('shoppingCartInsert', this.handleShoppingCartChange)
+    registerLsEvent('shoppingCartRemove', this.handleShoppingCartChange)
   },
   destroyed() {
     window.removeEventListener('scroll', this.handleScroll)
+    unregisterLsEvent('shoppingCartInsert')
+    unregisterLsEvent('shoppingCartRemove')
   },
   computed: {
+    username: function() {
+      if (localStorage.loggedIn == 1) {
+        return "Hi, " + localStorage.fullname
+      }
+      return null
+    },
     navClasses: function() {
       return {
         verticalNav: this.isCollapsed,
@@ -105,9 +137,6 @@ export default {
         verticalNavBadge: this.isCollapsed,
         horizontalNavBadge: !this.isCollapsed
       }
-    },
-    badgeValue: function() {
-      return getShopCart().length
     }
   },
   watch: {
