@@ -83,6 +83,7 @@ function addToCart(newItem) {
 //delete shopping cart element by id (each elem has an id)
 //return new shopping cart
 function deleteCartItem(id) {
+  if(!localStorage.shopcart) throw 'ERROR. Cannot delete item from empty shopping cart'
   var cart = JSON.parse(localStorage.shopcart);
   const index = indexOf(cart, id);
 
@@ -110,6 +111,7 @@ function getShopCart() {
 
 function getShopCartItemsCount() {
   var count = 0
+  if(!localStorage.shopcart) return 0  
   var cart = JSON.parse(localStorage.shopcart)
   for(var item in cart) {
     count += parseInt(localStorage[cart[item].id])
@@ -132,6 +134,7 @@ function addCard(newCard) {
 //delete card by index
 //return new card set
 function deleteCard(index) {
+  if(!localStorage.cards) throw 'ERROR. Cannot delete item from empty shopping cart'
   var cards = JSON.parse(localStorage.cards)
   cards.splice(index, 1)
   localStorage.setItem("cards", JSON.stringify(cards))
@@ -160,6 +163,7 @@ function addAddress(newAddress) {
 //delete address by index
 //return new address set
 function deleteAddress(index) {
+  if(!localStorage.address) throw 'ERROR. Cannot delete item from empty shopping cart'
   var addresses = JSON.parse(localStorage.addresses)
   addresses.splice(index, 1)
   localStorage.setItem("addresses", JSON.stringify(addresses))
