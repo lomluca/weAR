@@ -20,7 +20,7 @@
     </div>
 
     <!-- Other images -->
-    <el-container direction="vertical">
+    <el-container direction="vertical" style="height:unset">
       <h1 class="homepage-header">Most Popular</h1>
       <wear-list :items="popularItems" />
     </el-container>
