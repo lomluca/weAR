@@ -48,7 +48,7 @@
 
         <div id="shoppingCart" :class="[badgeClasses, {hide: hidden}]">
           <a :href="shopcart_page">
-            <el-badge :value="badgeValue"><el-button size="small" icon="el-icon-goods" @click="addItem"/></el-badge>
+            <el-badge :value="badgeValue" class="red-badge"><el-button size="small" icon="el-icon-goods" @click="addItem"/></el-badge>
           </a>
         </div>
       </div>
@@ -209,5 +209,9 @@ export default {
 
 .hide {
   display: none;
+}
+
+.red-badge {
+  margin-top: 5px;
 }
 </style>
