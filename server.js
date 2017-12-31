@@ -33,7 +33,7 @@ app.use(express.static(path.resolve(__dirname, 'public')))
 
 // Show a nice 404 error message page
 app.use((req, res) => {
-  res.redirect('index.html')
+  res.redirect('/index.html')
 })
 
 // Start listening
