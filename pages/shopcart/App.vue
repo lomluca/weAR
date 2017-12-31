@@ -76,57 +76,17 @@
         </el-card>
       </div>
 
+
+
+      <!-- RIGHT WRAPPER -->
       <div class="cartRightWrapper">
         <template v-if="loggedIn">
           <!-- address box -->
-          <el-card class="box-card">
-            <div slot="header" class="box-card-header">
-              <span>Delivery Address</span>
-            </div>
-            <template v-if="address.length > 0">
-              <el-radio-group v-model="addressChoice" v-for="(item, index) in address" :key="item">
-                <el-radio :label="item">
-                  <ul>
-                    <li>{{ item.street }}</li>
-                    <li>{{ item.city }}, {{ item.zipCode }}</li>
-                    <li>{{ item.country }}</li>
-                  </ul>
-                </el-radio>
-                <div class='button-wrapper'>
-                  <el-button class="el-icon-remove" size="mini" type="danger" @click="deleteAddress(index)"></el-button>
-                </div>
-              </el-radio-group>
-              <hr>
-            </template>
-            <el-button class="el-icon-circle-plus" size="mini" type="success" @click="addressDialogFormVisible = true">New</el-button>
-            <!-- address dialog -->
-            <wear-address-form :visible.sync="addressDialogFormVisible"/>
-
-          </el-card>
+          <wear-info-box headerTitle="Delivery Address" :getContent="getAddresses" :deleteItem="deleteAddress" :visible.sync="addressDialogFormVisible" :innerTable="addressTable"/>
+          <wear-address-form :visible.sync="addressDialogFormVisible"/>
           <!-- credit card box -->
-          <el-card class="box-card">
-            <div slot="header" class="box-card-header">
-              <span>Credit Card</span>
-            </div>
-            <template v-if="creditcard.length > 0">
-              <el-radio-group v-model="cardChoice" v-for="(item, index) in creditcard" :key="item">
-                <el-radio :label="item">
-                  <ul>
-                    <li>{{ item.owner }}</li>
-                    <li>{{ item.cardNumber }}</li>
-                    <li>{{ item.expirationDate }}</li>
-                  </ul>
-                </el-radio>
-                <div class='button-wrapper'>
-                  <el-button class="el-icon-remove" size="mini" type="danger" @click="deleteCard(index)"></el-button>
-                </div>
-              </el-radio-group>
-              <hr>
-            </template>
-            <el-button class="el-icon-circle-plus" size="mini" type="success" @click="cardDialogFormVisible = true">New</el-button>
-            <!-- credit card dialog -->
-            <wear-card-form :visible.sync="cardDialogFormVisible"/>
-          </el-card>
+          <wear-info-box headerTitle="Credit Card" :getContent="getCards" :deleteItem="deleteCard" :visible.sync="cardDialogFormVisible" :innerTable="cardTable"/>
+          <wear-card-form :visible.sync="cardDialogFormVisible"/>
         </template>
         <template v-else>
           <el-card class="box-card">
@@ -150,34 +110,34 @@ import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
 import WearCardForm from '../../components/CreditCardForm'
 import WearAddressForm from '../../components/AddressForm'
+import WearInfoCard from '../../components/InfoCard'
+import WearAddressTable from '../../components/AddressTable'
+import WearCardTable from '../../components/CardTable'
 
 export default {
   name: 'app',
   data: function() {
     return {
       shopcartData: getShopCart(),
-      address: getAddresses(),
-      addressChoice: '',
-      creditcard: getCards(),
-      cardChoice: '',
       quantities: [],
       confirmDialog: false,
       addressDialogFormVisible: false,
       cardDialogFormVisible: false,
-      form: {
-        name: '',
-        street: '',
-        city: '',
-        country: ''
-      },
-      formLabelWidth: '120px'
+      addressTable: WearAddressTable,
+      cardTable: WearCardTable,
+      windowWidth: window.innerWidth,
+      isCollapsed: (window.innerWidth < 768),
+      hidden: (window.innerWidth < 768)
     }
   },
   components: {
     'wear-header': WearHeader,
     'wear-footer': WearFooter,
     'wear-card-form': WearCardForm,
-    'wear-address-form': WearAddressForm
+    'wear-address-form': WearAddressForm,
+    'wear-info-box': WearInfoCard,
+    WearAddressTable,
+    WearCardTable
   },
   created: function() {
     //initialize quantities with localStorage content
@@ -187,15 +147,32 @@ export default {
     }
   },
   methods: {
+    getAddresses() {
+      return getAddresses();
+    },
+    getCards() {
+      return getCards();
+    },
+    deleteCard(index) {
+      deleteCard(index);
+    },
+    deleteAddress(index) {
+      deleteAddress(index);
+    },
     changeQuantity(id, value) {
       localStorage[id] = value;
     },
     checkoutClick() {
-      if(this.loggedIn) {
+      if(this.loggedIn && shopcartData.length > 0) {
         this.confirmDialog = true
       }
-      else {
+      else if(!this.loggedIn){
         this.$alert('Please log-in to continue', 'Message', {
+          confirmButtonText: 'OK'
+        });
+      }
+      else {
+        this.$alert('Please add at least an item', 'Message', {
           confirmButtonText: 'OK'
         });
       }
@@ -203,14 +180,6 @@ export default {
     deleteCartItem(id) {
       deleteCartItem(id);
       this.shopcartData = getShopCart();
-    },
-    deleteCard(index) {
-      deleteCard(index);
-      this.creditcard = getCards();
-    },
-    deleteAddress(index) {
-      deleteAddress(index);
-      this.address = getAddresses();
     }
   },
   computed: {
@@ -228,14 +197,18 @@ export default {
     }
   },
   watch: {
-    addressDialogFormVisible: function() {
-      if(!this.addressDialogFormVisible)
-        this.address = getAddresses();
-    },
-    cardDialogFormVisible: function() {
-      if(!this.cardDialogFormVisible)
-        this.creditcard = getCards();
+    windowWidth(newWidth, oldWidth) {
+      this.isCollapsed = (newWidth < 768);
+      this.hidden = this.isCollapsed;
     }
+  },
+  mounted() {
+    let that = this;
+    this.$nextTick(function() {
+      window.addEventListener('resize', function(e) {
+        that.windowWidth = window.innerWidth;
+      });
+    })
   }
 }
 </script>
