@@ -9,7 +9,7 @@
     <el-main>
       <wear-address-form :visible.sync="addressDialogFormVisible"/>
       <wear-card-form :visible.sync="cardDialogFormVisible"/>
-      
+
       <template v-if="!isCollapsed">
         <!-- LEFT WRAPPER -->
         <div class="cartLeftWrapper">
@@ -21,10 +21,10 @@
           <template v-if="loggedIn">
             <!-- address box -->
             <wear-info-box headerTitle="Delivery Address" :getContent="getAddresses" :deleteItem="deleteAddress" :visible.sync="addressDialogFormVisible" :innerTable="addressTable"/>
-            
+
             <!-- credit card box -->
             <wear-info-box headerTitle="Credit Card" :getContent="getCards" :deleteItem="deleteCard" :visible.sync="cardDialogFormVisible" :innerTable="cardTable"/>
-            
+
           </template>
           <template v-else>
             <el-card class="box-card">

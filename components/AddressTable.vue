@@ -15,9 +15,11 @@ export default {
 
 <style>
 ul {
-  width: 100%;
-  display: inline-block;
-  list-style-type: none;
-  text-align: left
+  margin:0;
+  padding: 0;
+  list-style-type: none
+}
+li{
+  text-align: left;
 }
 </style>

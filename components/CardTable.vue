@@ -15,9 +15,17 @@ export default {
 
 <style>
 ul {
-  width: 100%;
-  display: inline-block;
+  margin:0;
+  padding:0;
+  overflow: hidden;
+  list-style-position: inside;
   list-style-type: none;
-  text-align: left
+}
+li{
+  float: left;
+  clear: right;
+  width: 250px;
+  white-space: nowrap;
+  text-overflow: ellipsis // This is where the magic happens
 }
 </style>

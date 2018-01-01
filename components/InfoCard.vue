@@ -5,9 +5,11 @@
     </div>
     <template v-if="content.length > 0">
       <el-radio-group v-model="contentChoice" v-for="(item, index) in content" :key="item">
-        <el-radio :label="index">
-          <component :is="innerTable" :item="item"></component>
-        </el-radio>
+        <div class='radio-wrapper'>
+          <el-radio :label="index">
+            <component :is="innerTable" :item="item"></component>
+          </el-radio>
+        </div>
         <div class='button-wrapper'>
           <el-button class="el-icon-remove" size="mini" type="danger" @click="deleteBoxItem(index)"></el-button>
         </div>
@@ -48,22 +50,30 @@ export default {
 
 <style>
 .el-radio-group {
+  width: 100%;
+  display: table
+}
+.el-radio-group .radio-wrapper {
+  width: 80%;
+  display: table-cell
+}
+.el-radio-group .button-wrapper {
+  width: 20%;
+  display: table-cell;
+  vertical-align: middle
+}
+
+.el-radio-group .radio-wrapper .el-radio {
+  width: 100%;
   display: table;
-  width: 100%;
 }
-.el-radio-group .el-radio {
-  float: left;
-}
-.el-radio-group .el-radio .component {
-  width: 100%;
-}
-.button-wrapper {
+.el-radio-group .radio-wrapper .el-radio__input {
+  width: 10%;
   display: table-cell;
   vertical-align: middle;
 }
-.button-wrapper .el-button {
-  vertical-align: middle;
-  display: block;
-  margin: 0 auto;
+.el-radio-group .radio-wrapper .el-radio__label {
+  width: 90%;
+  display: table-cell;
 }
 </style>
