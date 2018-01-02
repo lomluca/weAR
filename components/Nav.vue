@@ -210,6 +210,7 @@ export default {
 
 .hide {
   display: none;
+  position: absolute;
 }
 
 .red-badge {
