@@ -6,9 +6,9 @@
     <div class="bottom clearfix">
       <el-row>
         <span class="list-item-price-label" style="float:left">{{ item.price }} €</span>
-        <el-container style="width:70%;float:right;" direction="vertical">
+        <el-container style="width:60%;float:right;" direction="vertical">
           <el-button type="primary" class="list-item-button" @click="tryOn(item)">Try</el-button>
-          <el-button class="list-item-button" style="margin-left:0" @click="addToCart(item)">Add To Cart</el-button>
+          <!-- <el-button class="list-item-button" style="margin-left:0" @click="addToCart(item)">Add To Cart</el-button> -->
         <el-container>
       </el-row>
     </div>
