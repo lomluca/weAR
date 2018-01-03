@@ -8,16 +8,7 @@
   <!-- Page's main content -->
   <el-main>
     <!-- Carousel -->
-    <div class="carouselBlock">
-      <el-carousel indicator-position="outside">
-        <el-carousel-item
-          v-for="item in carouselData"
-          :item="item"
-          :key="item.id" >
-          <a :href="item.href"><img :src="item.asset" :alt="item.alt"></a>
-        </el-carousel-item>
-      </el-carousel>
-    </div>
+    <wear-carousel :items="carouselData" />
 
     <!-- Other images -->
     <el-container direction="vertical" style="height:unset">
@@ -37,6 +28,7 @@
 import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
 import WearList from '../../components/List'
+import WearCarousel from '../../components/Carousel'
 
 export default {
   name: 'app',
@@ -49,7 +41,8 @@ export default {
   components: {
     'wear-header': WearHeader,
     'wear-footer': WearFooter,
-    'wear-list': WearList
+    'wear-list': WearList,
+    'wear-carousel': WearCarousel
   }
 }
 </script>
@@ -63,43 +56,6 @@ export default {
 .el-main {
   height: auto;
   overflow: initial;
-}
-
-.el-carousel__item a {
-  width: 100%;
-  height: 100%;
-}
-
-.el-carousel__item img {
-  width: 100%;
-  height: 100%;
-}
-
-.carouselBlock {
-  margin-bottom: 30px;
-}
-
-.imageBlock {
-  width: 100%;
-  height: auto;
-  display: inline-block;
-  vertical-align: top;
-}
-
-.blockCol {
-  width: 33%;
-  height: auto;
-  display: inline-block;
-}
-
-.imageContainer {
-  width: 100%;
-  height: 85%;
-}
-
-.description {
-  width: 100%;
-  height: 15%;
 }
 
 .homepage-header {
