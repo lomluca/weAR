@@ -7,7 +7,7 @@
 
 
   <!-- Main content -->
-  <el-main style="overflow: initial">
+  <el-main>
     <el-row :gutter="10">
       <el-col :sm="8">
         <div class="box">
@@ -84,6 +84,7 @@
       <el-col :xs="24">
         <div class="box">
           <p class="block-title">ORDERS</p>
+          <past-order-table></past-order-table>
         </div>
       </el-col>
     </el-row>
@@ -101,6 +102,7 @@ import WearHeader from '../../components/Header'
 import WearFooter from '../../components/Footer'
 import WearAddressForm from '../../components/AddressForm'
 import WearCardForm from '../../components/CreditCardForm'
+import PastOrderTable from '../../components/PastOrderTable'
 
 export default {
   name: 'app',
@@ -131,7 +133,8 @@ export default {
     'wear-header': WearHeader,
     'wear-footer': WearFooter,
     'wear-address-form': WearAddressForm,
-    'wear-card-form': WearCardForm
+    'wear-card-form': WearCardForm,
+    'past-order-table': PastOrderTable
   },
   watch: {
     addressDialogFormVisible: function() {
@@ -185,6 +188,8 @@ export default {
   }
 
   .el-main {
+    overflow: initial;
+    height: auto;
     background-color: white;
   }
 
