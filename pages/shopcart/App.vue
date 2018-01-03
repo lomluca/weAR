@@ -6,7 +6,7 @@
     </el-header>
 
     <!-- Main content -->
-    <el-main>
+    <el-main style="padding-left:0;padding-right:0">
       <wear-address-form :visible.sync="addressDialogFormVisible"/>
       <wear-card-form :visible.sync="cardDialogFormVisible"/>
 
@@ -135,16 +135,16 @@ export default {
   box-sizing: content-box;
   padding: 0px;
 }
-.el-footer{
-  box-sizing: content-box;
-  padding: 0px;
+
+footer div {
+  margin-right: 0px;
 }
+
 .el-main {
   overflow: initial;
   box-sizing: content-box;
-  padding: 10px;
+  padding: 10px 0px;
   height: auto;
-  background-color: white
 }
 
 /* left Wrapper */
@@ -154,15 +154,14 @@ export default {
   height: auto;
   float: left
 }
+
 /* Right Wrapper */
 .cartRightWrapper {
   display: inline-block;
   width: 30%;
 }
+
 /* Info box */
 .box-card {
-  margin: 0 15px 15px 15px;
 }
-
-
 </style>

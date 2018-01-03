@@ -109,7 +109,8 @@ header .headerRow2  {
 }
 
 header .headerRow3 {
-  padding: 5px 5px 5px 5px;
+  width: 99%;
+  padding: 5px 0px 5px 5px;
 }
 
 header .headerRow3_logo{
