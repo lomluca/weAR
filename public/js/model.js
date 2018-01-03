@@ -21,7 +21,7 @@ const MODEL = [
   { id: 23, name: 'CHARLINE - Sneakers', assets: [ '/assets/items/0023/1.jpg', '/assets/items/0023/2.jpg'  ], brand: 'le coq sportif', sizes: [ '37', '38', '39', '40' ], colors: [ 'Pink' ], price: 74.99 },
   { id: 24, name: 'EXPLORATEUR MID SPORT ', assets: [ '/assets/items/0024/1.jpg', '/assets/items/0024/2.jpg'  ], brand: 'Lacoste', sizes: [ '42', '43' ], colors: [ 'Kaki' ], price: 129.95 },
   { id: 25, name: 'LOIS FRILL', assets: [ '/assets/items/0025/1.jpg', '/assets/items/0025/2.jpg'  ], brand: 'French Connection', sizes: [ 'M', 'L' ], colors: [ 'Black', 'White', 'Red' ], price: 84.99 },
-  { id: 26, name: 'SPRINTYLL SCARF', assets: [ '/assets/items/0026/1.jpg', '/assets/items/0026/2.jpg'  ], brand: 'Diesel', sizes: [  ], colors: [ 'Black', 'White', 'Red' ], price: 84.99 },
+  { id: 26, name: 'SPRINTYLL SCARF', assets: [ '/assets/items/0026/1.jpg', '/assets/items/0026/2.jpg'  ], brand: 'Diesel', sizes: [ 'one-size-fits-all'  ], colors: [ 'Black', 'White', 'Red' ], price: 84.99 },
   { id: 27, name: 'Sandals with Heels', assets: [ '/assets/items/0027/1.jpg', '/assets/items/0027/2.jpg'  ], brand: 'Anna Field', sizes: [ '38', '39', '40' ], colors: [ 'Pink', 'White', 'Silver' ], price: 29.99 },
 
 ]
@@ -39,39 +39,45 @@ function unregisterLsEvent(name) {
   lsEvents[name] = null
 }
 
-//Used to check if an item with id (id) is contained into the array
+//Used to check if an item with id, color and size is contained into the array
 function contains(array, item) {
   for(var i = 0; i < array.length; i++) {
-    if(array[i].id == item.id)
+    if(array[i].id == item.id && array[i].color == item.color && array[i].size == item.size)
       return true;
   }
   return false;
 }
 
-function indexOf(array, id) {
+function indexOf(array, item) {
   for(var i = 0; i < array.length; i++) {
-    if(array[i].id == id)
+    if(array[i].id == item.id && array[i].color == item.color && array[i].size == item.size)
       return i;
   }
   return -1;
 }
 
+// a shopping cart item is identified by the id of the item, and the choosen color and size
 // add new item to shopcart, if it doesn't exist, create it!
 // add also quantity count to localStorage
-function addToCart(newItem) {
-  var cart;
+function addToCart(newItem, color, size) {
+  var cart, item;
+
+  item = newItem;
+  item.color = color;
+  item.size = size;
   //check if shopcart exist in localStorage, otherwise create it
   if(localStorage.shopcart) {
     cart = JSON.parse(localStorage.shopcart);
-    if(!contains(cart, newItem))
-      cart.push(newItem);
+    if(!contains(cart, item))
+      cart.push(item);
   }
   else {
-    cart = [newItem];
+    cart = [item];
   }
 
   //quantity count for each element in the shopcart
-  localStorage[newItem.id] = (localStorage[newItem.id]) ? parseInt(localStorage[newItem.id]) + 1 : 1;
+  var lSid = newItem.id+color+size;
+  localStorage[lSid] = (localStorage[lSid]) ? parseInt(localStorage[lSid]) + 1 : 1;
   localStorage.shopcart = JSON.stringify(cart);
 
   // Emit event
@@ -82,17 +88,18 @@ function addToCart(newItem) {
 
 //delete shopping cart element by id (each elem has an id)
 //return new shopping cart
-function deleteCartItem(id) {
+function deleteCartItem(item) {
   if(!localStorage.shopcart) throw 'ERROR. Cannot delete item from empty shopping cart'
   var cart = JSON.parse(localStorage.shopcart);
-  const index = indexOf(cart, id);
+  const index = indexOf(cart, item);
 
   //delete item from cart
   cart.splice(index, 1);
   localStorage.shopcart = JSON.stringify(cart);
 
   //delete quantity from localStorage
-  localStorage.removeItem(id);
+  var lSid = item.id+item.color+item.size;
+  localStorage.removeItem(lSid);
 
   // Emit event
   if(lsEvents['shoppingCartRemove'] != null) {
@@ -111,10 +118,10 @@ function getShopCart() {
 
 function getShopCartItemsCount() {
   var count = 0
-  if(!localStorage.shopcart) return 0  
+  if(!localStorage.shopcart) return 0
   var cart = JSON.parse(localStorage.shopcart)
   for(var item in cart) {
-    count += parseInt(localStorage[cart[item].id])
+    count += parseInt(localStorage[cart[item].id+cart[item].color+cart[item].size])
   }
   return count
 }
@@ -180,7 +187,7 @@ function getAddresses() {
 function getGeoAddress(self){
   var currgeocoder;
   var gStreet, gCity, gProvince, gZip, gCountry;
-  
+
 
   navigator.geolocation.getCurrentPosition(
     function( position ){ // success cb
@@ -232,7 +239,7 @@ function getGeoAddress(self){
                        gCountry = results[0].address_components[i].long_name;
                      }
                   }
-                  
+
                   self.geoAddress = { street: gStreet, city: gCity, province: gProvince, zip: gZip, country: gCountry };
                   //console.log(gStreet); console.log(gCity); console.log(gProvince); console.log(gZip);
               }

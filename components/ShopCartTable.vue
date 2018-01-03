@@ -10,8 +10,8 @@
               <img width="70px" height="70px" :src="scope.row.assets[0]" :alt="scope.row.alt" :href="scope.row.href"/>
             </div>
             <div class="itemWrapper">
-              <a style="text-decoration: none" :href="scope.row.href"><span class="itemName">{{ scope.row.name }}</span></a>
-              <span class="itemDescription">{{ scope.row.description }}</span>
+              <a style="text-decoration: none" :href="scope.row.href"><p class="itemName">{{ scope.row.name }}</p></a>
+              <span class="itemDescription">{{ scope.row.color }}, {{ scope.row.size }}</span>
             </div>
           </div>
         </template>
@@ -31,7 +31,7 @@
         width="150">
         <template slot-scope="scope">
           <div class="shopRowWrapper">
-            <el-input-number v-model="quantities[scope.row.id]" @change="changeQuantity(scope.row.id, $event)" size="mini" controls-position="right" min="0"></el-input-number>
+            <el-input-number v-model="quantities[scope.$index]" @change="changeQuantity(scope.row, $event)" size="mini" controls-position="right" min="0"></el-input-number>
           </div>
         </template>
       </el-table-column>
@@ -41,7 +41,7 @@
         <template slot-scope="scope">
           <div class="shopRowWrapper">
             <el-button size="mini" type="danger" icon="el-icon-remove"
-            @click="deleteCartItem(scope.row.id)"></el-button>
+            @click="deleteCartItem(scope.row)"></el-button>
           </div>
         </template>
       </el-table-column>
@@ -78,15 +78,19 @@ export default {
     //initialize quantities with localStorage content
     //localStorage is not responsive, we need an object defined in the vue instance
     for(var i = 0; i < this.shopcartData.length; i++) {
-      this.quantities[this.shopcartData[i].id] = localStorage[this.shopcartData[i].id];
+      this.quantities[i] = localStorage[this.shopcartData[i].id+this.shopcartData[i].color+this.shopcartData[i].size];
     }
   },
   methods: {
-    changeQuantity(id, value) {
-      localStorage[id] = value;
+    changeQuantity(item, value) {
+      localStorage[item.id+item.color+item.size] = value;
+      // Emit event
+      if(lsEvents['shoppingCartInsert'] != null) {
+        lsEvents['shoppingCartInsert']()
+      }
     },
-    deleteCartItem(id) {
-      deleteCartItem(id);
+    deleteCartItem(item) {
+      deleteCartItem(item);
       this.shopcartData = getShopCart();
     }
   },
@@ -94,7 +98,7 @@ export default {
     total: function() {
       var total;
       for(var i = 0, total = 0; i < this.shopcartData.length; i++) {
-        total += this.shopcartData[i].price*this.quantities[this.shopcartData[i].id];
+        total += this.shopcartData[i].price*this.quantities[i];
       }
       return total;
     },
@@ -114,12 +118,15 @@ export default {
 .shopRowWrapper .itemWrapper {
   display: inline-block;
   height: 100%;
+  text-align: left;
 }
 .shopRowWrapper .itemWrapper .itemName {
   font-size: 22px;
+  text-align: left;
 }
 .shopRowWrapper .itemWrapper .itemDescription {
-  font-size: 12px;
+  font-size: 16px;
+  text-align: left;
 }
 .shopCartTableFooter {
   float: right;

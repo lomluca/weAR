@@ -30,7 +30,7 @@
   <!-- Bottom bar -->
   <el-container class="property-bottombar" direction="vertical">
     <p class="property-price">{{ item.price }} €</p>
-    <el-button type="primary" @click="addToCart(item)">Add to Cart</el-button>
+    <el-button type="primary" @click="addToCart(item, color, size)">Add to Cart</el-button>
   </el-container>
 
 </el-container>
@@ -50,8 +50,8 @@ export default {
     propertyChange() {
       this.$emit('property-change', this.$data.color, this.$data.size)
     },
-    addToCart(item) {
-      addToCart(item) // Implemented in model.js
+    addToCart(item, color, size) {
+      addToCart(item, color, size) // Implemented in model.js
     }
   }
 }
