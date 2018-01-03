@@ -1,12 +1,12 @@
 <template>
 <el-container>
   <!-- Header -->
-  <el-header height="auto">
+  <el-header height="auto" style="padding:unset">
     <wear-header />
   </el-header>
 
   <!-- Page's main content -->
-  <el-main height="auto">
+  <el-main>
     <!-- On small screens item's property selector is collapsible -->
     <el-collapse class="collapsible-selector hidden-md-and-up" v-model="collapseActive">
       <el-collapse-item title="Pick Size and Color">
@@ -76,13 +76,8 @@ export default {
 
 <style>
 .el-main {
-  height: 100%;
+  height: auto;
   overflow: initial;
-}
-
-.verticalMenuItem {
-  float: left;
-  clear: left;
 }
 
 .releated-label {
