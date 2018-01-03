@@ -15,11 +15,15 @@ export default {
 
 <style>
 ul {
-  margin:0;
+  width: 250px;
+  margin: 0;
   padding: 0;
   list-style-type: none
 }
-li{
+li {
   text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

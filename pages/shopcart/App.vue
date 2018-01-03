@@ -13,21 +13,21 @@
       <template v-if="!isCollapsed">
         <!-- LEFT WRAPPER -->
         <div class="cartLeftWrapper">
-          <wear-shop-cart :visible.sync="confirmDialogVisible"/>
+          <wear-shop-cart class="box-card" :visible.sync="confirmDialogVisible"/>
         </div>
 
         <!-- RIGHT WRAPPER -->
         <div class="cartRightWrapper">
           <template v-if="loggedIn">
             <!-- address box -->
-            <wear-info-box headerTitle="Delivery Address" :getContent="getAddresses" :deleteItem="deleteAddress" :visible.sync="addressDialogFormVisible" :innerTable="addressTable"/>
+            <wear-info-box class="box-card" headerTitle="Delivery Address" :getContent="getAddresses" :deleteItem="deleteAddress" :visible.sync="addressDialogFormVisible" :innerTable="addressTable"/>
 
             <!-- credit card box -->
-            <wear-info-box headerTitle="Credit Card" :getContent="getCards" :deleteItem="deleteCard" :visible.sync="cardDialogFormVisible" :innerTable="cardTable"/>
+            <wear-info-box class="box-card" headerTitle="Credit Card" :getContent="getCards" :deleteItem="deleteCard" :visible.sync="cardDialogFormVisible" :innerTable="cardTable"/>
 
           </template>
           <template v-else>
-            <el-card class="box-card">
+            <el-card>
               <div class="box-card-body">
                 <h1>Please log-in to select your informations</h1>
               <div>
@@ -162,6 +162,12 @@ footer div {
 }
 
 /* Info box */
-.box-card {
+.cartLeftWrapper .box-card {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.cartRightWrapper .box-card {
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 </style>

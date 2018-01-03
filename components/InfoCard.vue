@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card">
+  <el-card>
     <div slot="header" class="box-card-header">
       <span>{{ headerTitle }}</span>
     </div>
