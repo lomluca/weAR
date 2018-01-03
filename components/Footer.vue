@@ -1,6 +1,6 @@
 <template>
 <footer>
-  <el-row :gutter="10">
+  <el-row :gutter="10" style="margin-right:0px">
     <el-col :sm="6">   
         <div class="footerListContainer">
           <div class="footerHeader"><h4> Contact Us </h4></div>
