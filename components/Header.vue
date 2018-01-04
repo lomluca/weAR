@@ -109,7 +109,7 @@ header .headerRow2  {
 }
 
 header .headerRow3 {
-  width: 99%;
+  width: 100%;
   padding: 5px 0px 5px 5px;
 }
 

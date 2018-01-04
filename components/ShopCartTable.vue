@@ -47,20 +47,22 @@
       </el-table-column>
     </el-table>
 
-    <div class="shopCartTableFooter" v-if="loggedIn && shopcartData.length > 0">
-      <h1>Total: {{ total.toFixed(2) }}€</h1>
-      <el-button @click="visible = true">Checkout</el-button>
-      <el-dialog
-        title="Confirm purchase"
-        :visible.sync="visible"
-        :before-close="handleClose">
-        <span>Do you want to confirm your purchases?</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="visible = false">Cancel</el-button>
-          <el-button type="primary" @click="confirmOrder">Confirm</el-button>
-        </span>
-      </el-dialog>
-    </div>
+    <transition name="fade">
+      <div class="shopCartTableFooter" v-if="loggedIn && shopcartData.length > 0">
+        <h1>Total: {{ total.toFixed(2) }}€</h1>
+        <el-button @click="visible = true">Checkout</el-button>
+        <el-dialog
+          title="Confirm purchase"
+          :visible.sync="visible"
+          :before-close="handleClose">
+          <span>Do you want to confirm your purchases?</span>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="visible = false">Cancel</el-button>
+            <el-button type="primary" @click="confirmOrder">Confirm</el-button>
+          </span>
+        </el-dialog>
+      </div>
+    </transition>
   </el-card>
 </template>
 
@@ -138,5 +140,13 @@ export default {
 .shopCartTableFooter {
   float: right;
   margin-bottom: 10px;
+}
+
+/* animation on checkout button */
+.fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

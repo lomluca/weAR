@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="myNav">
     <el-button class="collapse-menu-button" :class="{change: !hidden}" size="mini" type="text" v-if="isCollapsed" @click="hidden = !hidden">
-      <div class="bar1"></div>
-      <div class="bar2"></div>
-      <div class="bar3"></div>
+      <div class="bar1"/>
+      <div class="bar2"/>
+      <div class="bar3"/>
     </el-button>
     <nav :class="[navClasses, {hide: hidden}]">
       <!-- Render login, register, profile and logout links when collapsed -->
@@ -162,11 +162,14 @@ export default {
 </script>
 
 <style>
+.myNav {
+      max-width: 100%;
+      overflow-x: hidden;
+}
 /* NAV MENU COLLAPSE BUTTON (WITH ANIMATION) */
 .collapse-menu-button {
   float: right;
-  margin-top: 5px;
-  margin-right: 10px;
+  padding-right: 10px;
 }
 .bar1, .bar2, .bar3 {
     width: 20px;
