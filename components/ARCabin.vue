@@ -22,7 +22,15 @@ export default {
   mounted() {
     var video = document.querySelector("#ar-component");
      
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+    var constraints = { audio: false, video: true };
+
+    var handleSuccess = function (stream) {  
+        video.srcObject = stream;
+    };
+
+    navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess);
+
+    /*navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
       
     if (navigator.getUserMedia) {       
       navigator.getUserMedia({video: true}, handleVideo, videoError);
@@ -37,7 +45,7 @@ export default {
                 
     function videoError(e) {
       // do something
-    }
+    }*/
   }
 }
 </script>
