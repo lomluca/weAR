@@ -65,7 +65,7 @@
                 <el-button style="float: right;position: relative;top: 50px;" type="primary" icon="el-icon-delete" @click="deleteAddress(index)"></el-button>
                 <ul class="list-info">
                   <li><span class="ligth-text">street</span> <span class="bold-text">{{ address.street }}</span></li>
-                  <li><span class="ligth-text">number</span> <span class="bold-text">{{ address.city }}</span></li>
+                  <li><span class="ligth-text">city</span> <span class="bold-text">{{ address.city }}</span></li>
                   <li><span class="ligth-text">zip code</span> <span class="bold-text">{{ address.zipCode }}</span></li>
                   <li><span class="ligth-text">country</span> <span class="bold-text">{{ address.country }}</span></li>
                 </ul>
