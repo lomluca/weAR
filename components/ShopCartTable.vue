@@ -31,7 +31,7 @@
         width="150">
         <template slot-scope="scope">
           <div class="shopRowWrapper">
-            <el-input-number v-model="quantities[scope.$index]" @change="changeQuantity(scope.row, $event)" size="mini" controls-position="right" min="0"></el-input-number>
+            <el-input-number v-model="quantities[scope.$index]" @change="changeQuantity(scope.$index, $event)" size="mini" controls-position="right" min="1"></el-input-number>
           </div>
         </template>
       </el-table-column>
@@ -78,16 +78,13 @@ export default {
     //initialize quantities with localStorage content
     //localStorage is not responsive, we need an object defined in the vue instance
     for(var i = 0; i < this.shopcartData.length; i++) {
-      this.quantities[i] = localStorage[this.shopcartData[i].id+this.shopcartData[i].color+this.shopcartData[i].size];
+      this.quantities[i] = this.shopcartData[i].quantity;
+      console.log(this.quantities[i]);
     }
   },
   methods: {
-    changeQuantity(item, value) {
-      localStorage[item.id+item.color+item.size] = value;
-      // Emit event
-      if(lsEvents['shoppingCartInsert'] != null) {
-        lsEvents['shoppingCartInsert']()
-      }
+    changeQuantity(index, value) {
+      changeCartItemQuantity(index, value);
     },
     deleteCartItem(item) {
       deleteCartItem(item);
@@ -99,7 +96,7 @@ export default {
       //emit event for the cart icon badge
       lsEvents['shoppingCartInsert']()
       //update cart
-      this.shopcartData= getShopCart();
+      this.shopcartData = getShopCart();
 
       this.visible = false;
     }

@@ -39,7 +39,7 @@ function unregisterLsEvent(name) {
   lsEvents[name] = null
 }
 
-//Used to check if an item with id, color and size is contained into the array
+// a shopping cart item is identified by the id of the item, and the choosen color and size
 function contains(array, item) {
   for(var i = 0; i < array.length; i++) {
     if(array[i].id == item.id && array[i].color == item.color && array[i].size == item.size)
@@ -48,6 +48,7 @@ function contains(array, item) {
   return false;
 }
 
+// a shopping cart item is identified by the id of the item, and the choosen color and size
 function indexOf(array, item) {
   for(var i = 0; i < array.length; i++) {
     if(array[i].id == item.id && array[i].color == item.color && array[i].size == item.size)
@@ -57,28 +58,27 @@ function indexOf(array, item) {
 }
 
 // a shopping cart item is identified by the id of the item, and the choosen color and size
-// add new item to shopcart, if it doesn't exist, create it!
-// add also quantity count to localStorage
+// add new item (+quantity) to shopcart, if it doesn't exist, create it!
 function addToCart(newItem, color, size) {
-  var cart, item;
+  var cart, item, index;
 
   item = newItem;
   item.color = color;
   item.size = size;
+  item.quantity = 1;
   //check if shopcart exist in localStorage, otherwise create it
   if(localStorage.shopcart) {
     cart = JSON.parse(localStorage.shopcart);
-    if(!contains(cart, item))
+    index = indexOf(cart, item);
+    if(index < 0)
       cart.push(item);
+    else
+      cart[index].quantity++;
   }
   else {
     cart = [item];
   }
   localStorage.shopcart = JSON.stringify(cart);
-
-  //quantity count for each element in the shopcart
-  var lSid = newItem.id+color+size;
-  localStorage[lSid] = (localStorage[lSid]) ? parseInt(localStorage[lSid]) + 1 : 1;
 
   // Emit event
   if(lsEvents['shoppingCartInsert'] != null) {
@@ -97,13 +97,20 @@ function deleteCartItem(item) {
   cart.splice(index, 1);
   localStorage.shopcart = JSON.stringify(cart);
 
-  //delete quantity from localStorage
-  var lSid = item.id+item.color+item.size;
-  localStorage.removeItem(lSid);
-
   // Emit event
   if(lsEvents['shoppingCartRemove'] != null) {
     lsEvents['shoppingCartRemove']()
+  }
+}
+
+
+function changeCartItemQuantity(index, value) {
+  var cart = getShopCart();
+  cart[index].quantity = value;
+  localStorage.shopcart = JSON.stringify(cart);
+  // Emit event
+  if(lsEvents['shoppingCartInsert'] != null) {
+    lsEvents['shoppingCartInsert']()
   }
 }
 
@@ -117,11 +124,9 @@ function getShopCart() {
 }
 
 function getShopCartItemsCount() {
-  var count = 0
-  if(!localStorage.shopcart) return 0
-  var cart = JSON.parse(localStorage.shopcart)
+  var count = 0, cart = getShopCart();
   for(var item in cart) {
-    count += parseInt(localStorage[cart[item].id+cart[item].color+cart[item].size])
+    count += parseInt(cart[item].quantity);
   }
   return count
 }
@@ -184,15 +189,6 @@ function getAddresses() {
   }
 }
 
-//delete shop cart and all the quantity elems from localStorage
-function deleteCart() {
-  var cart = getShopCart();
-  for(var item in cart) {
-    localStorage.removeItem(item.id+item.color+item.size);
-  }
-  localStorage.removeItem('shopcart');
-}
-
 //insert new orders
 function putOrder() {
   var orders, shopcart = getShopCart();
@@ -209,7 +205,7 @@ function putOrder() {
 
   localStorage.orders = JSON.stringify(orders);
 
-  deleteCart();
+  localStorage.removeItem('shopcart');
 }
 
 function getOrders() {
