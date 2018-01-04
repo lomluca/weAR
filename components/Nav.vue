@@ -1,6 +1,10 @@
 <template>
   <div>
-    <el-button id="menuIcon" class="collapse-menu-button" size="small" v-if="isCollapsed" @click="hidden = !hidden">&#9776</el-button>
+    <el-button class="collapse-menu-button" :class="{change: !hidden}" size="mini" type="text" v-if="isCollapsed" @click="hidden = !hidden">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </el-button>
     <nav :class="[navClasses, {hide: hidden}]">
       <!-- Render login, register, profile and logout links when collapsed -->
       <div v-if="isCollapsed && !username" :class="[menuClasses, {hide: hidden}]">
@@ -158,10 +162,27 @@ export default {
 </script>
 
 <style>
+/* NAV MENU COLLAPSE BUTTON (WITH ANIMATION) */
 .collapse-menu-button {
   float: right;
   margin-top: 5px;
   margin-right: 10px;
+}
+.bar1, .bar2, .bar3 {
+    width: 20px;
+    height: 3px;
+    background-color: #333;
+    margin: 3px 0;
+    transition: 0.4s;
+}
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-4px, 3px);
+    transform: rotate(-45deg) translate(-4px, 3px);
+}
+.change .bar2 {opacity: 0;}
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-5px, -4px);
+    transform: rotate(45deg) translate(-5px, -4px);
 }
 
 /* HORIZONTAL NAV CSS */
@@ -184,7 +205,7 @@ export default {
 }
 
 .horizontalNavBadge {
-  
+
 }
 
 /* VERTICAL NAV CSS */
