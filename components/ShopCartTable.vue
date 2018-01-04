@@ -57,7 +57,7 @@
         <span>Do you want to confirm your purchases?</span>
         <span slot="footer" class="dialog-footer">
           <el-button @click="visible = false">Cancel</el-button>
-          <el-button type="primary" @click="visible = false">Confirm</el-button>
+          <el-button type="primary" @click="confirmOrder">Confirm</el-button>
         </span>
       </el-dialog>
     </div>
@@ -92,6 +92,16 @@ export default {
     deleteCartItem(item) {
       deleteCartItem(item);
       this.shopcartData = getShopCart();
+    },
+    confirmOrder() {
+      //update orders
+      putOrder();
+      //emit event for the cart icon badge
+      lsEvents['shoppingCartInsert']()
+      //update cart
+      this.shopcartData= getShopCart();
+
+      this.visible = false;
     }
   },
   computed: {

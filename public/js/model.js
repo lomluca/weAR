@@ -74,11 +74,11 @@ function addToCart(newItem, color, size) {
   else {
     cart = [item];
   }
+  localStorage.shopcart = JSON.stringify(cart);
 
   //quantity count for each element in the shopcart
   var lSid = newItem.id+color+size;
   localStorage[lSid] = (localStorage[lSid]) ? parseInt(localStorage[lSid]) + 1 : 1;
-  localStorage.shopcart = JSON.stringify(cart);
 
   // Emit event
   if(lsEvents['shoppingCartInsert'] != null) {
@@ -179,6 +179,42 @@ function deleteAddress(index) {
 function getAddresses() {
   if(localStorage.addresses)
     return JSON.parse(localStorage.addresses);
+  else {
+    return [];
+  }
+}
+
+//delete shop cart and all the quantity elems from localStorage
+function deleteCart() {
+  var cart = getShopCart();
+  for(var item in cart) {
+    localStorage.removeItem(item.id+item.color+item.size);
+  }
+  localStorage.removeItem('shopcart');
+}
+
+//insert new orders
+function putOrder() {
+  var orders, shopcart = getShopCart();
+
+  if(localStorage.orders) {
+    orders = JSON.parse(localStorage.orders);
+    for(var i = 0; i < shopcart.length; i++) {
+      orders.unshift(shopcart[i]);
+    }
+  }
+  else {
+    orders = shopcart;
+  }
+
+  localStorage.orders = JSON.stringify(orders);
+
+  deleteCart();
+}
+
+function getOrders() {
+  if(localStorage.orders)
+    return JSON.parse(localStorage.orders);
   else {
     return [];
   }
