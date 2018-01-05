@@ -63,7 +63,8 @@ export default {
       }).then(value => {
         this.$message({
           type: 'success',
-          message: 'Thanks for joining our community'
+          message: 'Thanks for joining our community',
+          customClass: 'wear-message'
         });
       }).catch(() => {
         this.$message({
