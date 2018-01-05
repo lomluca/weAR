@@ -110,6 +110,7 @@ header .headerRow2  {
 
 header .headerRow3 {
   width: 100%;
+  height: 100%;
   margin-bottom: 5px;
   margin-top: 5px;
 }

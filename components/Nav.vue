@@ -53,7 +53,7 @@
 
         <div id="shoppingCart" :class="[badgeClasses, {hide: hidden}]">
           <a :href="shopcart_page">
-            <el-badge :value="badgeValue" class="red-badge"><el-button size="small" icon="el-icon-goods" @click="addItem"/></el-badge>
+            <el-badge :value="badgeValue" class="red-badge"><el-button size="mini" icon="el-icon-goods" @click="addItem"/></el-badge>
           </a>
         </div>
       </div>
@@ -201,14 +201,11 @@ export default {
 .horizontalNav .rightBlock {
   float: right;
   padding-right: 15px;
+  margin-top: 9px;
 }
 .horizontalNav .rightBlock #searchBox, .horizontalNav .rightBlock #shoppingCart {
   display: inline-block;
   margin-left: 10px;
-}
-
-.horizontalNavBadge {
-
 }
 
 /* VERTICAL NAV CSS */
@@ -242,6 +239,6 @@ export default {
 }
 
 .red-badge {
-  margin-top: 5px;
+  z-index: 999999
 }
 </style>
