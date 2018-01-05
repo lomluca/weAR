@@ -1,14 +1,14 @@
 <template>
 <footer>
   <el-row :gutter="10" style="margin-right:0px">
-    <el-col :sm="6">   
+    <el-col :sm="6">
         <div class="footerListContainer">
           <div class="footerHeader"><h4> Contact Us </h4></div>
           <ul>
             <li><el-button size="mini" type="text"> Send us an email </el-button></li>
             <li><el-button size="mini" type="text"> Customer service </el-button></li>
           </ul>
-        </div> 
+        </div>
     </el-col>
     <el-col :sm="6">
         <div class="footerListContainer">
@@ -31,7 +31,7 @@
           </ul>
         </div>
     </el-col>
-    <el-col :sm="6">  
+    <el-col :sm="6">
         <div class="footerListContainer">
           <div class="footerHeader"><h4> Connect With Us </h4></div>
           <ul>
@@ -106,6 +106,6 @@ footer .footerListContainer ul li .el-button {
 }
 
 .wear-message {
-  z-index: 9999 !important;
+  z-index: 999999 !important;
 }
 </style>

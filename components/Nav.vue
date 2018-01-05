@@ -41,7 +41,7 @@
 
       </template>
 
-      <div class="rightBlock" :class="[searchBarClasses, {hide: hidden}]">
+      <div :class="[searchBarClasses, {hide: hidden, rightBlock: !isCollapsed}]">
         <div id="searchBox">
           <el-input
             size="mini"
@@ -163,8 +163,8 @@ export default {
 
 <style>
 .myNav {
-      max-width: 100%;
-      overflow-x: hidden;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 /* NAV MENU COLLAPSE BUTTON (WITH ANIMATION) */
 .collapse-menu-button {
@@ -200,7 +200,7 @@ export default {
 }
 .horizontalNav .rightBlock {
   float: right;
-  margin-right: 20px;
+  padding-right: 15px;
 }
 .horizontalNav .rightBlock #searchBox, .horizontalNav .rightBlock #shoppingCart {
   display: inline-block;
@@ -215,17 +215,21 @@ export default {
 .verticalNav {
   display: block;
   width: 100%;
-  padding: 10px;
+  padding: 0;
 }
 .verticalNav .verticalMenuItem {
   float: left;
   clear: left;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.verticalNavSearchBar {
+.verticalNav .verticalNavSearchBar {
   float: left;
   clear: left;
-  width: 100%;
+  width: 97%;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .verticalNavBadge {

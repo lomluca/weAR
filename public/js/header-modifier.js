@@ -7,8 +7,7 @@ window.addEventListener('scroll', function(){
         $(".headerRow1").css("display", "none");
         $(".headerRow2").css("display", "none");
         $(".headerRow3_logo").css("display", "inline-block");
-        $("nav").css("display", "inline-block");
-        $("nav").css("width", "96%");
+        $("nav").css("width", "100%");
         $("main").css("margin-top", "120px");
         $("main").css("padding-top", "30px");
     }
