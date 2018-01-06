@@ -250,7 +250,7 @@ function getGeoAddress(self){
                   }
                   for(var i=0;i<results[0].address_components.length;i++){
                     var types = results[0].address_components[i].types;
-                    if(types=="administrative_area_level_3,political"){
+                    if(types=="locality,political"){
                        gCity = results[0].address_components[i].short_name;
                      }
                   }for(var i=0;i<results[0].address_components.length;i++){
