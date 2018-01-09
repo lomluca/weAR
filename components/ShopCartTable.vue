@@ -37,7 +37,7 @@
       </el-table-column>
       <el-table-column
         label="Remove"
-        width="70">
+        width="80">
         <template slot-scope="scope">
           <div class="shopRowWrapper">
             <el-button size="mini" type="danger" icon="el-icon-remove"
