@@ -148,7 +148,6 @@ footer div {
 
 .el-main {
   overflow: initial;
-  box-sizing: content-box;
   padding: 10px 0px;
   height: auto;
 }
