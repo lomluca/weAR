@@ -11,29 +11,35 @@
       <wear-card-form :visible.sync="cardDialogFormVisible"/>
 
       <template v-if="!isCollapsed">
-        <!-- LEFT WRAPPER -->
-        <div class="cartLeftWrapper">
-          <wear-shop-cart class="box-card" :visible.sync="confirmDialogVisible"/>
-        </div>
+        <el-row :gutter="10">
+          <!-- LEFT WRAPPER -->
+          <el-col :span="16">
+            <div class="grid-content">
+              <wear-shop-cart class="box-card" :visible.sync="confirmDialogVisible"/>
+            </div>
+          </el-col>
 
-        <!-- RIGHT WRAPPER -->
-        <div class="cartRightWrapper">
-          <template v-if="loggedIn">
-            <!-- address box -->
-            <wear-info-box class="box-card" headerTitle="Delivery Address" :getContent="getAddresses" :deleteItem="deleteAddress" :visible.sync="addressDialogFormVisible" :innerTable="addressTable"/>
+          <!-- RIGHT WRAPPER -->
+          <el-col :span="8">
+            <div class="grid-content">
+              <template v-if="loggedIn">
+                <!-- address box -->
+                <wear-info-box class="box-card" headerTitle="Delivery Address" :getContent="getAddresses" :deleteItem="deleteAddress" :visible.sync="addressDialogFormVisible" :innerTable="addressTable"/>
 
-            <!-- credit card box -->
-            <wear-info-box class="box-card" headerTitle="Credit Card" :getContent="getCards" :deleteItem="deleteCard" :visible.sync="cardDialogFormVisible" :innerTable="cardTable"/>
+                <!-- credit card box -->
+                <wear-info-box class="box-card" headerTitle="Credit Card" :getContent="getCards" :deleteItem="deleteCard" :visible.sync="cardDialogFormVisible" :innerTable="cardTable"/>
 
-          </template>
-          <template v-else>
-            <el-card>
-              <div class="box-card-body">
-                <h1>Please log-in to select your informations</h1>
-              <div>
-            </el-card>
-          </template>
-        </div>
+              </template>
+              <template v-else>
+                <el-card>
+                  <div class="box-card-body">
+                    <h1>Please log-in to select your informations</h1>
+                  <div>
+                </el-card>
+              </template>
+            </div>
+          </el-col>
+        </el-row>
       </template>
 
       <template v-else>
@@ -147,27 +153,16 @@ footer div {
   height: auto;
 }
 
-/* left Wrapper */
-.cartLeftWrapper {
-  width: 70%;
-  display: inline-block;
-  height: auto;
-  float: left
+.el-row {
+  padding: 0 10px 0 10px;
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
-/* Right Wrapper */
-.cartRightWrapper {
-  display: inline-block;
-  width: 30%;
+.el-col {
+  border-radius: 4px;
 }
 
-/* Info box */
-.cartLeftWrapper .box-card {
-  margin-right: 10px;
-  margin-left: 10px;
-}
-.cartRightWrapper .box-card {
-  margin-bottom: 10px;
-  margin-right: 10px;
-}
 </style>
