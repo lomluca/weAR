@@ -12,6 +12,8 @@ html, body {
   color: #333;
   text-align: center;
   line-height: 40px;
+  padding-right: 5%;
+  padding-left: 5%;
 }
 
 .el-container {
