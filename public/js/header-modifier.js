@@ -4,6 +4,7 @@ window.addEventListener('scroll', function(){
         $("header").css("position", "fixed");
         $("header").css("top", "0px");
         $("header").css("z-index", "9999");
+        $("header").css("box-shadow", "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)");
         $(".headerRow1").css("display", "none");
         $(".headerRow2").css("display", "none");
         $(".headerRow3_logo").css("display", "inline-block");

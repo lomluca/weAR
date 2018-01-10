@@ -7,13 +7,13 @@ html, body {
 .el-main {
   width: 100%;
   height: 100%;
-  background-color: rgb(244, 244, 244);
+  background-color: rgb(244, 244, 244) !important;
   overflow: initial;
   color: #333;
   text-align: center;
   line-height: 40px;
-  padding-right: 5%;
-  padding-left: 5%;
+  padding-right: 5% !important;
+  padding-left: 5% !important; 
 }
 
 .el-container {
