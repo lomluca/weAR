@@ -36,7 +36,7 @@
           <div class="footerHeader"><h4> Connect With Us </h4></div>
           <ul>
             <li><el-button size="mini" type="text" @click="newsletter_messagebox">Sign up for newsletter</el-button></li>
-            <li><el-button size="mini" type="text"> Safety, Security and Privacy </el-button></li>
+            <li><el-button size="mini" type="text"> Security and Privacy </el-button></li>
             <li><el-button size="mini" type="text"> Careers </el-button></li>
           </ul>
         </div>

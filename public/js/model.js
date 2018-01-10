@@ -235,7 +235,6 @@ function getGeoAddress(self){
           { 'latLng': google_map_pos },
           function( results, status ) {
               if ( status == google.maps.GeocoderStatus.OK && results[0] ) {
-                  console.log( results[0]);
                   for(var i=0;i<results[0].address_components.length;i++){
                     var types = results[0].address_components[i].types;
                     if(types=="street_number"){
@@ -273,7 +272,6 @@ function getGeoAddress(self){
                   }
 
                   self.geoAddress = { street: gStreet, city: gCity, province: gProvince, zip: gZip, country: gCountry };
-                  //console.log(gStreet); console.log(gCity); console.log(gProvince); console.log(gZip);
               }
           }
       );
