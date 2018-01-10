@@ -1,5 +1,5 @@
 <template>
-<el-container direction="vertical" style="padding:20px">
+<el-container class="filter-bar-container"  direction="vertical" style="padding:20px">
 
   <h1 style="text-align:left" class="hidden-xs-only">Filters</h1>
 
@@ -76,6 +76,11 @@ export default {
 </script>
 
 <style>
+.filter-bar-container {
+  padding: none !important;
+  padding-right: 5px !important;
+}
+
 .filter-bar-item {
   margin-bottom: 10px;
 }
