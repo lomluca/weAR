@@ -4,8 +4,7 @@
     height="500"
     :data="shopcartData">
       <el-table-column
-        label="Item"
-        >
+        label="Item">
         <template slot-scope="scope">
           <div class="shopRowWrapper">
             <div class="itemWrapper">
@@ -52,7 +51,7 @@
     <transition name="fade">
       <div class="shopCartTableFooter" v-if="loggedIn && shopcartData.length > 0">
         <h1>Total: {{ total.toFixed(2) }}€</h1>
-        <el-button @click="visible = true">Checkout</el-button>
+        <el-button @click="checkoutClick">Checkout</el-button>
         <el-dialog
           title="Confirm purchase"
           :visible.sync="visible"
@@ -102,6 +101,25 @@ export default {
       this.shopcartData = getShopCart();
 
       this.visible = false;
+    },
+    checkoutClick() {
+      if(!getCards().length) {
+        this.$message({
+          type: 'error',
+          message: 'Please insert a Credit Card to proceed to the checkout',
+          customClass: 'wear-message'
+        });
+      }
+      else if(!getAddresses().length) {
+        this.$message({
+          type: 'error',
+          message: 'Please insert an Address to proceed to the checkout',
+          customClass: 'wear-message'
+        });
+      }
+      else {
+        this.visible = true;
+      }
     }
   },
   computed: {
@@ -149,5 +167,9 @@ export default {
 }
 .fade-leave-to {
   opacity: 0;
+}
+
+.wear-message {
+  z-index: 999999 !important;
 }
 </style>
