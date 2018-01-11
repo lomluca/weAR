@@ -33,7 +33,7 @@
         width="150">
         <template slot-scope="scope">
           <div class="shopRowWrapper">
-            <el-input-number v-model="quantities[scope.$index]" @change="changeQuantity(scope.$index, $event)" size="mini" controls-position="right" min="1"></el-input-number>
+            <el-input-number v-model="quantities[scope.$index]" @change="changeQuantity(scope.$index, $event)" size="mini" controls-position="right" :min="1"></el-input-number>
           </div>
         </template>
       </el-table-column>
