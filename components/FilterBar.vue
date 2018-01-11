@@ -78,7 +78,7 @@ export default {
 <style>
 .filter-bar-container {
   padding: none !important;
-  padding-right: 5px !important;
+  padding-right: 20px !important;
 }
 
 .filter-bar-item {
