@@ -239,6 +239,6 @@ export default {
 }
 
 .red-badge {
-  z-index: 999999
+  /*z-index: 999999*/
 }
 </style>
