@@ -1,6 +1,8 @@
 <template>
   <el-card class="box-card">
-    <el-table height="500" :data="shopcartData">
+    <el-table
+    height="500"
+    :data="shopcartData">
       <el-table-column
         label="Item"
         >
@@ -81,7 +83,6 @@ export default {
     //localStorage is not responsive, we need an object defined in the vue instance
     for(var i = 0; i < this.shopcartData.length; i++) {
       this.quantities[i] = this.shopcartData[i].quantity;
-      console.log(this.quantities[i]);
     }
   },
   methods: {

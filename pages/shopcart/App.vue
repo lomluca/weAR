@@ -164,4 +164,7 @@ footer div {
   border-radius: 4px;
 }
 
+.box-card {
+  margin-bottom: 5px;
+}
 </style>

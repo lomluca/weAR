@@ -4,24 +4,27 @@
       <span>{{ headerTitle }}</span>
     </div>
     <template v-if="content.length > 0">
-      <el-radio-group v-model="contentChoice" v-for="(item, index) in content" :key="item">
-        <el-row :gutter="5">
-          <!-- RADIO BUTTON + LABEL -->
-          <el-col :span="18">
-            <div class="grid-content">
-              <el-radio :label="index">
-                <component :is="innerTable" :item="item"></component>
-              </el-radio>
-            </div>
-          </el-col>
-          <!-- DEL BUTTON -->
-          <el-col :span="6">
-            <div class='grid-content'>
-              <el-button class="el-icon-remove" size="mini" type="danger" @click="deleteBoxItem(index)"></el-button>
-            </div>
-          </el-col>
-        </el-row>
-      </el-radio-group>
+      <el-table
+      ref="singleTable"
+      :data="content"
+      highlight-current-row
+      @current-change="handleCurrentChange"
+      :show-header="false"
+      size="mini"
+      style="width: 100%">
+      <el-table-column
+      :show-overflow-tooltip="true">
+        <template slot-scope="scope">
+          <component :is="innerTable" :item="scope.row"></component>
+        </template>
+      </el-table-column>
+      <el-table-column
+        width="70">
+        <template slot-scope="scope">
+          <el-button class="el-icon-remove" size="mini" type="danger" @click="deleteBoxItem(scope.$index)"></el-button>
+        </template>
+      </el-table-column>
+      </el-table>
       <hr>
     </template>
     <el-button class="el-icon-circle-plus" size="mini" type="success" @click="visible = true">New</el-button>
@@ -35,8 +38,12 @@ export default {
   data: function() {
     return {
       content: this.getContent(),
-      contentChoice: 0
+      currentRow: null
     }
+  },
+  mounted: function() {
+      if(this.content[0])
+      this.$refs.singleTable.setCurrentRow(this.content[0]);
   },
   watch: {
     visible: function() {
@@ -51,26 +58,14 @@ export default {
     deleteBoxItem(index) {
       this.deleteItem(index);
       this.content = this.getContent();
+    },
+    handleCurrentChange(val) {
+      this.currentRow = val;
     }
   }
 }
 </script>
 
 <style>
-.el-radio-group {
-  width: 100%
-}
-.el-radio-group .el-radio {
-  width: 100%;
-  display: table;
-}
-.el-radio-group .el-radio__input {
-  width: 10%;
-  display: table-cell;
-  vertical-align: middle;
-}
-.el-radio-group .el-radio__label {
-  width: 90%;
-  display: table-cell;
-}
+
 </style>
