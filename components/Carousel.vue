@@ -6,7 +6,7 @@
     :key="item.id" >
     <div class="wrap">
       <a :href="item.href"><img :src="item.asset" :alt="item.alt"></a>
-      <div class="text_over_image">SALE</div>
+      <span class="text_over_image">SALE</span>
     </div>
   </el-carousel-item>
 </el-carousel>
@@ -46,20 +46,17 @@ export default {
   height: 100%;
 }
 .wrap {
-    height:auto;
-    margin: auto;
     text-align:center;
     position:relative;
 }
 .text_over_image {
     position: absolute;
     margin: auto;
-    top: 0;
-    left:0;
-    right:0;
-    bottom:0;
+    top: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+
     color:#fff;
-    height: 50px;
     font-size: 4em;
     font-weight: bold;
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
