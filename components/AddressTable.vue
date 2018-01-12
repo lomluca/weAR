@@ -1,8 +1,9 @@
 <template>
   <ul>
-    <li>{{ item.street }}</li>
-    <li>{{ item.city }}, {{ item.zipCode }}</li>
-    <li>{{ item.country }}</li>
+    <li>Address: {{ item.street }}</li>
+    <li>City: {{ item.city }}</li>
+    <li>Zip: {{ item.zipCode }}</li>
+    <li>State: {{ item.country }}</li>
   </ul>
 </template>
 

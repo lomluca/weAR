@@ -33,7 +33,7 @@
               <template v-else>
                 <el-card>
                   <div class="box-card-body">
-                    <h1>Please log-in to select your informations</h1>
+                    <h1>Please log-in to proceed to the checkout</h1>
                   <div>
                 </el-card>
               </template>
