@@ -7,7 +7,6 @@
       <a :href="item.href"><img :src="item.asset" :alt="item.alt"></a>
       <span class="text_over_image">SALE</span>
       <span class="text_over_image_below">TRY YOUR STYLE NOW</span>
-
   </el-carousel-item>
 </el-carousel>
 </template>
@@ -15,33 +14,17 @@
 <script>
 export default {
   name: 'wear-carousel',
+  //images are of dimension: 1900x1304
   props: ['items'],
   data() {
     return {
-      //images are of dimension: 1900x1304
-      imageHeight: (window.innerWidth*1304/1900)+'px'
     }
   },
-  /*
-  methods: {
-    carouselChange(newIndex, oldIndex) {
-      var img = new Image();
-      img.src = this.items[newIndex].asset;
-      img.onload = function() {
-        //this.imageHeight = img.height;
-      }
-
-      if(this.windowHeight > this.windowWidth) {
-
-      }
-    }
-  },*/
   mounted() {
-    $('.el-carousel').css('height', this.imageHeight)
+    $('.el-carousel').css('height', (window.innerWidth*1304/1900)+'px')
     this.$nextTick(function() {
       window.addEventListener('resize', function(e) {
-        this.imageHeight = (window.innerWidth*1304/1900)+'px'
-        $('.el-carousel').css('height', this.imageHeight)
+        $('.el-carousel').css('height', (window.innerWidth*1304/1900)+'px')
       });
     })
   }
@@ -49,12 +32,6 @@ export default {
 </script>
 
 <style>
-.el-carousel .imageContainer {
-  width: 100%;
-  height: 100%;
-  background-size: contain;
-}
-
 .el-carousel__container {
   height: 100% !important;
 }
