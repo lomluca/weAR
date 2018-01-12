@@ -4,10 +4,8 @@
     v-for="item in items"
     :item="item"
     :key="item.id" >
-    <div class="wrap">
       <a :href="item.href"><img :src="item.asset" :alt="item.alt"></a>
       <span class="text_over_image">SALE</span>
-    </div>
   </el-carousel-item>
 </el-carousel>
 </template>
@@ -45,10 +43,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.wrap {
-    text-align:center;
-    position:relative;
-}
+
 .text_over_image {
     position: absolute;
     margin: auto;
