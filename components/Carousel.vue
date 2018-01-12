@@ -44,6 +44,23 @@ export default {
   height: 100%;
 }
 
+@supports (-ms-ime-align: auto) {
+  .text_over_image {
+      position: absolute;
+      margin: auto;
+      top: 50%;
+      bottom: 50%;
+      right: 50%;
+      left: 47%;
+      transform: translate(-50%, -50%);
+
+      color:#fff;
+      font-size: 3.8em;
+      font-weight: bold;
+      text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  }
+}
+
 .text_over_image {
     position: absolute;
     margin: auto;
