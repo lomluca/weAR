@@ -8,10 +8,9 @@
   <!-- Page's main content -->
   <el-main>
     <!-- Carousel -->
-    <wear-carousel :items="carouselData" />
-
+    <wear-carousel :items="carouselData"/>
     <!-- Other images -->
-    <el-container direction="vertical" style="height:unset">
+    <el-container direction="vertical" style="height:unset; padding: 0 5% 0 5% !important">
       <h1 class="homepage-header">Most Popular</h1>
       <wear-list :items="popularItems" />
     </el-container>
@@ -56,6 +55,7 @@ export default {
 .el-main {
   height: auto;
   overflow: initial;
+  padding: 0 !important
 }
 
 .homepage-header {
