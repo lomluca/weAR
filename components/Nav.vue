@@ -17,7 +17,7 @@
         <a><el-button size="medium" type="text" v-on:click="navigate(profile_page)">{{ username }}</el-button></a>
       </div>
       <div v-if="isCollapsed && username" :class="[menuClasses, {hide: hidden}]">
-        <a><el-button size="medium" type="text" v-on:click="navigate(home_page)">LOGOUT</el-button></a>
+        <a href="index.html" @click="logout" ><el-button size="medium" type="text">LOGOUT</el-button></a>
       </div>
 
       <template
@@ -100,6 +100,10 @@ export default {
     },
     handleShoppingCartChange: function() {
       this.$data.badgeValue = getShopCartItemsCount()
+    },
+    logout: function(e) {
+      localStorage.loggedIn = 0
+      return true
     }
   },
   created() {
