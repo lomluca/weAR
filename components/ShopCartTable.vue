@@ -57,6 +57,12 @@
           :visible.sync="visible"
           :before-close="handleClose">
           <span>Do you want to confirm your purchases?</span>
+          <hr>
+          <span>Address</span>
+          <wear-address-table :item="selectedAddress"/>
+          <hr>
+          <span>Card</span>
+          <wear-card-table :item="selectedCard"/>
           <span slot="footer" class="dialog-footer">
             <el-button @click="visible = false">Cancel</el-button>
             <el-button type="primary" @click="confirmOrder">Confirm</el-button>
@@ -68,14 +74,21 @@
 </template>
 
 <script>
+import WearAddressTable from './AddressTable'
+import WearCardTable from './CardTable'
+
 export default {
   name: 'wear-shop-cart',
-  props: ['visible'],
+  props: ['visible', 'selectedAddress', 'selectedCard'],
   data: function() {
     return {
       shopcartData: getShopCart(),
       quantities: []
     }
+  },
+  components: {
+    'wear-address-table': WearAddressTable,
+    'wear-card-table': WearCardTable
   },
   created: function() {
     //initialize quantities with localStorage content
@@ -114,6 +127,20 @@ export default {
         this.$message({
           type: 'error',
           message: 'Please insert an Address to proceed to the checkout',
+          customClass: 'wear-message'
+        });
+      }
+      else if(!this.selectedCard) {
+        this.$message({
+          type: 'error',
+          message: 'Please select a card to proceed to the checkout',
+          customClass: 'wear-message'
+        });
+      }
+      else if(!this.selectedAddress) {
+        this.$message({
+          type: 'error',
+          message: 'Please select an address to proceed to the checkout',
           customClass: 'wear-message'
         });
       }

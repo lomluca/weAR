@@ -34,11 +34,10 @@
 <script>
 export default {
   name: 'wear-info-box',
-  props: ['headerTitle', 'getContent', 'deleteItem', 'visible','innerTable'],
+  props: ['headerTitle', 'getContent', 'deleteItem', 'visible','innerTable', 'selected'],
   data: function() {
     return {
-      content: this.getContent(),
-      currentRow: null
+      content: this.getContent()
     }
   },
   /*
@@ -61,7 +60,7 @@ export default {
       this.content = this.getContent();
     },
     handleCurrentChange(val) {
-      this.currentRow = val;
+      this.$emit('update:selected', val);
     }
   }
 }
