@@ -15,7 +15,11 @@
           <!-- LEFT WRAPPER -->
           <el-col :span="16">
             <div class="grid-content">
-              <wear-shop-cart class="box-card" :visible.sync="confirmDialogVisible"/>
+              <wear-shop-cart
+              class="box-card"
+              :visible.sync="confirmDialogVisible"
+              :selectedAddress="addressSelected"
+              :selectedCard="cardSelected"/>
             </div>
           </el-col>
 
@@ -24,10 +28,24 @@
             <div class="grid-content">
               <template v-if="loggedIn">
                 <!-- address box -->
-                <wear-info-box class="box-card" headerTitle="Delivery Address" :getContent="getAddresses" :deleteItem="deleteAddress" :visible.sync="addressDialogFormVisible" :innerTable="addressTable"/>
+                <wear-info-box
+                class="box-card"
+                headerTitle="Delivery Address"
+                :getContent="getAddresses"
+                :deleteItem="deleteAddress"
+                :visible.sync="addressDialogFormVisible"
+                :selected.sync="addressSelected"
+                :innerTable="addressTable"/>
 
                 <!-- credit card box -->
-                <wear-info-box class="box-card" headerTitle="Credit Card" :getContent="getCards" :deleteItem="deleteCard" :visible.sync="cardDialogFormVisible" :innerTable="cardTable"/>
+                <wear-info-box
+                class="box-card"
+                headerTitle="Credit Card"
+                :getContent="getCards"
+                :deleteItem="deleteCard"
+                :visible.sync="cardDialogFormVisible"
+                :selected.sync="cardSelected"
+                :innerTable="cardTable"/>
 
               </template>
               <template v-else>
@@ -48,10 +66,24 @@
             <wear-shop-cart :visible.sync="confirmDialogVisible"/>
           </el-tab-pane>
           <el-tab-pane label="Address">
-            <wear-info-box headerTitle="Delivery Address" :getContent="getAddresses" :deleteItem="deleteAddress" :visible.sync="addressDialogFormVisible" :innerTable="addressTable"/>
+            <wear-info-box
+            class="box-card"
+            headerTitle="Delivery Address"
+            :getContent="getAddresses"
+            :deleteItem="deleteAddress"
+            :visible.sync="addressDialogFormVisible"
+            :selected.sync="addressSelected"
+            :innerTable="addressTable"/>
           </el-tab-pane>
           <el-tab-pane label="Credit Card">
-            <wear-info-box headerTitle="Credit Card" :getContent="getCards" :deleteItem="deleteCard" :visible.sync="cardDialogFormVisible" :innerTable="cardTable"/>
+            <wear-info-box
+            class="box-card"
+            headerTitle="Credit Card"
+            :getContent="getCards"
+            :deleteItem="deleteCard"
+            :visible.sync="cardDialogFormVisible"
+            :selected.sync="cardSelected"
+            :innerTable="cardTable"/>
           </el-tab-pane>
         </el-tabs>
       </template>
@@ -81,6 +113,8 @@ export default {
       confirmDialogVisible: false,
       addressDialogFormVisible: false,
       cardDialogFormVisible: false,
+      addressSelected: null,
+      cardSelected: null,
       addressTable: WearAddressTable,
       cardTable: WearCardTable,
       windowWidth: window.innerWidth,
