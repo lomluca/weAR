@@ -339,7 +339,7 @@ function query(params, items = MODEL) {
       return item.price >= priceRange[0] && item.price <= priceRange[1]
     })
 
-  var colors = params.get ? params.get('colors') : params['colors']
+  var colors = params['colors']
   if(colors) colors = colors.map(function(item) { item.toLowerCase() })
   if(colors.length > 0)
     data = data.filter(function(item) {
@@ -349,7 +349,7 @@ function query(params, items = MODEL) {
       return false
     })
 
-  var brands = params.get ? params.get('brands') : params['brands']
+  var brands = params['brands']
   if(brands.length > 0)
     data = data.filter(function(item) {
       for(var i = 0; i < brands.length; i++)
@@ -357,7 +357,7 @@ function query(params, items = MODEL) {
       return false
     })
 
-  var sizes = params.get ? params.get('sizes') : params['sizes']
+  var sizes = params['sizes']
   if(sizes.length > 0)
     data = data.filter(function(item) {
       for(var i = 0; i < sizes.length; i++)

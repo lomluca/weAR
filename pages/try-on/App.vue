@@ -17,14 +17,14 @@
     <!-- Item's property selector and AR viewer -->
     <el-row>
       <el-col :md="8" :lg="6" :xl="6" class="hidden-sm-and-down">
-        <wear-item-property-selector :item="item" /> 
+        <wear-item-property-selector :item="item" />
       </el-col>
-        
+
       <el-col :xs="24" :sm="24" :md="16" :lg="18" :xl="18">
         <wear-arcabin :item="item" />
-      </el-col>      
+      </el-col>
     </el-row>
-  
+
     <!-- Releated Items -->
     <el-row>
       <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
@@ -59,7 +59,7 @@ export default {
   name: 'app',
   data () {
     return {
-      item: getItem(params.get('id'))['data'], // Defined in model.js  
+      item: getItem(params['id'])['data'], // Defined in model.js  
       releatedItems,
       collapseActive: false
     }

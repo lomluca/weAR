@@ -14,15 +14,15 @@
       <!-- Small screens collapse filters bar -->
       <el-collapse v-model="collapseActive" class="hidden-sm-and-up">
         <el-collapse-item title="Filters" name="Filters">
-          <wear-filter-bar 
-            :_brands="brands" :_colors="colors" :_sizes="sizes" :_minPrice="minPrice" :_maxPrice="maxPrice" 
+          <wear-filter-bar
+            :_brands="brands" :_colors="colors" :_sizes="sizes" :_minPrice="minPrice" :_maxPrice="maxPrice"
             @filter-change="applyFiltering" style="padding-right: 10px">
         </el-collapse-item>
       </el-collapse>
 
       <el-col :xs="6" :sm="8" :md="8" :lg="6" :xl="6" class="hidden-xs-only">
-        <wear-filter-bar 
-          :_brands="brands" :_colors="colors" :_sizes="sizes" :_minPrice="minPrice" :_maxPrice="maxPrice" 
+        <wear-filter-bar
+          :_brands="brands" :_colors="colors" :_sizes="sizes" :_minPrice="minPrice" :_maxPrice="maxPrice"
           @filter-change="applyFiltering" style="padding-right: 10px">
       </el-col>
 
@@ -64,7 +64,7 @@ export default {
   data () {
     return {
       collapseActive: '',
-      query: params.get('q'),
+      query: params['q'],
       items: query(params)['data'], // defined into model.js
       brands: distinctValues.brands,
       colors: distinctValues.colors,
