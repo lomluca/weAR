@@ -1,5 +1,5 @@
 <template>
-<el-carousel indicator-position="none" arrow="never" :height="imageHeight">
+<el-carousel id="carousel" indicator-position="none" arrow="never">
   <el-carousel-item
     v-for="item in items"
     :item="item"
@@ -7,6 +7,7 @@
       <a :href="item.href"><img :src="item.asset" :alt="item.alt"></a>
       <span class="text_over_image">SALE</span>
       <span class="text_over_image_below">TRY YOUR STYLE NOW</span>
+
   </el-carousel-item>
 </el-carousel>
 </template>
@@ -17,22 +18,30 @@ export default {
   props: ['items'],
   data() {
     return {
-      windowHeight: window.innerHeight,
-      windowWidth: window.innerWidth,
-      imageHeight: (window.innerHeight*0.9)+'px'
+      //images are of dimension: 1900x1304
+      imageHeight: (window.innerWidth*1304/1900)+'px'
     }
   },
-  watch: {
-    windowWidth(newWidth, oldWidth) {
-      this.imageHeight = this.windowHeight;
+  /*
+  methods: {
+    carouselChange(newIndex, oldIndex) {
+      var img = new Image();
+      img.src = this.items[newIndex].asset;
+      img.onload = function() {
+        //this.imageHeight = img.height;
+      }
+
+      if(this.windowHeight > this.windowWidth) {
+
+      }
     }
-  },
+  },*/
   mounted() {
-    let that = this;
+    $('.el-carousel').css('height', this.imageHeight)
     this.$nextTick(function() {
       window.addEventListener('resize', function(e) {
-        this.windowHeight = window.innerHeight;
-        this.windowWidth = window.innerWidth;
+        this.imageHeight = (window.innerWidth*1304/1900)+'px'
+        $('.el-carousel').css('height', this.imageHeight)
       });
     })
   }
@@ -40,17 +49,19 @@ export default {
 </script>
 
 <style>
-.el-carousel {
-
-}
-.el-carousel__item a {
+.el-carousel .imageContainer {
   width: 100%;
   height: 100%;
+  background-size: contain;
+}
+
+.el-carousel__container {
+  height: 100% !important;
 }
 
 .el-carousel__item img {
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 @supports (-ms-ime-align: auto) {
@@ -64,7 +75,7 @@ export default {
       transform: translate(-50%, -50%);
 
       color:#fff;
-      font-size: 3.8em;
+      font-size: 3.8vw;
       font-weight: bold;
       text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
   }
@@ -79,7 +90,7 @@ export default {
       transform: translate(-50%, -50%);
 
       color:#fff;
-      font-size: 1.5em;
+      font-size: 2vw;
       font-weight: bold;
       text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
   }
@@ -93,7 +104,7 @@ export default {
     transform: translate(-50%, -50%);
 
     color:#fff;
-    font-size: 3.8em;
+    font-size: 3.8vw;
     font-weight: bold;
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
@@ -106,7 +117,7 @@ export default {
     transform: translate(-50%, -50%);
 
     color:#fff;
-    font-size: 1.5em;
+    font-size: 2vw;
     font-weight: bold;
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
