@@ -1,6 +1,8 @@
 <template>
 <el-card class="list-item" :body-style="{ padding: '0px' }">
-  <img :src="item.assets[0]" :alt="item.name" class="list-item-image">
+  <img :id="uniqueId" :src="cardImage" :key="uniqueId" :alt="item.name" class="list-item-image"
+    v-on:mouseover="loopImage()"
+    v-on:mouseout="loopImage()">
   <el-container direction="vertical" style="padding: 14px;">
     <span class="list-item-main-label">{{ item.name  }}</span>
     <div class="bottom clearfix">
@@ -19,9 +21,14 @@
 <script>
 export default {
   name: 'wear-filter-bar',
-  props: [ 'item' ],
+  props: [ 'item' ], 
   data: function() {
     return {
+      uniqueId: 'card-id-' + this.item.id,
+      cardImage: this.item.assets[0],
+      currentImageIdx: 0,
+      fadeInDuration: 250,
+      fadeOutDuration: 250
     }
   },
   methods: {
@@ -35,8 +42,44 @@ export default {
         customClass: 'wear-message'
       });
     },
+    loopImage() {
+      console.log(this.uniqueId)
+      this.currentImageIdx = (this.currentImageIdx + 1) % 2
+      let imgSrc = this.item.assets[this.currentImageIdx]
+      let id = '#' + this.uniqueId
+      $(id).fadeOut(this.fadeInDuration, function() {
+        $(id).attr('src', imgSrc)
+        $(id).fadeIn(this.fadeInDuration)
+      })
+    },
     tryOn(item) {
       window.location.href = 'try-on.html?id=' + this.item.id
+    },
+    enter: function (el, done) {
+      var vm = this
+      Velocity(el,
+        { opacity: 1 },
+        {
+          duration: this.fadeInDuration,
+          complete: function () {
+            done()
+            if (!vm.stop) vm.show = false
+          }
+        }
+      )
+    },
+    leave: function (el, done) {
+      var vm = this
+      Velocity(el,
+        { opacity: 0 },
+        {
+          duration: this.fadeOutDuration,
+          complete: function () {
+            done()
+            vm.show = true
+          }
+        } 
+      )
     }
   }
 }
