@@ -31,7 +31,3 @@ html, body {
   color: #333;
   text-align: center;
 }
-
-.el-dialog__wrapper {
-  z-index: 9999 !important;
-}

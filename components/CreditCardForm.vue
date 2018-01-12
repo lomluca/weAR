@@ -85,7 +85,6 @@ export default {
     windowWidth(newWidth, oldWidth) {
       this.labelPosition = (newWidth < 768) ? "top" : "right";
       this.fullscreenDialog = (newWidth < 768);
-      console.log("updated!")
     }
   },
   methods: {
