@@ -29,37 +29,22 @@ export default {
     };
 
     navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess);
-
-    /*navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-      
-    if (navigator.getUserMedia) {       
-      navigator.getUserMedia({video: true}, handleVideo, videoError);
-    }
-    else {
-      // The browser does not support HTML5 getUserMedia stuff
-    }
-
-    function handleVideo(stream) {
-      video.src = window.URL.createObjectURL(stream);
-    }
-                
-    function videoError(e) {
-      // do something
-    }*/
   }
 }
 </script>
 
-</style>
+<style>
 .ar-container {
-  width: 100%;
-  height: 100%;
-  border: 10px #333 solid;
+
 }
 
 .ar-element {
-  width: 100%;
-  height: 100%;
-  background-color: #666;
+  min-width: 100%; 
+  min-height: 100%;
+  width: 100%; 
+  height: auto; 
+  z-index: -100;
+  background-size: cover;
+  overflow: hidden;
 }
 </style>
