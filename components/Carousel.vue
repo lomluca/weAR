@@ -72,14 +72,14 @@ export default {
   .text_over_image_below {
       position: absolute;
       margin: auto;
-      top: 55%;
-      bottom: 45%;
-      right: 50%;
-      left: 47%;
+      top: 57%;
+      bottom: 43%;
+      right: 30%;
+      left: 51%;
       transform: translate(-50%, -50%);
 
       color:#fff;
-      font-size: 2em;
+      font-size: 1.5em;
       font-weight: bold;
       text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
   }
