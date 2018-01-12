@@ -12,7 +12,7 @@
         <a v-if="username" :href="profile_page"><el-button size="small" type="text">{{ username }}</el-button></a>
       </div>
       <div class="col">
-        <a v-if="username" :href="home_page"><el-button @click="logout" size="small" type="text">logout</el-button></a>
+        <a v-if="username" :href="home_page" @click="logout"><el-button size="small" type="text">logout</el-button></a>
       </div>
     </div>
   </div>
@@ -58,8 +58,9 @@ export default {
     'wear-nav': WearNav
   },
   methods: {
-    logout: function() {
+    logout: function(e) {
       localStorage.loggedIn = 0
+      return true
     },
     handleResize: function(event) {
       this.$data.isCollapsed = window.innerWidth < 768

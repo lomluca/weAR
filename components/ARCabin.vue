@@ -52,6 +52,8 @@ export default {
 
 </style>
 .ar-container {
+  width: 100%;
+  height: 100%;
   border: 10px #333 solid;
 }
 
