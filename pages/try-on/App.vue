@@ -51,9 +51,9 @@ import WearItemPropertySelector from '../../components/ItemPropertySelector'
 import WearList from '../../components/List'
 
 // Get query parameters
-let params = (new URL(document.location)).searchParams
+let params = getAllUrlParams()
 
-let releatedItems = getReleatedItems(getItem(params.get('id')))['data'] // Defined in model.js
+let releatedItems = getReleatedItems(getItem(params['id']))['data'] // Defined in model.js
 
 export default {
   name: 'app',

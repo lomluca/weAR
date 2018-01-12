@@ -53,7 +53,7 @@ import WearFilterBar from '../../components/FilterBar'
 import WearList from '../../components/List'
 
 // Get query parameters
-let params = (new URL(document.location)).searchParams
+let params = getAllUrlParams()
 
 let distinctValues = distinctQueryValues(MODEL)
 

@@ -314,7 +314,7 @@ function getCategories() {
 }
 
 function query(params, items = MODEL) {
-  var q = params.get ? params.get('q') : params['q']
+  var q = params['q']
   if(q) {
     q = q.toLowerCase()
     if(q == 'woman')
