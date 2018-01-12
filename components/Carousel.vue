@@ -72,8 +72,8 @@ export default {
   .text_over_image_below {
       position: absolute;
       margin: auto;
-      top: 57%;
-      bottom: 43%;
+      top: 62% !important;
+      bottom: 38% !important;
       right: 30%;
       left: 51%;
       transform: translate(-50%, -50%);

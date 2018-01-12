@@ -41,10 +41,11 @@ export default {
       currentRow: null
     }
   },
+  /*
   mounted: function() {
       if(this.content[0])
       this.$refs.singleTable.setCurrentRow(this.content[0]);
-  },
+  },*/
   watch: {
     visible: function() {
       // When the internal value changes, we $emit an event
