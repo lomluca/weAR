@@ -64,7 +64,7 @@
           <span>Card</span>
           <wear-card-table :item="selectedCard"/>
           <hr>
-          <span>Total: {{ total }}</span>
+          <span>Total: {{ total }} €</span>
           <span slot="footer" class="dialog-footer">
             <el-button @click="visible = false">Cancel</el-button>
             <el-button type="primary" @click="confirmOrder">Confirm</el-button>
