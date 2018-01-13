@@ -13,7 +13,7 @@
       <template v-if="!isCollapsed">
         <el-row :gutter="10">
           <!-- LEFT WRAPPER -->
-          <el-col :span="16">
+          <el-col :span="loggedIn ? 16 : 24">
             <div class="grid-content">
               <wear-shop-cart
               class="box-card"
@@ -24,7 +24,7 @@
           </el-col>
 
           <!-- RIGHT WRAPPER -->
-          <el-col :span="8">
+          <el-col v-if="loggedIn" :span="8">
             <div class="grid-content">
               <template v-if="loggedIn">
                 <!-- address box -->
@@ -46,14 +46,6 @@
                 :visible.sync="cardDialogFormVisible"
                 :selected.sync="cardSelected"
                 :innerTable="cardTable"/>
-
-              </template>
-              <template v-else>
-                <el-card>
-                  <div class="box-card-body">
-                    <h1>Please log-in to proceed to the checkout</h1>
-                  <div>
-                </el-card>
               </template>
             </div>
           </el-col>
@@ -61,11 +53,11 @@
       </template>
 
       <template v-else>
-        <el-tabs type="card">
+        <el-tabs type="card" style="border-radius: 5px">
           <el-tab-pane label="ShopCart">
             <wear-shop-cart :visible.sync="confirmDialogVisible"/>
           </el-tab-pane>
-          <el-tab-pane label="Address">
+          <el-tab-pane v-if="loggedIn" label="Address">
             <wear-info-box
             class="box-card"
             headerTitle="Delivery Address"
@@ -75,7 +67,7 @@
             :selected.sync="addressSelected"
             :innerTable="addressTable"/>
           </el-tab-pane>
-          <el-tab-pane label="Credit Card">
+          <el-tab-pane v-if="loggedIn" label="Credit Card">
             <wear-info-box
             class="box-card"
             headerTitle="Credit Card"
@@ -192,6 +184,16 @@ footer div {
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+.el-tabs--card>.el-tabs__header {
+  border-bottom: none;
+}
+.el-tabs__header {
+  margin: 0 0 1px 0;
+}
+.el-tabs__nav {
+  background-color: white;
 }
 
 .el-col {
