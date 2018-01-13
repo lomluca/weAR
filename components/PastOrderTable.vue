@@ -22,10 +22,14 @@
       header-align="center">
     </el-table-column>
     <el-table-column
-      prop="price"
-      label="Price"
-      width="180"
-      header-align="center">
+        label="Price"
+        width="180">
+        <template slot-scope="scope">
+          <div class="shopRowWrapper">
+            <span>{{ scope.row.price }}</span>
+            <i>€</i>
+          </div>
+        </template>
     </el-table-column>
     <el-table-column
       label="Status"

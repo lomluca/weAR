@@ -21,12 +21,20 @@
     </el-form>
 
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" 
+    <el-row :gutter="10">
+      <el-col :md="8">
+        <el-button type="primary" 
                  icon="el-icon-location-outline"
                  @click="getMyCurrentPosition()"
                  :loading="loadingPosition">My current location</el-button>
-      <el-button @click="visible = false">Cancel</el-button>
-      <el-button type="success" @click="submitForm('editFormModel')">Confirm</el-button>
+      </el-col>
+      <el-col :md="8">
+        <el-button @click="visible = false">Cancel</el-button>
+      </el-col>
+      <el-col :md="8">
+        <el-button type="success" @click="submitForm('editFormModel')">Confirm</el-button>
+      </el-col>
+      
     </span>
   </el-dialog>
 </template>
