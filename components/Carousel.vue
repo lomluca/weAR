@@ -73,13 +73,27 @@ export default {
   }
 }
 
+@-moz-document url-prefix() {
+   .text_over_image {
+      position: absolute;
+      margin: auto;
+      top: 50%;
+      bottom: 50%;
+      right: 42%;
+      transform: translate(-50%, -50%);
+      color:#fff;
+      font-size: 3.8vw;
+      font-weight: bold;
+      text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    }
+}
+
 .text_over_image {
     position: absolute;
     margin: auto;
     top: 50%;
     bottom: 50%;
     transform: translate(-50%, -50%);
-
     color:#fff;
     font-size: 3.8vw;
     font-weight: bold;
@@ -92,7 +106,6 @@ export default {
     top: 57%;
     bottom: 43%;
     transform: translate(-50%, -50%);
-
     color:#fff;
     font-size: 2vw;
     font-weight: bold;
