@@ -8,10 +8,10 @@
     <nav :class="[navClasses, {hide: hidden}]">
       <!-- Render login, register, profile and logout links when collapsed -->
       <div v-if="isCollapsed && !username" :class="[menuClasses, {hide: hidden}]">
-        <a><el-button size="medium" type="text" v-on:click="navigate(login_page)">LOGIN</el-button></a>
+        <el-button size="medium" type="text" v-on:click="loginDialogFormVisible = true">LOGIN</el-button>
       </div>
       <div v-if="isCollapsed && !username" :class="[menuClasses, {hide: hidden}]">
-        <a><el-button size="medium" type="text" v-on:click="navigate(signup_page)">REGISTER</el-button></a>
+        <el-button size="medium" type="text" v-on:click="signupDialogFormVisible = true">REGISTER</el-button>
       </div>
       <div v-if="isCollapsed && username" :class="[menuClasses, {hide: hidden}]">
         <a><el-button size="medium" type="text" v-on:click="navigate(profile_page)">{{ username }}</el-button></a>
@@ -58,16 +58,22 @@
         </div>
       </div>
     </nav>
+    <wear-login-form :visible.sync="loginDialogFormVisible"/>
+    <wear-signup-form :visible.sync="signupDialogFormVisible"/>
   </div>
 </template>
 
 <script>
+import WearLoginForm from './LoginForm'
+import WearSignupForm from './RegisterForm'
 let lastScrollTop = 0
 
 export default {
   name: 'wear-nav',
   data() {
     return {
+      loginDialogFormVisible: false,
+      signupDialogFormVisible: false,
       signup_page: 'signup.html',
       home_page: 'index.html',
       login_page: 'login.html',
@@ -105,6 +111,10 @@ export default {
       localStorage.loggedIn = 0
       return true
     }
+  },
+  components: {
+    'wear-login-form': WearLoginForm,
+    'wear-signup-form': WearSignupForm
   },
   created() {
     window.addEventListener('scroll', this.handleScroll)
