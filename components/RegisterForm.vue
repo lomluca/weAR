@@ -1,38 +1,40 @@
 <template>
+<el-dialog title="Signup" :visible.sync="visible" :fullscreen="fullscreenDialog">
+  <el-form :model="registerFormModel" status-icon :rules="registerFormRules" ref="registerFormModel" :label-position="labelPosition">
+    <el-form-item label="Fullname" prop="fullname">
+      <el-input type="text" v-model="registerFormModel.fullname" auto-complete="off"></el-input>
+    </el-form-item>
+   
+    <el-form-item label="Email" prop="email">
+      <el-input type="email" v-model="registerFormModel.email" auto-complete="off"></el-input>
+    </el-form-item> 
 
-<el-form :model="registerFormModel" status-icon :rules="registerFormRules" ref="registerFormModel" label-width="120px">
-  <el-form-item label="Fullname" prop="fullname">
-    <el-input type="text" v-model="registerFormModel.fullname" auto-complete="off"></el-input>
-  </el-form-item>
- 
-  <el-form-item label="Email" prop="email">
-    <el-input type="email" v-model="registerFormModel.email" auto-complete="off"></el-input>
-  </el-form-item> 
+    <el-form-item label="Password" prop="pass">
+      <el-input type="password" v-model="registerFormModel.pass" auto-complete="off"></el-input>
+    </el-form-item>
+    
+    <el-form-item label="Confirm" prop="checkPass">
+      <el-input type="password" v-model="registerFormModel.checkPass" auto-complete="off"></el-input>
+    </el-form-item>
 
-  <el-form-item label="Password" prop="pass">
-    <el-input type="password" v-model="registerFormModel.pass" auto-complete="off"></el-input>
-  </el-form-item>
-  
-  <el-form-item label="Confirm" prop="checkPass">
-    <el-input type="password" v-model="registerFormModel.checkPass" auto-complete="off"></el-input>
-  </el-form-item>
-
-  <el-form-item label="Birthday" prop="birthday">
-    <el-date-picker type="date" v-model="registerFormModel.birthday" :picker-options="birthdatPickerOptions" style="width:100%"></el-date-picker>
-  </el-form-item>
- 
-  <el-form-item>
-    <el-button type="primary" @click="submitForm('registerFormModel')">Submit</el-button>
-    <el-button @click="resetForm('registerFormModel')">Reset</el-button>
-  </el-form-item>
-</el-form>
-
+    <el-form-item label="Birthday" prop="birthday">
+      <el-date-picker type="date" v-model="registerFormModel.birthday" :picker-options="birthdatPickerOptions" style="width:100%"></el-date-picker>
+    </el-form-item>
+   
+    <el-form-item>
+      <el-button type="primary" @click="submitForm('registerFormModel')">Submit</el-button>
+      <el-button @click="resetForm('registerFormModel')">Reset</el-button>
+    </el-form-item>
+  </el-form>
+</el-dialog>
 </template>
 
 <script>
 import * as CryptoJS from 'crypto-js'
 
 export default {
+  name: 'wear-signup-form',
+  props: ['visible'],
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -54,6 +56,9 @@ export default {
       }
     }
     return {
+      windowWidth: window.innerWidth,
+      fullscreenDialog: (window.innerWidth < 768),
+      labelPosition: (window.innerWidth < 768) ? "top" : "right",
       registerFormModel: {
         fullname: '',
         email: '',
@@ -87,6 +92,17 @@ export default {
       }
     }
   }, 
+  watch: {
+    visible: function() {
+      // When the internal value changes, we $emit an event
+      // v-model will automatically update the parent value
+      this.$emit('update:visible', this.visible);
+    },
+    windowWidth(newWidth, oldWidth) {
+      this.labelPosition = (newWidth < 768) ? "top" : "right";
+      this.fullscreenDialog = (newWidth < 768);
+    }
+  },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
@@ -99,7 +115,11 @@ export default {
           var emptyArray = []
           localStorage.setItem("cards", JSON.stringify(emptyArray))
           localStorage.setItem("addresses", JSON.stringify(emptyArray))
-          this.$emit('signupSuccess')
+          this.$message({
+            message: 'Signup completed!',
+            type: 'success'
+          });
+          this.visible = false
           // Do nothing, we don't care alert('submit!');
         } else {
           console.log('error submit!!');
@@ -110,6 +130,14 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     }
+  },
+  mounted() {
+    let that = this;
+    this.$nextTick(function() {
+      window.addEventListener('resize', function(e) {
+        that.windowWidth = window.innerWidth;
+      });
+    })
   }
 }
 </script>

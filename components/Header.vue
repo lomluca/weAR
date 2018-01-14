@@ -6,7 +6,7 @@
         <el-button size="small" v-if="!username" type="text" @click="loginDialogFormVisible = true">login</el-button>
       </div>
       <div class="col">
-        <a v-if="!username" :href="signup_page"><el-button size="small" type="text">register</el-button></a>
+        <el-button size="small" v-if="!username" type="text" @click="signupDialogFormVisible = true">register</el-button>
       </div>
       <div class="col">
         <a v-if="username" :href="profile_page"><el-button size="small" type="text">{{ username }}</el-button></a>
@@ -26,12 +26,14 @@
     <wear-nav/>
   </div>
   <wear-login-form :visible.sync="loginDialogFormVisible"/>
+  <wear-signup-form :visible.sync="signupDialogFormVisible"/>
 </header>
 </template>
 
 <script>
 import WearNav from './Nav'
 import WearLoginForm from './LoginForm'
+import WearSignupForm from './RegisterForm'
 
 export default {
   name: 'wear-header',
@@ -47,7 +49,8 @@ export default {
       login_page: 'login.html',
       profile_page: 'profile.html',
       isCollapsed: (window.innerWidth < 768),
-      loginDialogFormVisible: false
+      loginDialogFormVisible: false,
+      signupDialogFormVisible: false
     }
   },
   computed: {
@@ -60,7 +63,8 @@ export default {
   },
   components: {
     'wear-nav': WearNav,
-    'wear-login-form': WearLoginForm
+    'wear-login-form': WearLoginForm,
+    'wear-signup-form': WearSignupForm
   },
   methods: {
     logout: function(e) {
