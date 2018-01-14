@@ -77,7 +77,7 @@ export default {
         if (valid) {
           localStorage.setItem("loggedIn", 1)
           this.$emit('loginSuccess')
-          window.location.href = 'index.html'
+          location.reload()
         } else {
           console.log('error submit!!');
           return false;

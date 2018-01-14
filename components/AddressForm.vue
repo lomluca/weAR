@@ -22,16 +22,16 @@
 
     <span slot="footer" class="dialog-footer">
     <el-row :gutter="10">
-      <el-col :md="8">
+      <el-col :md="8" style="margin-bottom: 10px">
         <el-button type="primary" 
                  icon="el-icon-location-outline"
                  @click="getMyCurrentPosition()"
                  :loading="loadingPosition">My current location</el-button>
       </el-col>
-      <el-col :md="8">
+      <el-col :md="8" style="margin-bottom: 10px">
         <el-button @click="visible = false">Cancel</el-button>
       </el-col>
-      <el-col :md="8">
+      <el-col :md="8" style="margin-bottom: 10px">
         <el-button type="success" @click="submitForm('editFormModel')">Confirm</el-button>
       </el-col>
       
