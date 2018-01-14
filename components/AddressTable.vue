@@ -1,9 +1,9 @@
 <template>
-  <ul>
-    <li>Address: {{ item.street }}</li>
-    <li>City: {{ item.city }}</li>
-    <li>Zip: {{ item.zipCode }}</li>
-    <li>State: {{ item.country }}</li>
+  <ul class="list-info">
+    <li><span class="ligth-text">Street</span> <span class="bold-text">{{ item.street }}</span></li>
+    <li><span class="ligth-text">City</span> <span class="bold-text">{{ item.city }}</span></li>
+    <li><span class="ligth-text">Zip code</span> <span class="bold-text">{{ item.zipCode }}</span></li>
+    <li><span class="ligth-text">Country</span> <span class="bold-text">{{ item.country }}</span></li>
   </ul>
 </template>
 
@@ -15,15 +15,25 @@ export default {
 </script>
 
 <style>
-ul {
+ul.list-info {
+  list-style-type: none;
+  text-align: left;
   margin: 0;
   padding: 0;
-  list-style-type: none
 }
-li {
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
+span.light-text {
+  font-size: 14px;
+  font-style: italic;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+span.bold-text {
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 15px;
 }
 </style>

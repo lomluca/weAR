@@ -50,11 +50,7 @@
             <el-tab-pane label="Credit cards" name="first">
               <template v-for="(card, index) in cards">
                 <el-button style="float: right;position: relative;top: 50px;" type="primary" icon="el-icon-delete" @click="deleteCard(index)"></el-button>
-                <ul class="list-info">
-                  <li><span class="ligth-text">owner</span> <span class="bold-text">{{ card.owner }}</span></li>
-                  <li><span class="ligth-text">number</span> <span class="bold-text">{{ card.cardNumber }}</span></li>
-                  <li><span class="ligth-text">expiration</span> <span class="bold-text">{{ card.expirationDate }}</span></li>
-                </ul>
+                <wear-card-table :item="card"/>
               </template>
               <el-button type="primary" @click="cardDialogFormVisible = true" icon="el-icon-circle-plus">Add</el-button>
               <!-- credit card dialog -->
@@ -63,12 +59,7 @@
             <el-tab-pane label="Addresses" name="second">
               <template v-for="(address, index) in addresses">
                 <el-button style="float: right;position: relative;top: 50px;" type="primary" icon="el-icon-delete" @click="deleteAddress(index)"></el-button>
-                <ul class="list-info">
-                  <li><span class="ligth-text">street</span> <span class="bold-text">{{ address.street }}</span></li>
-                  <li><span class="ligth-text">city</span> <span class="bold-text">{{ address.city }}</span></li>
-                  <li><span class="ligth-text">zip code</span> <span class="bold-text">{{ address.zipCode }}</span></li>
-                  <li><span class="ligth-text">country</span> <span class="bold-text">{{ address.country }}</span></li>
-                </ul>
+                <wear-address-table :item="address"/>
               </template>
               <el-button type="primary" @click="addressDialogFormVisible = true" icon="el-icon-circle-plus">Add</el-button>
               <!-- address dialog -->
@@ -103,6 +94,8 @@ import WearFooter from '../../components/Footer'
 import WearAddressForm from '../../components/AddressForm'
 import WearCardForm from '../../components/CreditCardForm'
 import PastOrderTable from '../../components/PastOrderTable'
+import AddressTable from '../../components/AddressTable'
+import CardTable from '../../components/CardTable'
 
 export default {
   name: 'app',
@@ -134,7 +127,9 @@ export default {
     'wear-footer': WearFooter,
     'wear-address-form': WearAddressForm,
     'wear-card-form': WearCardForm,
-    'past-order-table': PastOrderTable
+    'past-order-table': PastOrderTable,
+    'wear-address-table': AddressTable,
+    'wear-card-table': CardTable
   },
   watch: {
     addressDialogFormVisible: function() {
@@ -193,36 +188,12 @@ export default {
     background-color: white;
   }
 
-  ul.list-info {
-    list-style-type: none;
-    text-align: left;
-  }
-
-  span.light-text {
-    font-family: "Helvetica Neue";
-    font-size: 14px;
-    font-style: italic;
-    font-variant: normal;
-    font-weight: 400;
-    line-height: 20px;
-  }
-
   .block-title {
-    font-family: "Helvetica Neue";
     font-size: 24px;
     font-style: normal;
     font-variant: normal;
     font-weight: 400;
     line-height: 26px;
-  }
-
-  span.bold-text {
-    font-family: "Helvetica Neue";
-    font-size: 14px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 500;
-    line-height: 15px;
   }
 
   .box {
