@@ -3,7 +3,7 @@
   <div class="headerRow1" v-if="!isCollapsed">
     <div class="top">
       <div class="col">
-        <el-button size="small" type="text" @click="loginDialogFormVisible = true">login</el-button>
+        <el-button size="small" v-if="!username" type="text" @click="loginDialogFormVisible = true">login</el-button>
       </div>
       <div class="col">
         <a v-if="!username" :href="signup_page"><el-button size="small" type="text">register</el-button></a>
@@ -25,9 +25,8 @@
     </div>
     <wear-nav/>
   </div>
+  <wear-login-form :visible.sync="loginDialogFormVisible"/>
 </header>
-
-<wear-login-form :visible.sync="loginDialogFormVisible"/>
 </template>
 
 <script>

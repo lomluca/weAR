@@ -8,10 +8,9 @@
     <el-form-item label="Password" prop="pass">
       <el-input type="password" v-model="loginFormModel.pass" auto-complete="off"></el-input>
     </el-form-item>
-   
-    <span slot="footer" class="dialog-footer">
+    <el-form-item
       <el-button type="primary" @click="submitForm('loginFormModel')">Submit</el-button>
-    </span>
+    </el-form-item
   </el-form>
 </el-dialog>
 </template>
@@ -44,6 +43,7 @@ export default {
     }
 
     return {
+      windowWidth: window.innerWidth,
       fullscreenDialog: (window.innerWidth < 768),
       labelPosition: (window.innerWidth < 768) ? "top" : "right",
       loginFormModel: {
@@ -77,6 +77,7 @@ export default {
         if (valid) {
           localStorage.setItem("loggedIn", 1)
           this.$emit('loginSuccess')
+          window.location.href = 'index.html'
         } else {
           console.log('error submit!!');
           return false;
