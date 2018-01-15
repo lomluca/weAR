@@ -2,19 +2,19 @@
 <el-dialog title="Signup" :visible.sync="visible" :fullscreen="fullscreenDialog">
   <el-form :model="registerFormModel" :rules="registerFormRules" ref="registerFormModel" :label-position="labelPosition">
     <el-form-item label="Fullname" prop="fullname">
-      <el-input type="text" v-model="registerFormModel.fullname" auto-complete="off"></el-input>
+      <el-input @keyup.enter.native="submitForm('registerFormModel')" type="text" v-model="registerFormModel.fullname" auto-complete="off"></el-input>
     </el-form-item>
    
     <el-form-item label="Email" prop="email">
-      <el-input type="email" v-model="registerFormModel.email" auto-complete="off"></el-input>
+      <el-input @keyup.enter.native="submitForm('registerFormModel')" type="email" v-model="registerFormModel.email" auto-complete="off"></el-input>
     </el-form-item> 
 
     <el-form-item label="Password" prop="pass">
-      <el-input type="password" v-model="registerFormModel.pass" auto-complete="off"></el-input>
+      <el-input @keyup.enter.native="submitForm('registerFormModel')" type="password" v-model="registerFormModel.pass" auto-complete="off"></el-input>
     </el-form-item>
     
     <el-form-item label="Confirm" prop="checkPass">
-      <el-input type="password" v-model="registerFormModel.checkPass" auto-complete="off"></el-input>
+      <el-input @keyup.enter.native="submitForm('registerFormModel')" type="password" v-model="registerFormModel.checkPass" auto-complete="off"></el-input>
     </el-form-item>
 
     <el-form-item label="Birthday" prop="birthday">

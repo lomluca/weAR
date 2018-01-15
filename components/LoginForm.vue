@@ -2,11 +2,11 @@
 <el-dialog title="Login" :visible.sync="visible" :fullscreen="fullscreenDialog">
   <el-form :model="loginFormModel" :rules="loginFormRules" ref="loginFormModel" :label-position="labelPosition">
     <el-form-item label="Email" prop="email">
-      <el-input type="email" v-model="loginFormModel.email" auto-complete="off"></el-input>
+      <el-input @keyup.enter.native="submitForm('loginFormModel')" type="email" v-model="loginFormModel.email" auto-complete="off"></el-input>
     </el-form-item> 
 
     <el-form-item label="Password" prop="pass">
-      <el-input type="password" v-model="loginFormModel.pass" auto-complete="off"></el-input>
+      <el-input @keyup.enter.native="submitForm('loginFormModel')" type="password" v-model="loginFormModel.pass" auto-complete="off"></el-input>
     </el-form-item>
   </el-form>
     <span slot="footer" class="dialog-footer">

@@ -3,20 +3,20 @@
     <el-form :model="form" :rules="editFormRules" ref="editFormModel"
              :label-position="labelPosition">
 
-      <el-form-item label="street" :label-width="formLabelWidth" prop="street">
+      <el-form-item @keyup.enter.native="submitForm('editFormModel')" label="street" :label-width="formLabelWidth" prop="street">
         <el-input v-model="form.street" auto-complete="off"></el-input>
       </el-form-item>
 
       <el-form-item label="city" :label-width="formLabelWidth" prop="city">
-        <el-input v-model="form.city" auto-complete="off"></el-input>
+        <el-input @keyup.enter.native="submitForm('editFormModel')" v-model="form.city" auto-complete="off"></el-input>
       </el-form-item>
 
       <el-form-item label="zip code" :label-width="formLabelWidth" prop="zipCode">
-        <el-input v-model="form.zipCode" auto-complete="off"></el-input>
+        <el-input @keyup.enter.native="submitForm('editFormModel')" v-model="form.zipCode" auto-complete="off"></el-input>
       </el-form-item>
 
       <el-form-item label="country" :label-width="formLabelWidth" prop="country">
-        <el-input v-model="form.country" auto-complete="off"></el-input>
+        <el-input @keyup.enter.native="submitForm('editFormModel')" v-model="form.country" auto-complete="off"></el-input>
       </el-form-item>
     </el-form>
 

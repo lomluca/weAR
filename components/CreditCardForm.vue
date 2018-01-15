@@ -2,10 +2,10 @@
   <el-dialog title="Add a credit card" :visible.sync="visible" :fullscreen="fullscreenDialog">
     <el-form :model="creditCardForm" :rules="creditCardFormRules" ref="creditCardFormModel" :label-position="labelPosition">
       <el-form-item label="owner" :label-width="formLabelWidth" prop="owner">
-        <el-input v-model="creditCardForm.owner" auto-complete="off"></el-input>
+        <el-input @keyup.enter.native="submitCCForm('creditCardFormModel')" v-model="creditCardForm.owner" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item label="number" :label-width="formLabelWidth" prop="cardNumber">
-        <el-input v-model="creditCardForm.cardNumber" auto-complete="off"></el-input>
+        <el-input @keyup.enter.native="submitCCForm('creditCardFormModel')" v-model="creditCardForm.cardNumber" auto-complete="off"></el-input>
       </el-form-item>
       <img class="credit-card"
            src="/assets/visa.png"
