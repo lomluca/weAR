@@ -1,33 +1,35 @@
 <template>
-<header>
-  <div class="headerRow1" v-if="!isCollapsed">
-    <div class="top">
-      <div class="col">
-        <el-button size="small" v-if="!username" type="text" @click="loginDialogFormVisible = true">login</el-button>
-      </div>
-      <div class="col">
-        <el-button size="small" v-if="!username" type="text" @click="signupDialogFormVisible = true">register</el-button>
-      </div>
-      <div class="col">
-        <a v-if="username" :href="profile_page"><el-button size="small" type="text">{{ username }}</el-button></a>
-      </div>
-      <div class="col">
-        <a v-if="username" :href="home_page" @click="logout"><el-button size="small" type="text">logout</el-button></a>
+<div>
+  <header>
+    <div class="headerRow1" v-if="!isCollapsed">
+      <div class="top">
+        <div class="col">
+          <el-button size="small" v-if="!username" type="text" @click="loginDialogFormVisible = true">login</el-button>
+        </div>
+        <div class="col">
+          <el-button size="small" v-if="!username" type="text" @click="signupDialogFormVisible = true">register</el-button>
+        </div>
+        <div class="col">
+          <a v-if="username" :href="profile_page"><el-button size="small" type="text">{{ username }}</el-button></a>
+        </div>
+        <div class="col">
+          <a v-if="username" :href="home_page" @click="logout"><el-button size="small" type="text">logout</el-button></a>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="headerRow2" :class="{ paddedLogo: isCollapsed }">
-    <a :href="home_page"><img :src="logo.asset" :alt="logo.alt" width="50px" height="50px"></a>
-  </div>
-  <div class="headerRow3">
-    <div class="headerRow3_logo">
-      <a :href="home_page"><img :src="logo.asset" :alt="logo.alt" width="25px" height="25px"></a>
+    <div class="headerRow2" :class="{ paddedLogo: isCollapsed }">
+      <a :href="home_page"><img :src="logo.asset" :alt="logo.alt" width="50px" height="50px"></a>
     </div>
-    <wear-nav/>
-  </div>
+    <div class="headerRow3">
+      <div class="headerRow3_logo">
+        <a :href="home_page"><img :src="logo.asset" :alt="logo.alt" width="25px" height="25px"></a>
+      </div>
+      <wear-nav/>
+    </div>
+  </header>
   <wear-login-form :visible.sync="loginDialogFormVisible"/>
   <wear-signup-form :visible.sync="signupDialogFormVisible"/>
-</header>
+</div>
 </template>
 
 <script>
