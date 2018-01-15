@@ -35,3 +35,9 @@ html, body {
 .el-dialog__wrapper {
   z-index: 4000 !important;
 }
+
+@media (min-width: 768px) {
+  .v-modal {
+    z-index: 3000 !important;
+  }
+}
