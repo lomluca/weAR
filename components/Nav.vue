@@ -179,6 +179,7 @@ export default {
 .myNav {
   max-width: 100%;
   overflow-x: hidden;
+  padding-right: 10px;
 }
 /* NAV MENU COLLAPSE BUTTON (WITH ANIMATION) */
 .collapse-menu-button {
@@ -240,7 +241,6 @@ export default {
   clear: left;
   width: 97%;
   padding-left: 10px;
-  padding-right: 10px;
 }
 
 .verticalNavBadge {
