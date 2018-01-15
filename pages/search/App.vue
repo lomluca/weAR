@@ -1,9 +1,7 @@
 <template>
 <el-container>
   <!-- Header -->
-  <el-header height="auto">
     <wear-header />
-  </el-header>
 
 
   <!-- Main content -->
