@@ -1,6 +1,6 @@
 <template>
 <el-dialog title="Signup" :visible.sync="visible" :fullscreen="fullscreenDialog">
-  <el-form :model="registerFormModel" status-icon :rules="registerFormRules" ref="registerFormModel" :label-position="labelPosition">
+  <el-form :model="registerFormModel" :rules="registerFormRules" ref="registerFormModel" :label-position="labelPosition">
     <el-form-item label="Fullname" prop="fullname">
       <el-input type="text" v-model="registerFormModel.fullname" auto-complete="off"></el-input>
     </el-form-item>
@@ -20,12 +20,12 @@
     <el-form-item label="Birthday" prop="birthday">
       <el-date-picker type="date" v-model="registerFormModel.birthday" :picker-options="birthdatPickerOptions" style="width:100%"></el-date-picker>
     </el-form-item>
-   
-    <el-form-item>
-      <el-button type="primary" @click="submitForm('registerFormModel')">Submit</el-button>
-      <el-button @click="resetForm('registerFormModel')">Reset</el-button>
-    </el-form-item>
   </el-form>
+    <span slot="footer" class="dialog-footer">
+      <el-button style="color:white" type="primary" @click="submitForm('registerFormModel')">Submit</el-button>
+      <el-button @click="resetForm('registerFormModel')">Reset</el-button>
+    </span>
+  
 </el-dialog>
 </template>
 

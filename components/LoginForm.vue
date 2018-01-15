@@ -1,6 +1,6 @@
 <template>
 <el-dialog title="Login" :visible.sync="visible" :fullscreen="fullscreenDialog">
-  <el-form :model="loginFormModel" status-icon :rules="loginFormRules" ref="loginFormModel" :label-position="labelPosition">
+  <el-form :model="loginFormModel" :rules="loginFormRules" ref="loginFormModel" :label-position="labelPosition">
     <el-form-item label="Email" prop="email">
       <el-input type="email" v-model="loginFormModel.email" auto-complete="off"></el-input>
     </el-form-item> 
@@ -8,11 +8,11 @@
     <el-form-item label="Password" prop="pass">
       <el-input type="password" v-model="loginFormModel.pass" auto-complete="off"></el-input>
     </el-form-item>
-    <el-form-item
-      <el-button type="primary" @click="submitForm('loginFormModel')">Submit</el-button>
-    </el-form-item
   </el-form>
-</el-dialog>
+    <span slot="footer" class="dialog-footer">
+        <el-button style="color:white" type="primary" @click="submitForm('loginFormModel')">Submit</el-button>
+    </span>
+  </el-dialog>
 </template>
 
 <script>
