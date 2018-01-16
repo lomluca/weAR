@@ -1,7 +1,7 @@
 <template>
-<el-container>
+<el-container direction="vertical">
   <!-- Header -->
-    <wear-header />
+  <wear-header />
 
 
   <!-- Main content -->
@@ -37,9 +37,7 @@
   </el-main>
 
   <!-- Footer -->
-  <el-footer height="auto">
-    <wear-footer />
-  </el-footer>
+  <wear-footer />
 </el-container>
 </template>
 

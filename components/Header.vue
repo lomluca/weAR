@@ -1,6 +1,6 @@
 <template>
 <div>
-  <header>
+  <el-header height="auto">
     <div class="headerRow1" v-if="!isCollapsed">
       <div class="top">
         <div class="col">
@@ -26,7 +26,7 @@
       </div>
       <wear-nav/>
     </div>
-  </header>
+  </el-header>
   <wear-login-form :visible.sync="loginDialogFormVisible"/>
   <wear-signup-form :visible.sync="signupDialogFormVisible"/>
 </div>
@@ -87,47 +87,47 @@ export default {
 </script>
 
 <style>
-header {
+.el-header {
   width: 100%;
   background: #fff;
 }
 
-header .el-button {
+.el-header .el-button {
   color: #303133;
   text-transform: uppercase;
 }
 
 /* Header row 1 */
-header .headerRow1, header .headerRow2, header .headerRow3 {
+.el-header .headerRow1, .el-header .headerRow2, .el-header .headerRow3 {
   width: 100%;
   display: inline-block;
   vertical-align: top;
   background: #fff;
 }
-header .headerRow1 .col {
+.el-header .headerRow1 .col {
   margin-right: 20px;
   display: block;
   float: left;
 }
-header .headerRow1 .top {
+.el-header .headerRow1 .top {
   float: right;
 }
 
 /* Header row 2 */
-header .headerRow2  {
+.el-header .headerRow2  {
   margin-top: -10px;
   margin-bottom: -5px;
   text-align: center;
 }
 
-header .headerRow3 {
+.el-header .headerRow3 {
   width: 100%;
   height: 100%;
   margin-bottom: 5px;
   margin-top: 5px;
 }
 
-header .headerRow3_logo{
+.el-header .headerRow3_logo{
   float: left;
   padding: 3px;
   display: none;

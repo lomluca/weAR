@@ -1,7 +1,7 @@
 <template>
-<el-container>
+<el-container direction="vertical">
   <!-- Header -->
-    <wear-header />
+  <wear-header />
 
   <!-- Page's main content -->
   <el-main>
@@ -34,9 +34,8 @@
   </el-main>
 
   <!-- Footer -->
-  <el-footer height="auto">
-    <wear-footer />
-  </el-footer>
+  <wear-footer />
+  
 </el-container>
 </template>
 
@@ -57,7 +56,7 @@ export default {
   name: 'app',
   data () {
     return {
-      item: getItem(params['id'])['data'], // Defined in model.js  
+      item: getItem(params['id'])['data'], // Defined in model.js
       releatedItems,
       collapseActive: false
     }

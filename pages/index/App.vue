@@ -1,7 +1,7 @@
 <template>
-<el-container>
+<el-container direction="vertical">
   <!-- Header -->
-    <wear-header />
+  <wear-header />
 
   <!-- Page's main content -->
   <el-main>
@@ -15,9 +15,7 @@
   </el-main>
 
   <!-- Footer -->
-  <el-footer height="auto">
-    <wear-footer />
-  </el-footer>
+  <wear-footer />
 </el-container>
 </template>
 
@@ -45,7 +43,7 @@ export default {
 </script>
 
 <style>
-.el-header{
+.el-header {
   box-sizing: content-box;
   padding: 0px;
 }
@@ -54,6 +52,11 @@ export default {
   height: auto;
   overflow: initial;
   padding: 0 !important
+}
+
+.el-footer {
+  box-sizing: content-box;
+  padding: 0px;
 }
 
 .homepage-header {

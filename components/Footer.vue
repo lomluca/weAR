@@ -1,5 +1,5 @@
 <template>
-<footer>
+<el-footer height="auto">
   <el-row :gutter="10" style="margin-right:0px">
     <el-col :sm="6">
         <div class="footerListContainer">
@@ -42,7 +42,7 @@
         </div>
     </el-col>
   </el-row>
-</footer>
+</el-footer>
 </template>
 
 <script>
@@ -79,29 +79,24 @@ export default {
 </script>
 
 <style>
-footer {
+.el-footer {
   width: 100%;
-  height: 100%;
-  font-family: Helvetica, sans-serif;
   font-size: 12px;
 }
 /* Footer columns */
-footer .footerListContainer {
-  /*margin-left: 30px;*/
-}
-footer .footerListContainer .footerHeader {
+.el-footer .footerListContainer .footerHeader {
   width: 100%
 }
-footer .footerListContainer .footerHeader h4 {
+.el-footer .footerListContainer .footerHeader h4 {
   color: #303133;
 }
-footer .footerListContainer ul {
+.el-footer .footerListContainer ul {
   list-style-type: none;
 }
-footer .footerListContainer ul li {
+.el-footer .footerListContainer ul li {
   display: block;
 }
-footer .footerListContainer ul li .el-button {
+.el-footer .footerListContainer ul li .el-button {
   display: block;
   color: #909399;
 }

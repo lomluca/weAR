@@ -1,9 +1,7 @@
 <template>
-<el-container>
+<el-container direction="vertical">
   <!-- Header -->
-  <el-header height="auto">
-    <wear-header />
-  </el-header>
+  <wear-header />
 
 
   <!-- Main content -->
@@ -19,29 +17,6 @@
             <li><span class="ligth-text">email</span> <span class="bold-text">{{ mail }}</span></li>
             <li><span class="ligth-text">birthday</span> <span class="bold-text">{{ birthday }}</span></li>
           </ul>
-          <!--
-          <el-button type="primary" @click="showDialogForm()">Edit</el-button>
-          <el-dialog title="Edit your personal info" :visible.sync="dialogFormVisible">
-            <el-form :model="form" :rules="editFormRules" ref="editFormModel">
-              <el-form-item label="fullname" :label-width="formLabelWidth" prop="fullname">
-                <el-input v-model="form.fullname" auto-complete="off"></el-input>
-              </el-form-item>
-              <el-form-item label="email" :label-width="formLabelWidth" prop="email">
-                <el-input type="email" v-model="form.email" auto-complete="off"></el-input>
-              </el-form-item>
-              <el-form-item label="birthday" :label-width="formLabelWidth" prop="birthday">
-                <el-date-picker type="date" v-model="form.birthday" :picker-options="birthdatPickerOptions" style="width:100%"></el-date-picker>
-              </el-form-item>
-              <el-form-item label="address" :label-width="formLabelWidth" prop="address">
-                <el-input v-model="form.address" auto-complete="off"></el-input>
-              </el-form-item>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-              <el-button @click="dialogFormVisible = false">Cancel</el-button>
-              <el-button type="primary" @click="submitForm('editFormModel')">Confirm</el-button>
-            </span>
-          </el-dialog>
-          -->
         </div>
       </el-col>
       <el-col :sm="16">
@@ -66,7 +41,7 @@
               <wear-address-form :visible.sync="addressDialogFormVisible"/>
             </el-tab-pane>
           </el-tabs>
-          <!--<img class="small" src="/assets/credit-card-logo.png">-->
+
 
         </div>
       </el-col>
@@ -82,9 +57,7 @@
   </el-main>
 
   <!-- Footer -->
-  <el-footer height="auto">
-    <wear-footer />
-  </el-footer>
+  <wear-footer />
 </el-container>
 </template>
 
