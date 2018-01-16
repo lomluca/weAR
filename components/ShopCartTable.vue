@@ -1,18 +1,5 @@
 <template>
   <el-card class="box-card">
-
-    <el-popover
-    ref="deletePopover"
-    placement="top"
-    width="160"
-    v-model="deletepopoverVisible">
-      <p>Are you sure to delete this?</p>
-      <div style="text-align: right; margin: 0">
-        <el-button size="mini" type="text" @click="deletepopoverVisible = false">cancel</el-button>
-        <el-button type="primary" size="mini" @click="deletepopoverVisible = false">confirm</el-button>
-      </div>
-    </el-popover>
-
     <el-table
     height="500"
     :data="shopcartData">
@@ -54,12 +41,23 @@
         width="80">
         <template slot-scope="scope">
           <div class="shopRowWrapper">
+            <el-popover
+            ref="deletePopover"
+            placement="top"
+            width="auto"
+            v-model="deletepopoverVisible">
+              <p>Are you sure to delete this?</p>
+              <div style="text-align: right; margin: 0">
+                <el-button size="mini" @click="deletepopoverVisible = false">cancel</el-button>
+                <el-button type="danger" size="mini" @click="deleteCartItem(scope.row)">confirm</el-button>
+              </div>
+            </el-popover>
+
             <el-button
             size="mini"
             type="danger"
             icon="el-icon-remove"
-            v-popover: deletePopover
-            @click="deleteCartItem(scope.row)"></el-button>
+            v-popover:deletePopover></el-button>
           </div>
         </template>
       </el-table-column>
@@ -122,6 +120,7 @@ export default {
       changeCartItemQuantity(index, value);
     },
     deleteCartItem(item) {
+      this.deletepopoverVisible = false;
       deleteCartItem(item);
       this.shopcartData = getShopCart();
     },
