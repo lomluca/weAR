@@ -9,19 +9,22 @@
 
 <script>
 
+'use strict';
+
 export default {
   name: 'wear-arcabin',
   props: [ 'item' ],
   data() {
     return {
-      video: document.querySelector("#ar-component"),
-      constraints: window.constraints = { audio: false, video: true }
     }
   },
   methods: {
     
   },
   mounted: function() {
+
+      var video =  document.querySelector("#ar-component"),
+      var constraints = window.constraints = { audio: false, video: true }
 
       var handleSuccess = function (stream) {  
           var videoTracks = stream.getVideoTracks();
@@ -31,7 +34,7 @@ export default {
             console.log('Stream inactive');
           };
           window.stream = stream; // make variable available to browser console
-          this.video.srcObject = stream;
+          video.srcObject = stream;
       };
 
       var errorMsg = function(msg, error) {
@@ -52,7 +55,7 @@ export default {
         errorMsg('getUserMedia error: ' + error.name, error);
       }
 
-      navigator.mediaDevices.getUserMedia(this.constraints).then(handleSuccess).catch(handleError);
+      navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError);
   }
 }
 </script>
