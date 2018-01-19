@@ -12,8 +12,8 @@
           <img class="small" src="/assets/widget-personal-info1.png">
           <!--<img class="profile-img":src="sourceImg" v-if="showImg"></img>
           <input type="file" accept="image/*"@change="changePic($event)"></input>-->
-          <video v-if="cameraShowed" playsinline="true" autoplay="true" id="video-box"></video>
-          <canvas v-if="cameraShowed" id="snapshot" width="100" height="100"></canvas>
+          <video v-show="cameraShowed" playsinline="true" autoplay="true" id="video-box"></video>
+          <canvas v-show="cameraShowed" id="snapshot" width="100" height="100"></canvas>
           <img src="" alt="Profile picture" id="profile-pic">
           <el-button type="primary" @click="takePhoto">Take photo</el-button>
           <ul class="list-info">
@@ -133,9 +133,9 @@ export default {
       this.addresses = getAddresses();
     },
     takePhoto: function() {
+      this.cameraShowed = true;
       var video =  document.querySelector("#video-box")
       var constraints = window.constraints = { audio: false, video: true }
-      this.cameraShowed = true;
 
       var handleSuccess = function (stream) {  
           var videoTracks = stream.getVideoTracks();
