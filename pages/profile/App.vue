@@ -170,7 +170,7 @@ export default {
       navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError); 
     },
     getSnap: function() {
-      var canvas = document.querySelector("snapshot");
+      var canvas = document.querySelector("#snapshot");
       ctx = canvas.getContext('2d');
       ctx.drawImage(video, 0,0, canvas.width, canvas.height);
       cameraShowed = false;
