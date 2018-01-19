@@ -282,10 +282,10 @@ function getGeoAddress(self){
 function getCarouselData() {
   return {
     data: [
-      { id: 1, asset: '/assets/carousel/1.jpg', alt: 'Ad Banner 1', href: '#', title: 'IMAGINE', subtitle: 'A dressing room in your camera'  },
-      { id: 2, asset: '/assets/carousel/2.jpg', alt: 'Ad Banner 2', href: '#', title: 'IMAGINE', subtitle: 'A dressing room in your camera'   },
-      { id: 3, asset: '/assets/carousel/3.jpg', alt: 'Ad Banner 3', href: '#', title: 'IMAGINE', subtitle: 'A dressing room in your camera'   },
-      { id: 4, asset: '/assets/carousel/4.jpg', alt: 'Ad Banner 4', href: '#', title: 'IMAGINE', subtitle: 'A dressing room in your camera'   }
+      { id: 1, asset: '/assets/carousel/1.jpg', alt: 'Ad Banner 1', href: '#', title: 'IMAGINE', subtitle: 'A dressing room in your camera.'  },
+      { id: 2, asset: '/assets/carousel/2.jpg', alt: 'Ad Banner 2', href: '#', title: 'DISCOVER', subtitle: 'A new shopping experience.'   },
+      { id: 3, asset: '/assets/carousel/3.jpg', alt: 'Ad Banner 3', href: '#', title: 'SAY HELLO', subtitle: 'The future has just arrived.'   },
+      { id: 4, asset: '/assets/carousel/4.jpg', alt: 'Ad Banner 4', href: '#', title: 'WEAR NOW', subtitle: 'It\'s like taking a selfie.'  }
     ]
   }
 }
