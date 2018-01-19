@@ -47,7 +47,7 @@ export default {
       margin: auto;
       top: 50%;
       bottom: 50%;
-      right: 50%;
+      right: 36%;
       left: 47%;
       transform: translate(-50%, -50%);
 
