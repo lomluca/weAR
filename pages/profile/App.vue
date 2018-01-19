@@ -14,7 +14,7 @@
           <input type="file" accept="image/*"@change="changePic($event)"></input>-->
           <video v-show="cameraShowed" playsinline="true" autoplay="true" id="video-box"></video>
           <canvas v-show="previewShowed" id="snapshot" width="150" height="150"></canvas>
-          <img v-if="profilePicture" src="" alt="Profile picture" id="profile-pic">
+          <img v-if="profilePicture" v-bind:src="profilePicture" alt="Profile picture" id="profile-pic">
           <el-button type="primary" @click="takePhoto">Change photo</el-button>
           <el-button type="primary" @click="getSnap">Take photo</el-button>
           <el-button type="primary" @click="savePhoto">Save</el-button>
@@ -88,7 +88,7 @@ export default {
       cards: JSON.parse(localStorage.cards),
       addresses: JSON.parse(localStorage.addresses),
       updateFullname: false,
-      profilePicture: localStorage.picture,
+      profilePicture: JSON.parse(localStorage.picture),
       cameraShowed: false
     }
   },
@@ -181,7 +181,7 @@ export default {
     savePhoto: function() {
       var canvas = document.querySelector("#snapshot");
       var imgFile = canvas.toDataURL("image/png")
-      localStorage.setItem("profile-pic", JSON.stringify(imgFile))
+      localStorage.setItem("picture", JSON.stringify(imgFile))
     }
   },
   beforeMount() {
