@@ -23,7 +23,7 @@ export default {
   },
   mounted: function() {
 
-      var video =  document.querySelector("#ar-component"),
+      var video =  document.querySelector("#ar-component")
       var constraints = window.constraints = { audio: false, video: true }
 
       var handleSuccess = function (stream) {  

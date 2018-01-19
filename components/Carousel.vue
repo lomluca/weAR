@@ -5,8 +5,8 @@
     :item="item"
     :key="item.id" >
       <a :href="item.href"><img :src="item.asset" :alt="item.alt"></a>
-      <span class="text_over_image">SALE</span>
-      <span class="text_over_image_below">TRY YOUR STYLE NOW</span>
+      <span class="text_over_image">{{ item.title }}</span>
+      <span class="text_over_image_below">{{ item.subtitle }}</span>
   </el-carousel-item>
 </el-carousel>
 </template>
@@ -95,9 +95,11 @@ export default {
     bottom: 50%;
     transform: translate(-50%, -50%);
     color:#fff;
-    font-size: 3.8vw;
+    font-size: 11vw;
     font-weight: bold;
-    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    text-shadow: 1px 1px 5px rgb(107, 107, 107);
+    font-family: "Helvetica Neue";
+    font-weight: normal;
 }
 
 .text_over_image_below {
@@ -107,9 +109,11 @@ export default {
     bottom: 43%;
     transform: translate(-50%, -50%);
     color:#fff;
-    font-size: 2vw;
+    font-size: 2.4vw;
     font-weight: bold;
-    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    text-shadow: 1px 1px 5px rgb(7, 7, 7);
+    font-family: "Helvetica Neue";
+    font-weight: normal;
 }
 
 </style>
