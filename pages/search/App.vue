@@ -18,14 +18,14 @@
         </el-collapse-item>
       </el-collapse>
 
-      <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" class="hidden-xs-only">
+      <el-col :xs="6" :sm="4" :md="4" :lg="6" :xl="6" class="hidden-xs-only">
         <wear-filter-bar
           :_brands="brands" :_colors="colors" :_sizes="sizes" :_minPrice="minPrice" :_maxPrice="maxPrice"
           @filter-change="applyFiltering" style="padding-right: 10px">
       </el-col>
 
       <!-- Search results -->
-      <el-col :xs="24" :sm="18" :md="18" :lg="18" :xl="18">
+      <el-col :xs="24" :sm="20" :md="20" :lg="18" :xl="18">
         <el-container direction="vertical">
           <h1 v-if="items && items.length > 0"  class="query-result-label">Results for: {{ query }}</h1>
           <wear-list v-if="items && items.length > 0" :items="items" />
