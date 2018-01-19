@@ -16,7 +16,7 @@
           <canvas v-show="previewShowed" id="snapshot" width="100" height="100"></canvas>
           <img src="" alt="Profile picture" id="profile-pic">
           <el-button type="primary" @click="takePhoto">Change photo</el-button>
-          <el-button type="primary" @click="takeSnap">Take photo</el-button>
+          <el-button type="primary" @click="getSnap">Take photo</el-button>
           <ul class="list-info">
             <li><span class="ligth-text">fullname</span> <span class="bold-text">{{ fullname }}</span></li>
             <li><span class="ligth-text">email</span> <span class="bold-text">{{ mail }}</span></li>
