@@ -12,8 +12,8 @@
           <img class="small" src="/assets/widget-personal-info1.png">
           <!--<img class="profile-img":src="sourceImg" v-if="showImg"></img>
           <input type="file" accept="image/*"@change="changePic($event)"></input>-->
-          <video playsinline="true" autoplay="true" id="video-box">
-          <canvas  id="snapshot" width="400" height="400"></canvas>
+          <video v-if="cameraShowed" playsinline="true" autoplay="true" id="video-box"></video>
+          <canvas v-if="cameraShowed" id="snapshot" width="100" height="100"></canvas>
           <img src="" alt="Profile picture" id="profile-pic">
           <el-button type="primary" @click="takePhoto">Take photo</el-button>
           <ul class="list-info">
@@ -86,7 +86,8 @@ export default {
       cards: JSON.parse(localStorage.cards),
       addresses: JSON.parse(localStorage.addresses),
       updateFullname: false,
-      profilePicture: localStorage.picture
+      profilePicture: localStorage.picture,
+      cameraShowed: false
     }
   },
   computed: {
@@ -134,6 +135,7 @@ export default {
     takePhoto: function() {
       var video =  document.querySelector("#video-box")
       var constraints = window.constraints = { audio: false, video: true }
+      this.cameraShowed = true;
 
       var handleSuccess = function (stream) {  
           var videoTracks = stream.getVideoTracks();
@@ -222,6 +224,11 @@ export default {
     border: 1px solid;
     border-color: rgb(202, 200, 204);
     box-shadow: 0 4px 5px 1px rgb(193, 186, 196)
+  }
+
+  #video-box {
+    width: 50px;
+    height: 50px;
   }
 
 </style>
