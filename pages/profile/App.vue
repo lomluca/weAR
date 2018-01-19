@@ -174,8 +174,8 @@ export default {
       var ctx = canvas.getContext('2d');
       var video =  document.querySelector("#video-box")
       ctx.drawImage(video, 0,0, canvas.width, canvas.height);
-      cameraShowed = false;
-      previewShowed = true;
+      this.cameraShowed = false;
+      this.previewShowed = true;
     }
   },
   beforeMount() {
