@@ -172,6 +172,7 @@ export default {
     getSnap: function() {
       var canvas = document.querySelector("#snapshot");
       var ctx = canvas.getContext('2d');
+      var video =  document.querySelector("#video-box")
       ctx.drawImage(video, 0,0, canvas.width, canvas.height);
       cameraShowed = false;
       previewShowed = true;
