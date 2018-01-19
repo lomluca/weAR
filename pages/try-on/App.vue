@@ -14,11 +14,11 @@
 
     <!-- Item's property selector and AR viewer -->
     <el-row>
-      <el-col :md="8" :lg="6" :xl="6" class="hidden-sm-and-down">
+      <el-col :md="6" :lg="6" :xl="6" class="hidden-sm-and-down">
         <wear-item-property-selector :item="item" />
       </el-col>
 
-      <el-col :xs="24" :sm="24" :md="16" :lg="18" :xl="18">
+      <el-col :xs="24" :sm="24" :md="18" :lg="18" :xl="18">
         <wear-arcabin :item="item" />
       </el-col>
     </el-row>
