@@ -18,7 +18,7 @@
         </el-collapse-item>
       </el-collapse>
 
-      <el-col :xs="6" :sm=6" :md="6" :lg="6" :xl="6" class="hidden-xs-only">
+      <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" class="hidden-xs-only">
         <wear-filter-bar
           :_brands="brands" :_colors="colors" :_sizes="sizes" :_minPrice="minPrice" :_maxPrice="maxPrice"
           @filter-change="applyFiltering" style="padding-right: 10px">
