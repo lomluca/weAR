@@ -1,15 +1,20 @@
 <template>
-<el-card class="list-item" :body-style="{ padding: '0px' }">
+<el-card class="list-item" :body-style="{ padding: '0px' }" 
+    vocab="http://schema.org/" typeof="Product">
   <img :id="uniqueId" :src="this.item.assets[0]" :key="uniqueId" :alt="item.name" class="list-item-image li-image-top"
     v-on:mouseover="loopImage()"
-    v-on:mouseout="loopImage()">
+    v-on:mouseout="loopImage()"
+    property="image">
   <!-- The below image is never shown, it is here for the solo purpose of preloading an asset -->
   <img :src="this.item.assets[1]" class="list-item-image-preload">
   <el-container direction="vertical" style="padding: 14px;">
-    <span class="list-item-main-label">{{ item.name  }}</span>
+    <span class="list-item-main-label" property="name">{{ item.name  }}</span>
     <div class="bottom clearfix">
       <el-row>
-        <span class="list-item-price-label" style="float:left">{{ item.price }} €</span>
+        <span class="list-item-price-label" style="float:left"
+            property="price" :content="item.price">
+          {{ item.price }} <span property="priceCurrency" content="EUR">€</span>
+        </span>
         <el-container style="width:60%;float:right;" direction="vertical">
           <el-button type="primary" class="list-item-button" @click="tryOn(item)">Try</el-button>
           <!-- <el-button class="list-item-button" style="margin-left:0" @click="addToCart(item)">Add To Cart</el-button> -->

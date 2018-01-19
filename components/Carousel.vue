@@ -47,7 +47,7 @@ export default {
       margin: auto;
       top: 50%;
       bottom: 50%;
-      right: 50%;
+      right: 36%;
       left: 47%;
       transform: translate(-50%, -50%);
 
@@ -77,9 +77,9 @@ export default {
    .text_over_image {
       position: absolute;
       margin: auto;
-      top: 50%;
+      top: 49%;
       bottom: 50%;
-      right: 42%;
+      right: 24%;
       transform: translate(-50%, -50%);
       color:#fff;
       font-size: 3.8vw;
@@ -91,14 +91,13 @@ export default {
 .text_over_image {
     position: absolute;
     margin: auto;
-    top: 50%;
+    top: 49%;
     bottom: 50%;
     transform: translate(-50%, -50%);
     color:#fff;
     font-size: 11vw;
     font-weight: bold;
     text-shadow: 1px 1px 5px rgb(107, 107, 107);
-    font-family: "Helvetica Neue";
     font-weight: normal;
 }
 
@@ -112,7 +111,6 @@ export default {
     font-size: 2.4vw;
     font-weight: bold;
     text-shadow: 1px 1px 5px rgb(7, 7, 7);
-    font-family: "Helvetica Neue";
     font-weight: normal;
 }
 
