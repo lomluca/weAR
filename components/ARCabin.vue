@@ -1,7 +1,7 @@
 <template>
 <!-- IE versions < 11 do not support this feature -->
 <div class="ar-container">
-  <video autoplay="true" class="ar-element" id="ar-component">
+  <video playsinline="true" autoplay="true" class="ar-element" id="ar-component">
   
   </video>
 </div>
