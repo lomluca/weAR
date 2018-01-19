@@ -88,7 +88,6 @@ export default {
       cards: JSON.parse(localStorage.cards),
       addresses: JSON.parse(localStorage.addresses),
       updateFullname: false,
-      profilePicture: JSON.parse(localStorage.picture),
       cameraShowed: false
     }
   },
@@ -101,6 +100,13 @@ export default {
       if (this.dialogFormVisible == false) {
         return newBirthday
       } else return newBirthday
+    },
+    profilePicture: function() {
+      var imgFile;
+      if (localStorage.picture) {
+        imgFile = JSON.parse(localStorage.getItem("picture"))
+      }
+      return imgFile;
     }
   },
   components: {
