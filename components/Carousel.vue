@@ -77,9 +77,9 @@ export default {
    .text_over_image {
       position: absolute;
       margin: auto;
-      top: 50%;
+      top: 49%;
       bottom: 50%;
-      right: 42%;
+      right: 24%;
       transform: translate(-50%, -50%);
       color:#fff;
       font-size: 3.8vw;
@@ -91,7 +91,7 @@ export default {
 .text_over_image {
     position: absolute;
     margin: auto;
-    top: 50%;
+    top: 49%;
     bottom: 50%;
     transform: translate(-50%, -50%);
     color:#fff;
