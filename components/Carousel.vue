@@ -98,7 +98,6 @@ export default {
     font-size: 11vw;
     font-weight: bold;
     text-shadow: 1px 1px 5px rgb(107, 107, 107);
-    font-family: "Helvetica Neue";
     font-weight: normal;
 }
 
@@ -112,7 +111,6 @@ export default {
     font-size: 2.4vw;
     font-weight: bold;
     text-shadow: 1px 1px 5px rgb(7, 7, 7);
-    font-family: "Helvetica Neue";
     font-weight: normal;
 }
 
