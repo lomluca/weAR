@@ -13,10 +13,11 @@
           <!--<img class="profile-img":src="sourceImg" v-if="showImg"></img>
           <input type="file" accept="image/*"@change="changePic($event)"></input>-->
           <video v-show="cameraShowed" playsinline="true" autoplay="true" id="video-box"></video>
-          <canvas v-show="previewShowed" id="snapshot" width="100" height="100"></canvas>
-          <img src="" alt="Profile picture" id="profile-pic">
+          <canvas v-show="previewShowed" id="snapshot" width="150" height="150"></canvas>
+          <img v-if="profilePicture" src="" alt="Profile picture" id="profile-pic">
           <el-button type="primary" @click="takePhoto">Change photo</el-button>
           <el-button type="primary" @click="getSnap">Take photo</el-button>
+          <el-button type="primary" @click="savePhoto">Save</el-button>
           <ul class="list-info">
             <li><span class="ligth-text">fullname</span> <span class="bold-text">{{ fullname }}</span></li>
             <li><span class="ligth-text">email</span> <span class="bold-text">{{ mail }}</span></li>
@@ -176,6 +177,11 @@ export default {
       ctx.drawImage(video, 0,0, canvas.width, canvas.height);
       this.cameraShowed = false;
       this.previewShowed = true;
+    },
+    savePhoto: function() {
+      var canvas = document.querySelector("#snapshot");
+      var imgFile = canvas.toDataURL("image/png")
+      localStorage.setItem("profile-pic", JSON.stringify(imgFile))
     }
   },
   beforeMount() {
