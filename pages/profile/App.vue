@@ -12,6 +12,10 @@
           <img class="small" src="/assets/widget-personal-info1.png">
           <!--<img class="profile-img":src="sourceImg" v-if="showImg"></img>
           <input type="file" accept="image/*"@change="changePic($event)"></input>-->
+          <video playsinline="true" autoplay="true" id="video-box">
+          <canvas  id="snapshot" width="400" height="400"></canvas>
+          <img src="" alt="Profile picture" id="profile-pic">
+          <el-button type="primary" @click="takePhoto">Take photo</el-button>
           <ul class="list-info">
             <li><span class="ligth-text">fullname</span> <span class="bold-text">{{ fullname }}</span></li>
             <li><span class="ligth-text">email</span> <span class="bold-text">{{ mail }}</span></li>
@@ -82,6 +86,7 @@ export default {
       cards: JSON.parse(localStorage.cards),
       addresses: JSON.parse(localStorage.addresses),
       updateFullname: false,
+      profilePicture: localStorage.picture
     }
   },
   computed: {
@@ -125,6 +130,46 @@ export default {
     deleteAddress(index) {
       deleteAddress(index);
       this.addresses = getAddresses();
+    },
+    takePhoto: function() {
+      var video =  document.querySelector("#video-box")
+      var constraints = window.constraints = { audio: false, video: true }
+
+      var handleSuccess = function (stream) {  
+          var videoTracks = stream.getVideoTracks();
+          console.log('Got stream with constraints:', constraints);
+          console.log('Using video device: ' + videoTracks[0].label);
+          stream.oninactive = function() {
+            console.log('Stream inactive');
+          };
+          window.stream = stream; // make variable available to browser console
+          video.srcObject = stream;
+      };
+
+      var errorMsg = function(msg, error) {
+        if (typeof error !== 'undefined') {
+            console.error(error);
+        }
+      }
+
+      var handleError = function(error) {
+        if (error.name === 'ConstraintNotSatisfiedError') {
+          errorMsg('The resolution ' + constraints.video.width.exact + 'x' +
+              constraints.video.width.exact + ' px is not supported by your device.');
+        } else if (error.name === 'PermissionDeniedError') {
+          errorMsg('Permissions have not been granted to use your camera and ' +
+            'microphone, you need to allow the page access to your devices in ' +
+            'order for the demo to work.');
+        }
+        errorMsg('getUserMedia error: ' + error.name, error);
+      }
+
+      navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError); 
+    },
+    getSnap: function() {
+      canvas = document.getElementById("snapshot");
+      ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0,0, canvas.width, canvas.height);
     }
   },
   beforeMount() {
