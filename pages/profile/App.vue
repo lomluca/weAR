@@ -12,10 +12,11 @@
           <img class="small" src="/assets/widget-personal-info1.png">
           <!--<img class="profile-img":src="sourceImg" v-if="showImg"></img>
           <input type="file" accept="image/*"@change="changePic($event)"></input>-->
-          <video v-if="cameraShowed" playsinline="true" autoplay="true" id="video-box"></video>
-          <canvas v-if="cameraShowed" id="snapshot" width="100" height="100"></canvas>
+          <video v-show="cameraShowed" playsinline="true" autoplay="true" id="video-box"></video>
+          <canvas v-show="previewShowed" id="snapshot" width="100" height="100"></canvas>
           <img src="" alt="Profile picture" id="profile-pic">
-          <el-button type="primary" @click="takePhoto">Take photo</el-button>
+          <el-button type="primary" @click="takePhoto">Change photo</el-button>
+          <el-button type="primary" @click="getSnap">Take photo</el-button>
           <ul class="list-info">
             <li><span class="ligth-text">fullname</span> <span class="bold-text">{{ fullname }}</span></li>
             <li><span class="ligth-text">email</span> <span class="bold-text">{{ mail }}</span></li>
@@ -133,9 +134,9 @@ export default {
       this.addresses = getAddresses();
     },
     takePhoto: function() {
+      this.cameraShowed = true;
       var video =  document.querySelector("#video-box")
       var constraints = window.constraints = { audio: false, video: true }
-      this.cameraShowed = true;
 
       var handleSuccess = function (stream) {  
           var videoTracks = stream.getVideoTracks();
@@ -172,6 +173,8 @@ export default {
       canvas = document.getElementById("snapshot");
       ctx = canvas.getContext('2d');
       ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+      cameraShowed = false;
+      previewShowed = true;
     }
   },
   beforeMount() {
@@ -227,8 +230,8 @@ export default {
   }
 
   #video-box {
-    width: 50px;
-    height: 50px;
+    width: 150px;
+    height: 150px;
   }
 
 </style>
