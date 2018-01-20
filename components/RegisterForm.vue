@@ -115,6 +115,7 @@ export default {
           var emptyArray = []
           localStorage.setItem("cards", JSON.stringify(emptyArray))
           localStorage.setItem("addresses", JSON.stringify(emptyArray))
+          localStorage.removeItem("picture")
           this.$message({
             message: 'Signup completed!',
             type: 'success'

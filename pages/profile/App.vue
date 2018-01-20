@@ -15,9 +15,10 @@
           <video v-show="cameraShowed" playsinline="true" autoplay="true" id="video-box"></video>
           <canvas v-show="previewShowed" id="snapshot" width="150" height="150"></canvas>
           <img v-if="profilePicture" v-bind:src="profilePicture" alt="Profile picture" id="profile-pic">
-          <el-button type="primary" @click="takePhoto">Change photo</el-button>
-          <el-button type="primary" @click="getSnap">Take photo</el-button>
-          <el-button type="primary" @click="savePhoto">Save</el-button>
+          <el-button v-if="!cameraShowed" type="primary" @click="takePhoto">Change photo</el-button>
+          <el-button v-if="cameraShowed" type="primary" @click="getSnap">Get snap</el-button>
+          <el-button v-if="previewShowed" type="success" @click="savePhoto" round>Save</el-button>
+          <el-button v-if="previewShowed" type="danger" @click="againPhoto" round>Reset</el-button>
           <ul class="list-info">
             <li><span class="ligth-text">fullname</span> <span class="bold-text">{{ fullname }}</span></li>
             <li><span class="ligth-text">email</span> <span class="bold-text">{{ mail }}</span></li>
@@ -188,6 +189,13 @@ export default {
       var canvas = document.querySelector("#snapshot");
       var imgFile = canvas.toDataURL("image/png")
       localStorage.setItem("picture", JSON.stringify(imgFile))
+    },
+    againPhoto: function() {
+      var canvas = document.querySelector("#snapshot");
+      var ctx = canvas.getContext('2d');
+      this.previewShowed = false;
+      this.cameraShowed = true;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
   },
   beforeMount() {
