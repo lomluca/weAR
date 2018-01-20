@@ -89,7 +89,8 @@ export default {
       cards: JSON.parse(localStorage.cards),
       addresses: JSON.parse(localStorage.addresses),
       updateFullname: false,
-      cameraShowed: false
+      cameraShowed: false,
+      previewShowed: false
     }
   },
   computed: {
@@ -104,7 +105,7 @@ export default {
     },
     profilePicture: function() {
       var imgFile;
-      if (localStorage.picture) {
+      if (localStorage.picture && !previewShowed) {
         imgFile = JSON.parse(localStorage.getItem("picture"))
       }
       return imgFile;
@@ -189,6 +190,8 @@ export default {
       var canvas = document.querySelector("#snapshot");
       var imgFile = canvas.toDataURL("image/png")
       localStorage.setItem("picture", JSON.stringify(imgFile))
+      this.previewShowed = false;
+      this.cameraShowed = false;
     },
     againPhoto: function() {
       var canvas = document.querySelector("#snapshot");
@@ -259,6 +262,7 @@ export default {
 
   #profile-pic {
     display: block;
+    margin: 0 auto;
     width: 100px;
     height: 100px;
     border-radius: 50%;
