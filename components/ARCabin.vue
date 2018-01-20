@@ -1,32 +1,33 @@
 <template>
 <!-- IE versions < 11 do not support this feature -->
 <div class="ar-container">
-  <video playsinline="true" autoplay="true" class="ar-element" id="ar-component">
-  
+  <p v-if="!webcamAvailable" class="error-message">Can not play webcam</p>
+  <video v-else playsinline="true" autoplay="true" class="ar-element" id="ar-component">
+    <script>alert('aa')</script>
   </video>
 </div>
 </template>
 
 <script>
-
-'use strict';
+'use strict'
 
 export default {
   name: 'wear-arcabin',
   props: [ 'item' ],
   data() {
     return {
+      webcamAvailable: true
     }
   },
   methods: {
-    
+
   },
   mounted: function() {
 
       var video =  document.querySelector("#ar-component")
       var constraints = window.constraints = { audio: false, video: true }
 
-      var handleSuccess = function (stream) {  
+      var handleSuccess = function (stream) {
           var videoTracks = stream.getVideoTracks();
           console.log('Got stream with constraints:', constraints);
           console.log('Using video device: ' + videoTracks[0].label);
@@ -43,7 +44,9 @@ export default {
         }
       }
 
+      let that = this
       var handleError = function(error) {
+        that.$data.webcamAvailable = false
         if (error.name === 'ConstraintNotSatisfiedError') {
           errorMsg('The resolution ' + constraints.video.width.exact + 'x' +
               constraints.video.width.exact + ' px is not supported by your device.');
@@ -65,13 +68,20 @@ export default {
 
 }
 
+.error-message {
+  color: red;
+  font-size: 3.5vw;
+  font-weight: bold;
+}
+
 .ar-element {
-  min-width: 100%; 
+  min-width: 100%;
   min-height: 100%;
-  width: 100%; 
-  height: auto; 
+  width: 100%;
+  height: auto;
   z-index: -100;
   background-size: cover;
   overflow: hidden;
+  background-color: black;
 }
 </style>

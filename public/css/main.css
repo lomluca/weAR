@@ -36,6 +36,10 @@ html, body {
   z-index: 4000 !important;
 }
 
+.el-picker-panel {
+  z-index: 4000 !important;
+}
+
 @media (min-width: 768px) {
   .v-modal {
     z-index: 3000 !important;
