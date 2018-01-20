@@ -13,7 +13,7 @@
           <!--<img class="profile-img":src="sourceImg" v-if="showImg"></img>
           <input type="file" accept="image/*"@change="changePic($event)"></input>-->
           <video v-show="cameraShowed" playsinline="true" autoplay="true" id="video-box"></video>
-          <canvas v-show="previewShowed" id="snapshot" width="150" height="150"></canvas>
+          <canvas v-show="previewShowed" id="snapshot" width="100" height="100"></canvas>
           <img v-if="profilePicture && !cameraShowed && !previewShowed" v-bind:src="profilePicture" alt="Profile picture" id="profile-pic">
           <el-button v-if="!cameraShowed && !previewShowed" type="primary" @click="takePhoto">Change photo</el-button>
           <el-button v-if="cameraShowed" type="primary" @click="getSnap">Get snap</el-button>
@@ -253,17 +253,21 @@ export default {
   #video-box {
     width: 150px;
     height: 150px;
+    display: block;
+    margin: 0 auto;
   }
 
   #profile-pic {
     display: block;
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
   }
 
   #snapshot {
     border-radius: 50%;
+    display: block;
+    margin: 0 auto;
   }
 
 </style>
