@@ -12,17 +12,18 @@
           <img class="small" src="/assets/widget-personal-info1.png">
           <!--<img class="profile-img":src="sourceImg" v-if="showImg"></img>
           <input type="file" accept="image/*"@change="changePic($event)"></input>-->
-          <video v-show="cameraShowed" playsinline="true" autoplay="true" id="video-box"></video>
+          <p v-if="!webcamAvailable" class="error-message">Can not play webcam</p>
+          <video v-show="cameraShowed && webcamAvailable" playsinline="true" autoplay="true" id="video-box"></video>
           <canvas v-show="previewShowed" id="snapshot" width="100" height="100"></canvas>
           <img v-if="profilePicture && !cameraShowed && !previewShowed" v-bind:src="profilePicture" alt="Profile picture" id="profile-pic">
           <el-button v-if="!cameraShowed && !previewShowed" type="primary" @click="takePhoto">Change photo</el-button>
-          <el-button v-if="cameraShowed" type="primary" @click="getSnap">Get snap</el-button>
+          <el-button v-if="cameraShowed && webcamAvailable" type="primary" @click="getSnap">Get snap</el-button>
           <el-button v-if="previewShowed" type="success" @click="savePhoto" round>Save</el-button>
           <el-button v-if="previewShowed" type="danger" @click="againPhoto" round>Reset</el-button>
           <ul class="list-info">
-            <li><span class="ligth-text">fullname</span> <span class="bold-text">{{ fullname }}</span></li>
-            <li><span class="ligth-text">email</span> <span class="bold-text">{{ mail }}</span></li>
-            <li><span class="ligth-text">birthday</span> <span class="bold-text">{{ birthday }}</span></li>
+            <li><span class="light-text">fullname</span> <span class="bold-text">{{ fullname }}</span></li>
+            <li><span class="light-text">email</span> <span class="bold-text">{{ mail }}</span></li>
+            <li><span class="light-text">birthday</span> <span class="bold-text">{{ birthday }}</span></li>
           </ul>
         </div>
       </el-col>
@@ -90,7 +91,8 @@ export default {
       addresses: JSON.parse(localStorage.addresses),
       updateFullname: false,
       cameraShowed: false,
-      previewShowed: false
+      previewShowed: false,
+      webcamAvailable: true
     }
   },
   computed: {
@@ -172,7 +174,9 @@ export default {
         }
       }
 
+      let that = this
       var handleError = function(error) {
+        that.$data.webcamAvailable = false
         if (error.name === 'ConstraintNotSatisfiedError') {
           errorMsg('The resolution ' + constraints.video.width.exact + 'x' +
               constraints.video.width.exact + ' px is not supported by your device.');
@@ -221,73 +225,84 @@ export default {
 </script>
 
 <style>
-  img.credit-card {
-    width: 55px;
-    height: 30px;
-  }
-  img.small {
-    width: 75px;
-    height: 75px;
-    display: block;
-    margin: auto;
-  }
-  .el-header{
-    box-sizing: content-box;
-    padding: 0px;
-  }
-  .el-footer{
-    box-sizing: content-box;
-    padding: 0px;
-  }
+img.credit-card {
+  width: 55px;
+  height: 30px;
+}
+img.small {
+  width: 75px;
+  height: 75px;
+  display: block;
+  margin: auto;
+}
+.el-header{
+  box-sizing: content-box;
+  padding: 0px;
+}
+.el-footer{
+  box-sizing: content-box;
+  padding: 0px;
+}
 
-  .el-main {
-    overflow: initial;
-    height: auto;
-    background-color: white;
-  }
+.el-main {
+  overflow: initial;
+  height: auto;
+  background-color: white;
+}
 
-  .block-title {
-    font-size: 24px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 400;
-    line-height: 26px;
-  }
+.block-title {
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 26px;
+}
 
-  .box {
-    background-color: white;
-    padding: 10px;
-    margin: 5px;
-    min-height: 36px;
-    border: 1px solid;
-    border-color: rgb(202, 200, 204);
-    box-shadow: 0 4px 5px 1px rgb(193, 186, 196)
-  }
+.box {
+  background-color: white;
+  padding: 10px;
+  margin: 5px;
+  min-height: 36px;
+  border: 1px solid;
+  border-color: rgb(202, 200, 204);
+  box-shadow: 0 4px 5px 1px rgb(193, 186, 196)
+}
 
-  #video-box {
-    width: 150px;
-    height: 150px;
-    display: block;
-    margin: 0 auto;
-  }
+#video-box {
+  width: 150px;
+  height: 150px;
+  display: block;
+  margin: 0 auto;
+}
 
-  #profile-pic {
-    display: block;
-    margin: 0 auto;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 5px;
-  }
+#profile-pic {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
 
-  #snapshot {
-    display: block;
-    margin: 0 auto;
-  }
+#snapshot {
+  display: block;
+  margin: 0 auto;
+}
 
-  .list-info {
-    list-style-type: none;
-    text-align: left;
-  }
+.list-info {
+  list-style-type: none;
+  text-align: left;
+}
 
+.error-message {
+  color: red;
+}
+
+.light-text {
+  font-size: 14px;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
+  color: slategray;
+}
 </style>
