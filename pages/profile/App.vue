@@ -283,4 +283,8 @@ export default {
     margin: 0 auto;
   }
 
+  .list-info {
+    list-style-type: none;
+  }
+
 </style>
