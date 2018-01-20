@@ -1,8 +1,8 @@
 <template>
   <ul class="list-info">
-    <li><span class="ligth-text">Owner</span> <span class="bold-text">{{ item.owner }}</span></li>
-    <li><span class="ligth-text">Number</span> <span class="bold-text">{{ item.cardNumber }}</span></li>
-    <li><span class="ligth-text">Expiration</span> <span class="bold-text">{{ item.expirationDate }}</span></li>
+    <li><span class="light-text">Owner</span> <span class="bold-text">{{ item.owner }}</span></li>
+    <li><span class="light-text">Number</span> <span class="bold-text">{{ item.cardNumber }}</span></li>
+    <li><span class="light-text">Expiration</span> <span class="bold-text">{{ item.expirationDate }}</span></li>
   </ul>
 </template>
 
@@ -23,11 +23,12 @@ ul.list-info {
 
 span.light-text {
   font-size: 14px;
-  font-style: italic;
   font-variant: normal;
   font-weight: 400;
   line-height: 20px;
+  color: slategray;
 }
+
 span.bold-text {
   font-size: 14px;
   font-style: normal;
