@@ -107,6 +107,7 @@ export default {
       var imgFile;
       if (localStorage.picture && !this.previewShowed) {
         imgFile = JSON.parse(localStorage.getItem("picture"))
+        console.log("updated pic!")
       }
       return imgFile;
     }
@@ -190,8 +191,8 @@ export default {
       var canvas = document.querySelector("#snapshot");
       var imgFile = canvas.toDataURL("image/png")
       localStorage.setItem("picture", JSON.stringify(imgFile))
-      this.previewShowed = false;
       this.cameraShowed = false;
+      this.previewShowed = false;
     },
     againPhoto: function() {
       var canvas = document.querySelector("#snapshot");
@@ -266,6 +267,7 @@ export default {
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    margin-bottom: 5px;
   }
 
   #snapshot {
