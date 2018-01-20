@@ -105,7 +105,7 @@ export default {
     },
     profilePicture: function() {
       var imgFile;
-      if (localStorage.picture && !previewShowed) {
+      if (localStorage.picture && !this.previewShowed) {
         imgFile = JSON.parse(localStorage.getItem("picture"))
       }
       return imgFile;
