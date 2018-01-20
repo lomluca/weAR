@@ -285,6 +285,7 @@ export default {
 
   .list-info {
     list-style-type: none;
+    text-align: left;
   }
 
 </style>
