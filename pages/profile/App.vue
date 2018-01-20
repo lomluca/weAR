@@ -281,7 +281,6 @@ export default {
   }
 
   #snapshot {
-    border-radius: 50%;
     display: block;
     margin: 0 auto;
   }
