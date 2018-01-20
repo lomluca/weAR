@@ -66,11 +66,12 @@
     <transition name="fade">
       <div class="shopCartTableFooter" v-if="loggedIn && shopcartData.length > 0">
         <h1>Total: {{ total.toFixed(2) }}€</h1>
-        <el-button @click="checkoutClick">Checkout</el-button>
+        <el-button style="float: right" type="primary" @click="checkoutClick">Checkout</el-button>
         <el-dialog
           title="Confirm purchase"
           :visible.sync="visible"
-          :before-close="handleClose">
+          :before-close="handleClose"
+          :fullscreen="fullscreenDialog">
           <span>Do you want to confirm your purchases?</span>
           <hr>
           <span>Address</span>
@@ -101,7 +102,8 @@ export default {
     return {
       shopcartData: getShopCart(),
       quantities: [],
-      deletepopoverVisible: false
+      deletepopoverVisible: false,
+      fullscreenDialog: (window.innerWidth < 768)
     }
   },
   components: {
@@ -181,6 +183,14 @@ export default {
         return true;
       else return false;
     }
+  },
+  mounted() {
+    let that = this
+    this.$nextTick(function() {
+      window.addEventListener('resize', function(e) {
+        that.fullscreenDialog = (window.innerWidth < 768)
+      });
+    })
   }
 }
 </script>

@@ -53,7 +53,10 @@
       <template v-else>
         <el-tabs type="card" style="border-radius: 5px">
           <el-tab-pane label="ShopCart">
-            <wear-shop-cart :visible.sync="confirmDialogVisible"/>
+            <wear-shop-cart
+            :visible.sync="confirmDialogVisible"
+            :selectedAddress="addressSelected"
+            :selectedCard="cardSelected"/>
           </el-tab-pane>
           <el-tab-pane v-if="loggedIn" label="Address">
             <wear-info-box
@@ -81,7 +84,7 @@
 
     <!-- Footer -->
     <wear-footer />
-    
+
   </el-container>
 </template>
 
