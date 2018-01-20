@@ -193,7 +193,7 @@ export default {
       ctx.beginPath()
       ctx.arc(50, 50, 50, 0, Math.PI * 2, false);
       ctx.clip()
-      ctx.drawImage(video, 0,0);
+      ctx.drawImage(video, 0,0, canvas.width, canvas.height);
       this.cameraShowed = false;
       this.previewShowed = true;
     },
