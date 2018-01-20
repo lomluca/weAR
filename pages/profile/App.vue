@@ -105,9 +105,16 @@ export default {
     },
     profilePicture: function() {
       var imgFile;
-      if (localStorage.picture && !this.previewShowed) {
-        imgFile = JSON.parse(localStorage.getItem("picture"))
-        console.log("updated pic!")
+      if (this.previewShowed) {
+        if (localStorage.picture) {
+          imgFile = JSON.parse(localStorage.getItem("picture"))
+          console.log("updated pic!")
+        }
+      } else {
+        if (localStorage.picture) {
+          imgFile = JSON.parse(localStorage.getItem("picture"))
+          console.log("updated pic!")
+        }
       }
       return imgFile;
     }
