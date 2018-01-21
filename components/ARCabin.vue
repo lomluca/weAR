@@ -3,7 +3,7 @@
 <div class="ar-container">
   <p v-if="!webcamAvailable" class="error-message">Can not play webcam</p>
   <video v-else playsinline="true" autoplay="true" class="ar-element" id="ar-component">
-    <script>alert('aa')</script>
+  
   </video>
 </div>
 </template>

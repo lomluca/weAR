@@ -1,9 +1,9 @@
 <template>
   <ul class="list-info">
-    <li><span class="ligth-text">Street</span> <span class="bold-text">{{ item.street }}</span></li>
-    <li><span class="ligth-text">City</span> <span class="bold-text">{{ item.city }}</span></li>
-    <li><span class="ligth-text">Zip code</span> <span class="bold-text">{{ item.zipCode }}</span></li>
-    <li><span class="ligth-text">Country</span> <span class="bold-text">{{ item.country }}</span></li>
+    <li><span class="light-text">Street</span> <span class="bold-text">{{ item.street }}</span></li>
+    <li><span class="light-text">City</span> <span class="bold-text">{{ item.city }}</span></li>
+    <li><span class="light-text">Zip code</span> <span class="bold-text">{{ item.zipCode }}</span></li>
+    <li><span class="light-text">Country</span> <span class="bold-text">{{ item.country }}</span></li>
   </ul>
 </template>
 
@@ -24,11 +24,12 @@ ul.list-info {
 
 span.light-text {
   font-size: 14px;
-  font-style: italic;
   font-variant: normal;
   font-weight: 400;
   line-height: 20px;
+  color: slategray;
 }
+
 span.bold-text {
   font-size: 14px;
   font-style: normal;
