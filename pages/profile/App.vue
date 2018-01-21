@@ -192,7 +192,7 @@ export default {
       ctx.arc(50, 50, 50, 0, Math.PI * 2, false);
       ctx.clip()
       console.log("W: %s H: %s", video.videoWidth, video.videoHeight)
-      ctx.drawImage(video, video.videoWidth / 2 - canvas.width / 2, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(video, 80, 0, 480, 480, 0, 0, canvas.width, canvas.height);
       this.cameraShowed = false;
       this.previewShowed = true;
     },
