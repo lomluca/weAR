@@ -12,7 +12,7 @@
           <video v-show="cameraShowed" playsinline="true" autoplay="true" id="video-box"></video>
           <canvas v-show="previewShowed" id="snapshot" width="100" height="100"></canvas>
           <img v-if="profilePicture && !cameraShowed && !previewShowed" v-bind:src="profilePicture" alt="Profile picture" id="profile-pic">
-          <img v-else class="small" src="/assets/widget-personal-info1.png">
+          <img v-if="!profilePicture && !cameraShowed && !previewShowed" class="small" src="/assets/widget-personal-info1.png">
           <el-button v-if="!cameraShowed && !previewShowed" type="primary" @click="takePhoto">Change photo</el-button>
           <el-button v-if="cameraShowed" type="primary" @click="getSnap">Get snap</el-button>
           <el-button v-if="previewShowed" type="success" @click="savePhoto" round>Save</el-button>
@@ -188,6 +188,7 @@ export default {
       var canvas = document.querySelector("#snapshot");
       var ctx = canvas.getContext('2d');
       var video =  document.querySelector("#video-box")
+      ctx.imageSmoothingQuality = "high"
       ctx.beginPath()
       ctx.arc(50, 50, 50, 0, Math.PI * 2, false);
       ctx.clip()
