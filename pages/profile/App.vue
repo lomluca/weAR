@@ -197,7 +197,14 @@ export default {
       ctx.arc(50, 50, 50, 0, Math.PI * 2, false);
       ctx.clip()
       console.log("W: %s H: %s", video.videoWidth, video.videoHeight)
-      ctx.drawImage(video, 80, 0, 480, 480, 0, 0, canvas.width, canvas.height);
+      //640 x 480
+      if (video.videoWidth >= video.videoHeight) {
+        var diff = video.videoWidth - video.videoHeight;
+        ctx.drawImage(video, diff / 2, 0, video.videoHeight, video.videoHeight, 0, 0, canvas.width, canvas.height);
+      } else {
+        var diff = video.videoHeight - video.videoWidth;
+        ctx.drawImage(video, 0, diff / 2, video.videoWidth, video.videoWidth, 0, 0, canvas.width, canvas.height);
+      }
       this.cameraShowed = false;
       this.previewShowed = true;
     },
