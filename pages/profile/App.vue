@@ -9,12 +9,10 @@
     <el-row :gutter="10">
       <el-col :sm="8">
         <div class="box">
-          <img class="small" src="/assets/widget-personal-info1.png">
-          <!--<img class="profile-img":src="sourceImg" v-if="showImg"></img>
-          <input type="file" accept="image/*"@change="changePic($event)"></input>-->
           <video v-show="cameraShowed" playsinline="true" autoplay="true" id="video-box"></video>
           <canvas v-show="previewShowed" id="snapshot" width="100" height="100"></canvas>
           <img v-if="profilePicture && !cameraShowed && !previewShowed" v-bind:src="profilePicture" alt="Profile picture" id="profile-pic">
+          <img v-else class="small" src="/assets/widget-personal-info1.png">
           <el-button v-if="!cameraShowed && !previewShowed" type="primary" @click="takePhoto">Change photo</el-button>
           <el-button v-if="cameraShowed" type="primary" @click="getSnap">Get snap</el-button>
           <el-button v-if="previewShowed" type="success" @click="savePhoto" round>Save</el-button>
@@ -193,7 +191,7 @@ export default {
       ctx.beginPath()
       ctx.arc(50, 50, 50, 0, Math.PI * 2, false);
       ctx.clip()
-      ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+      ctx.drawImage(video, video.width * 0.25, 0, canvas.width, canvas.height);
       this.cameraShowed = false;
       this.previewShowed = true;
     },
