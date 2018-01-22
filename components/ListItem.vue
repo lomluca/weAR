@@ -53,11 +53,14 @@ export default {
       let imgSrc = this.item.assets[this.currentImageIdx]
       let tmp = new Image();
       tmp.src = imgSrc; //just for pre-loading
+      console.log("Preloading")
+      var that = this
       setTimeout( function() {
-        let id = '#' + this.uniqueId
-        $(id).fadeOut(this.fadeInDuration, function() {
+        console.log("timeout")
+        let id = '#' + that.uniqueId
+        $(id).fadeOut(that.fadeInDuration, function() {
           $(id).attr('src', imgSrc)
-          $(id).fadeIn(this.fadeInDuration)
+          $(id).fadeIn(that.fadeInDuration)
         })
       }, 500)
     },
