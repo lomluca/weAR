@@ -61,7 +61,7 @@ export default {
           $(id).attr('src', tmp.src)
           $(id).fadeIn(that.fadeInDuration)
         })
-      }, 1000)
+      }, 500)
     },
     tryOn(item) {
       window.location.href = 'try-on.html?id=' + this.item.id
