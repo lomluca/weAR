@@ -51,11 +51,16 @@ export default {
     loopImage() {
       this.currentImageIdx = (this.currentImageIdx + 1) % 2
       let imgSrc = this.item.assets[this.currentImageIdx]
-      let id = '#' + this.uniqueId
-      $(id).fadeOut(this.fadeInDuration, function() {
-        $(id).attr('src', imgSrc)
-        $(id).fadeIn(this.fadeInDuration)
-      })
+      let tmp = new Image();
+      tmp.src = imgSrc; //just for pre-loading
+      var that = this
+      setTimeout( function() {
+        let id = '#' + that.uniqueId
+        $(id).fadeOut(that.fadeInDuration, function() {
+          $(id).attr('src', tmp.src)
+          $(id).fadeIn(that.fadeInDuration)
+        })
+      }, 300)
     },
     tryOn(item) {
       window.location.href = 'try-on.html?id=' + this.item.id

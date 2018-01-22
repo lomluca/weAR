@@ -65,7 +65,7 @@ export default {
       this.$emit('filter-change', this.$data.priceRange, this.$data.colors, this.$data.brands, this.$data.sizes)
     },
     reset: function() {
-      this.$data.priceRange = [ this._minPrice, this._maxPrice ] 
+      this.$data.priceRange = [ this._minPrice, this._maxPrice ]
       this.$data.colors = []
       this.$data.brands = []
       this.$data.sizes = []
@@ -98,4 +98,3 @@ export default {
   top: 10px;
 }
 </style>
-

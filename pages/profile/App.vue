@@ -9,13 +9,11 @@
     <el-row :gutter="10">
       <el-col :sm="8">
         <div class="box">
-          <img class="small" src="/assets/widget-personal-info1.png">
-          <!--<img class="profile-img":src="sourceImg" v-if="showImg"></img>
-          <input type="file" accept="image/*"@change="changePic($event)"></input>-->
           <p v-if="!webcamAvailable" class="error-message">Can not play webcam</p>
           <video v-show="cameraShowed && webcamAvailable" playsinline="true" autoplay="true" id="video-box"></video>
           <canvas v-show="previewShowed" id="snapshot" width="100" height="100"></canvas>
           <img v-if="profilePicture && !cameraShowed && !previewShowed" v-bind:src="profilePicture" alt="Profile picture" id="profile-pic">
+          <img v-if="!profilePicture && !cameraShowed && !previewShowed" class="small" src="/assets/widget-personal-info1.png">
           <el-button v-if="!cameraShowed && !previewShowed" type="primary" @click="takePhoto">Change photo</el-button>
           <el-button v-if="cameraShowed && webcamAvailable" type="primary" @click="getSnap">Get snap</el-button>
           <el-button v-if="previewShowed" type="success" @click="savePhoto" round>Save</el-button>
@@ -194,10 +192,19 @@ export default {
       var canvas = document.querySelector("#snapshot");
       var ctx = canvas.getContext('2d');
       var video =  document.querySelector("#video-box")
+      ctx.imageSmoothingQuality = "high"
       ctx.beginPath()
       ctx.arc(50, 50, 50, 0, Math.PI * 2, false);
       ctx.clip()
-      ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+      console.log("W: %s H: %s", video.videoWidth, video.videoHeight)
+      //640 x 480
+      if (video.videoWidth >= video.videoHeight) {
+        var diff = video.videoWidth - video.videoHeight;
+        ctx.drawImage(video, diff / 2, 0, video.videoHeight, video.videoHeight, 0, 0, canvas.width, canvas.height);
+      } else {
+        var diff = video.videoHeight - video.videoWidth;
+        ctx.drawImage(video, 0, diff / 2, video.videoWidth, video.videoWidth, 0, 0, canvas.width, canvas.height);
+      }
       this.cameraShowed = false;
       this.previewShowed = true;
     },

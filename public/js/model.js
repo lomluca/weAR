@@ -341,7 +341,6 @@ function query(params, items = MODEL) {
     })
 
   var colors = params['colors']
-  if(colors) colors = colors.map(function(item) { item.toLowerCase() })
   if(colors.length > 0)
     data = data.filter(function(item) {
       for(var i = 0; i < colors.length; i++)
