@@ -53,11 +53,13 @@ export default {
       let imgSrc = this.item.assets[this.currentImageIdx]
       let tmp = new Image();
       tmp.src = imgSrc; //just for pre-loading
-      let id = '#' + this.uniqueId
-      $(id).fadeOut(this.fadeInDuration, function() {
-        $(id).attr('src', imgSrc)
-        $(id).fadeIn(this.fadeInDuration)
-      })
+      setTimeout( function() {
+        let id = '#' + this.uniqueId
+        $(id).fadeOut(this.fadeInDuration, function() {
+          $(id).attr('src', imgSrc)
+          $(id).fadeIn(this.fadeInDuration)
+        })
+      }, 500)
     },
     tryOn(item) {
       window.location.href = 'try-on.html?id=' + this.item.id
