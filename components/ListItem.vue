@@ -56,13 +56,12 @@ export default {
       console.log("Preloading")
       var that = this
       setTimeout( function() {
-        console.log("timeout")
         let id = '#' + that.uniqueId
         $(id).fadeOut(that.fadeInDuration, function() {
           $(id).attr('src', imgSrc)
           $(id).fadeIn(that.fadeInDuration)
         })
-      }, 500)
+      }, 1000)
     },
     tryOn(item) {
       window.location.href = 'try-on.html?id=' + this.item.id
