@@ -58,7 +58,7 @@ export default {
       setTimeout( function() {
         let id = '#' + that.uniqueId
         $(id).fadeOut(that.fadeInDuration, function() {
-          $(id).attr('src', imgSrc)
+          $(id).attr('src', tmp.src)
           $(id).fadeIn(that.fadeInDuration)
         })
       }, 1000)
