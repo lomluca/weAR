@@ -305,23 +305,24 @@ function getLogo() {
 function getCategories() {
   return {
     data: [
-      { id: 1, name: 'Man', subcategories: [ { id: 11, name: 'Shirts', href: '/search.html?q=man' }, { id: 12, name: 'Pants', href: '/search.html?q=man' } ], href: '/search.html?q=man' },
-      { id: 2, name: 'Woman', subcategories: [ { id: 21, name: 'Skirts', href: '/search.html?q=woman' }, { id: 22, name: 'Trousers', href: '/search.html?q=woman' } ], href: '/search.html?q=woman' },
-      { id: 3, name: 'Winter Collection', href: '/search.html?q=man' },
-      { id: 4, name: 'Promos', href: '/search.html?q=man' }
+      { id: 1, name: 'Man', subcategories: [ { id: 11, name: 'Shirts', href: '/search.html?q=Man' }, { id: 12, name: 'Pants', href: '/search.html?q=man' } ], href: '/search.html?q=Man' },
+      { id: 2, name: 'Woman', subcategories: [ { id: 21, name: 'Skirts', href: '/search.html?q=Woman, Skirts' }, { id: 22, name: 'Trousers', href: '/search.html?q=Woman, Trousers' } ], href: '/search.html?q=Woman' },
+      { id: 3, name: 'Winter Collection', href: '/search.html?q=Winter Collection' },
+      { id: 4, name: 'Promos', href: '/search.html?q=Promos' }
     ]
   }
 }
 
 function query(params, items = MODEL) {
   var q = params['q']
+  q = q.toLowerCase()
   if(q) {
     q = q.toLowerCase()
-    if(q == 'woman')
+    if(q.indexOf('woman') !== -1 || q.indexOf('winter') !== -1 || q.indexOf('promos') !== -1)
       return {
         data: items.filter(function(item) { return item.id <= 10 })
       }
-    else if(q == 'man')
+    else if(q.indexOf('man'))
       return {
         data: items.filter(function(item) { return item.id > 10 && item.id <= 20 })
       }

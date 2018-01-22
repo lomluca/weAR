@@ -31,7 +31,6 @@ function getAllUrlParams(url) {
 
       // (optional) keep case consistent
       paramName = paramName.toLowerCase();
-      paramValue = paramValue.toLowerCase();
 
       // if parameter name already exists
       if (obj[paramName]) {
