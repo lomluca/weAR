@@ -51,7 +51,8 @@ export default {
     loopImage() {
       this.currentImageIdx = (this.currentImageIdx + 1) % 2
       let imgSrc = this.item.assets[this.currentImageIdx]
-      $('<img/>')[0].src = imgSrc; //just for pre-loading
+      let tmp = new Image();
+      tmp.src = imgSrc; //just for pre-loading
       let id = '#' + this.uniqueId
       $(id).fadeOut(this.fadeInDuration, function() {
         $(id).attr('src', imgSrc)
