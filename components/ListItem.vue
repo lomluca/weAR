@@ -54,8 +54,7 @@ export default {
       let id = '#' + this.uniqueId
       $(id).fadeOut(this.fadeInDuration, function() {
         $(id).attr('src', imgSrc)
-        $(id).fadeIn(this.fadeInDuration)
-      })
+      }).fadeIn(this.fadeInDuration)
     },
     tryOn(item) {
       window.location.href = 'try-on.html?id=' + this.item.id
