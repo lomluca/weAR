@@ -32,10 +32,14 @@
         <el-dropdown :class="[menuClasses, {hide: hidden}]" v-else>
           <el-button size="medium" type="text">{{ category.name }}<i class="el-icon-arrow-down el-icon--right"/></el-button>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item v-for="subcategory in category.subcategories"
-            :subcategory="subcategory">
-              <span style="text-transform:uppercase" v-on:click="navigate(subcategory.href)">{{ subcategory.name }}</span>
-            </el-dropdown-item>
+            <template v-for="subcategory in category.subcategories">
+              <a style="display: block; text-decoration: none" :href="subcategory.href">
+                <el-dropdown-item 
+                :subcategory="subcategory">
+                    <span style="text-transform:uppercase" >{{ subcategory.name }}</span>
+                </el-dropdown-item>
+              <a>
+            </template>
           </el-dropdown-menu>
         </el-dropdown>
 
