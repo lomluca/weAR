@@ -60,7 +60,7 @@ export default {
   data () {
     return {
       collapseActive: '',
-      query: params['q'],
+      query: decodeURI(params['q']),
       items: query(params)['data'], // defined into model.js
       brands: distinctValues.brands,
       colors: distinctValues.colors,
