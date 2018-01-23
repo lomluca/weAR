@@ -305,7 +305,7 @@ function getLogo() {
 function getCategories() {
   return {
     data: [
-      { id: 1, name: 'Man', subcategories: [ { id: 11, name: 'Shirts', href: '/search.html?q=Man' }, { id: 12, name: 'Pants', href: '/search.html?q=man' } ], href: '/search.html?q=Man' },
+      { id: 1, name: 'Man', subcategories: [ { id: 11, name: 'Shirts', href: '/search.html?q=Man, Shirts' }, { id: 12, name: 'Pants', href: '/search.html?q=Man, Pants' } ], href: '/search.html?q=Man' },
       { id: 2, name: 'Woman', subcategories: [ { id: 21, name: 'Skirts', href: '/search.html?q=Woman, Skirts' }, { id: 22, name: 'Trousers', href: '/search.html?q=Woman, Trousers' } ], href: '/search.html?q=Woman' },
       { id: 3, name: 'Winter Collection', href: '/search.html?q=Winter Collection' },
       { id: 4, name: 'Promos', href: '/search.html?q=Promos' }
