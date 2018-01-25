@@ -322,7 +322,7 @@ function query(params, items = MODEL) {
       return {
         data: items.filter(function(item) { return item.id <= 10 })
       }
-    else if(q.indexOf('man'))
+    else if(q.indexOf('man') !== -1)
       return {
         data: items.filter(function(item) { return item.id > 10 && item.id <= 20 })
       }
